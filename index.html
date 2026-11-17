@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Dashboard Pengawasan Dewas 2026–2027</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ground:#f2f6fa;--surface:#fff;--surface-2:#eaf1f7;--sidebar:#fff;
+  --ink:#0e2233;--ink-2:#3d5568;--muted:#566d80;--line:#dde7f0;--line-strong:#c3d4e2;
+  --accent:#0b77bd;--accent-soft:#e3f0fa;--accent-ink:#0a6ba9;--on-accent:#fff;
+  --ok:#257534;--ok-soft:#ddf3e1;--warn:#a8490a;--warn-soft:#fdf0d3;--crit:#b91c1c;--crit-soft:#fde3e0;
+  --bayang:0 1px 3px rgb(14 34 51 / .07);--bayang-naik:0 8px 24px rgb(14 34 51 / .10);
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --ground:#071520;--surface:#0f2231;--surface-2:#16303f;--sidebar:#0b1c29;
+  --ink:#e6f0f8;--ink-2:#b3c8d8;--muted:#7e9bb0;--line:#1e394b;--line-strong:#2b5169;
+  --accent:#4aa8e0;--accent-soft:#0e2d40;--accent-ink:#4aa8e0;--on-accent:#05131d;
+  --ok:#6ede8a;--ok-soft:#0d3320;--warn:#f0c069;--warn-soft:#3a2d12;--crit:#f2938c;--crit-soft:#3e1d1b;
+  --bayang:0 1px 3px rgb(0 0 0 / .4);--bayang-naik:0 8px 24px rgb(0 0 0 / .5);
+}}
+:root[data-theme="dark"]{
+  --ground:#071520;--surface:#0f2231;--surface-2:#16303f;--sidebar:#0b1c29;
+  --ink:#e6f0f8;--ink-2:#b3c8d8;--muted:#7e9bb0;--line:#1e394b;--line-strong:#2b5169;
+  --accent:#4aa8e0;--accent-soft:#0e2d40;--accent-ink:#4aa8e0;--on-accent:#05131d;
+  --ok:#6ede8a;--ok-soft:#0d3320;--warn:#f0c069;--warn-soft:#3a2d12;--crit:#f2938c;--crit-soft:#3e1d1b;
+  --bayang:0 1px 3px rgb(0 0 0 / .4);--bayang-naik:0 8px 24px rgb(0 0 0 / .5);
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--ground);color:var(--ink);font-family:Inter,ui-sans-serif,system-ui,sans-serif;font-size:14px;line-height:1.5;-webkit-font-smoothing:antialiased}
+h1,h2,h3,p{margin:0}
+button{font:inherit;color:inherit;cursor:pointer}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.tnum{font-variant-numeric:tabular-nums}
+.mono{font-family:"IBM Plex Mono",ui-monospace,monospace}
+.ikon{width:1em;height:1em;display:inline-block;vertical-align:middle;flex:none;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+
+/* Kerangka: di ponsel menu jadi strip tab lengket; di layar lebar jadi sidebar 16rem. */
+.app{min-height:100dvh}
+.bar{display:flex;align-items:center;gap:.6rem;background:var(--surface);border-bottom:1px solid var(--line);padding:.6rem 1rem}
+.merek{display:flex;align-items:center;gap:.6rem;min-width:0}
+.marka{display:grid;place-items:center;width:2.1rem;height:2.1rem;border-radius:.75rem;background:var(--accent);color:var(--on-accent);font-size:1.15rem;flex:none}
+.merek b{display:block;font-size:.95rem;font-weight:800;letter-spacing:-.02em;line-height:1.15}
+.eyebrow{font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.tombol-ikon{margin-left:auto;display:grid;place-items:center;width:2.5rem;height:2.5rem;border-radius:.75rem;border:1px solid var(--line);background:var(--surface);color:var(--ink-2);font-size:1.15rem;flex:none}
+.tombol-ikon:hover{background:var(--surface-2)}
+.sisi{position:sticky;top:0;z-index:20}
+.menu{display:flex;gap:.25rem;overflow-x:auto;background:var(--surface);border-bottom:1px solid var(--line);padding:.4rem .75rem;scrollbar-width:none}
+.menu::-webkit-scrollbar{display:none}
+.menu a{display:flex;align-items:center;gap:.45rem;white-space:nowrap;border-radius:.75rem;padding:.5rem .75rem;font-weight:500;color:var(--ink-2);text-decoration:none}
+.menu a .ikon{font-size:1.1rem;color:var(--muted)}
+.menu a[aria-current="page"]{background:var(--accent-soft);color:var(--accent-ink);font-weight:600}
+.menu a[aria-current="page"] .ikon{color:var(--accent-ink)}
+.menu .hitung{margin-left:.15rem}
+.label-grup{display:none}
+main{padding:1.25rem 1rem 3rem;min-width:0;max-width:72rem}
+main:focus{outline:none}
+.sisi-merek{display:none}
+@media (min-width:1024px){
+  .app{display:grid;grid-template-columns:17.5rem minmax(0,1fr)}
+  .sisi{position:sticky;top:0;height:100dvh;background:var(--sidebar);border-right:1px solid var(--line);padding:.9rem .75rem;display:flex;flex-direction:column;gap:1rem}
+  .sisi-merek{display:flex}
+  .bar .merek{display:none}
+  .bar{background:transparent;border:0;padding:1rem 2.5rem 0}
+  .menu{position:static;flex-direction:column;border:0;padding:0;background:transparent;overflow:visible}
+  .menu a{padding:.5rem .75rem;gap:.75rem;white-space:normal;line-height:1.25}
+  .menu .hitung{margin-left:auto}
+  .label-grup{display:block;font-size:.6rem;font-weight:700;letter-spacing:.11em;text-transform:uppercase;color:var(--muted);padding:.5rem .75rem .15rem}
+  main{padding:.5rem 2.5rem 4rem}
+}
+
+.kicker{font-size:.7rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--accent-ink)}
+h1{font-size:1.75rem;line-height:1.1;font-weight:800;letter-spacing:-.025em;margin-top:.35rem}
+.ket{margin-top:.4rem;max-width:64ch;color:var(--ink-2)}
+h2.bagian{font-size:1.1rem;font-weight:800;letter-spacing:-.02em;margin:1.75rem 0 .75rem}
+.kartu{background:var(--surface);border:1px solid var(--line);border-radius:1rem;box-shadow:var(--bayang)}
+.panel{overflow:hidden;margin-top:1rem}
+.panel>header{display:flex;align-items:center;justify-content:space-between;gap:.75rem;border-bottom:1px solid var(--line);padding:.8rem 1.1rem}
+.panel>header h2,.panel>header h3{font-size:.95rem;font-weight:700;letter-spacing:-.01em}
+.panel .isi{padding:1rem 1.1rem}
+.gulir{overflow-x:auto}
+.sumber{font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:.62rem;letter-spacing:.04em;color:var(--muted);white-space:nowrap}
+
+.grid{display:grid;gap:.75rem;grid-template-columns:repeat(2,minmax(0,1fr));margin-top:1rem}
+@media (min-width:900px){.grid{grid-template-columns:repeat(4,minmax(0,1fr))}.stat .nilai{font-size:1.5rem}}
+.stat{padding:.9rem;display:flex;flex-direction:column;gap:.3rem;min-width:0}
+.stat .nilai{font-size:1.3rem;line-height:1.05;font-weight:800;letter-spacing:-.03em;overflow-wrap:anywhere}
+.stat .label{font-size:.82rem;font-weight:600;color:var(--ink-2)}
+.stat .cat{font-size:.74rem;color:var(--muted)}
+.stat .sumber{margin-top:auto;padding-top:.3rem}
+.n-ok{color:var(--ok)}.n-warn{color:var(--warn)}.n-crit{color:var(--crit)}
+
+.lencana{display:inline-flex;align-items:center;gap:.3rem;border-radius:999px;padding:.2rem .6rem;font-size:.72rem;font-weight:600;white-space:nowrap}
+.lencana .ikon{font-size:.95rem}
+.l-ok{background:var(--ok-soft);color:var(--ok)}.l-warn{background:var(--warn-soft);color:var(--warn)}
+.l-crit{background:var(--crit-soft);color:var(--crit)}.l-aksen{background:var(--accent-soft);color:var(--accent-ink)}
+.l-netral{background:var(--surface-2);color:var(--muted)}
+.hitung{display:grid;place-items:center;height:1.25rem;min-width:1.25rem;padding:0 .35rem;border-radius:999px;background:var(--crit-soft);color:var(--crit);font-size:.68rem;font-weight:700}
+
+/* Pemindah tampilan di tiap deputi */
+.segmen{display:flex;gap:.25rem;border:1px solid var(--line);background:var(--surface-2);border-radius:1rem;padding:.25rem;margin-top:1rem;overflow-x:auto;scrollbar-width:none}
+.segmen::-webkit-scrollbar{display:none}
+.segmen button{flex:1 0 auto;border:0;background:transparent;border-radius:.75rem;padding:.5rem .8rem;font-size:.85rem;color:var(--ink-2);white-space:nowrap;display:inline-flex;align-items:center;justify-content:center;gap:.35rem}
+.segmen button[aria-selected="true"]{background:var(--surface);color:var(--ink);font-weight:600;box-shadow:var(--bayang)}
+
+/* Batang kemajuan: isi pekat = realisasi, garis tegak = prognosa/target */
+.batang{display:grid;grid-template-columns:1fr auto;gap:.15rem .75rem;align-items:center;padding:.5rem 0}
+.batang+.batang{border-top:1px solid var(--line)}
+.batang .nm{font-size:.85rem;color:var(--ink-2);font-weight:500}
+.batang .nl{font-size:.85rem;font-weight:700;text-align:right}
+.batang .rel{grid-column:1/-1;position:relative;height:.55rem;border-radius:999px;background:var(--surface-2)}
+.batang .rel i{position:absolute;inset:0 auto 0 0;border-radius:999px;background:var(--accent);min-width:2px}
+.batang .rel i.ok{background:var(--ok)}.batang .rel i.warn{background:var(--warn)}.batang .rel i.crit{background:var(--crit)}.batang .rel i.netral{background:var(--line-strong)}
+.batang .rel em{position:absolute;top:-.25rem;bottom:-.25rem;width:2px;background:var(--ink);border-radius:1px}
+.batang .sub{grid-column:1/-1;font-size:.74rem;color:var(--muted)}
+.legenda{display:flex;flex-wrap:wrap;gap:.4rem 1rem;font-size:.74rem;color:var(--muted);margin-bottom:.4rem}
+.legenda span{display:inline-flex;align-items:center;gap:.35rem}
+.legenda i{display:inline-block;width:.9rem;height:.5rem;border-radius:999px;background:var(--accent)}
+.legenda i.tg{width:2px;height:.9rem;background:var(--ink);border-radius:1px}
+
+/* Grafik kolom bulanan */
+.kolom{display:grid;grid-template-columns:repeat(12,minmax(2.6rem,1fr));gap:.3rem;align-items:end;height:13rem;min-width:36rem;padding-top:1.4rem}
+.kolom div{display:flex;flex-direction:column;align-items:center;justify-content:flex-end;height:100%;gap:.2rem}
+.kolom b{font-size:.68rem;font-weight:700}
+.kolom i{display:block;width:70%;border-radius:.35rem .35rem 0 0;background:var(--accent);min-height:2px}
+.kolom i.puncak{background:var(--ink)}
+.kolom span{font-size:.68rem;color:var(--muted)}
+.kolom small{font-size:.62rem;color:var(--muted)}
+
+table{width:100%;border-collapse:collapse;font-size:.85rem}
+th{border-bottom:1px solid var(--line);padding:.6rem 1.1rem;font-size:.68rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);text-align:left;white-space:nowrap}
+td{border-top:1px solid var(--line);padding:.6rem 1.1rem;vertical-align:middle;color:var(--ink-2)}
+td.k,th.k{text-align:right}
+td b{color:var(--ink)}
+tr.total td{font-weight:700;color:var(--ink);background:var(--surface-2)}
+
+/* Catatan bertepi = titik kritis */
+.isu{display:flex;gap:.75rem;border-left-width:4px;border-radius:.5rem 1rem 1rem .5rem;padding:.9rem 1rem;margin-top:.75rem}
+.isu.kritis{border-left-color:var(--crit)}.isu.klarifikasi{border-left-color:var(--warn)}.isu.pantau{border-left-color:var(--accent)}
+.isu h3{font-size:.95rem;font-weight:700;letter-spacing:-.01em;margin:.4rem 0 .25rem}
+.isu p{color:var(--ink-2);font-size:.86rem}
+.isu .tanya{margin-top:.55rem;padding:.55rem .7rem;border-radius:.75rem;background:var(--surface-2);color:var(--ink);font-size:.86rem}
+.isu .tanya .eyebrow{display:block;margin-bottom:.15rem}
+.isu .atas{display:flex;flex-wrap:wrap;align-items:center;gap:.4rem .6rem}
+.isu .badan{min-width:0;flex:1}
+
+.kartu-deputi{display:block;padding:1rem;text-decoration:none;color:inherit}
+.kartu-deputi:hover{border-color:var(--line-strong)}
+.kartu-deputi .kepala{display:flex;align-items:center;gap:.6rem}
+.kotak-ikon{display:grid;place-items:center;width:2.25rem;height:2.25rem;border-radius:.75rem;background:var(--accent-soft);color:var(--accent-ink);font-size:1.2rem;flex:none}
+.kartu-deputi b.nm{font-size:1rem;font-weight:800;letter-spacing:-.02em;display:block;line-height:1.2}
+.kartu-deputi ul{list-style:none;margin:.75rem 0 0;padding:0;display:grid;gap:.4rem}
+.kartu-deputi li{display:flex;gap:.5rem;font-size:.86rem;color:var(--ink-2)}
+.kartu-deputi li b{color:var(--ink)}
+.titik{flex:none;width:.5rem;height:.5rem;border-radius:999px;margin-top:.45rem;background:var(--line-strong)}
+.titik.ok{background:var(--ok)}.titik.warn{background:var(--warn)}.titik.crit{background:var(--crit)}
+.dua{display:grid;gap:.75rem;margin-top:1rem}
+@media (min-width:760px){.dua{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.dua>.panel{margin-top:0}
+
+.cari{position:relative;display:flex;align-items:center;margin-top:1rem}
+.cari .ikon{position:absolute;left:.8rem;font-size:1.1rem;color:var(--muted);pointer-events:none}
+.cari input{width:100%;border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:.75rem;padding:.65rem .8rem .65rem 2.4rem;font:inherit;box-shadow:var(--bayang)}
+.cari input:focus-visible{border-color:var(--accent)}
+.chips{display:flex;gap:.4rem;overflow-x:auto;margin-top:.6rem;padding-bottom:.2rem;scrollbar-width:none}
+.chips::-webkit-scrollbar{display:none}
+.chip{display:inline-flex;align-items:center;gap:.35rem;white-space:nowrap;border-radius:999px;padding:.4rem .85rem;font-size:.82rem;font-weight:500;border:1px solid var(--line);background:var(--surface);color:var(--ink-2)}
+.chip[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:var(--on-accent);font-weight:600}
+.paket{display:flex;gap:.75rem;align-items:flex-start;padding:.75rem 1.1rem;border-top:1px solid var(--line)}
+.paket:first-child{border-top:0}
+.paket .jd{font-weight:600;color:var(--ink);font-size:.88rem}
+.paket .kd{font-size:.68rem;color:var(--muted)}
+.paket .lencana{margin-left:auto;flex:none}
+.kosong{padding:2.5rem 1rem;text-align:center;color:var(--ink-2)}
+ul.daftar{margin:0;padding:0;list-style:none;display:grid;gap:.5rem}
+ul.daftar li{display:flex;gap:.55rem;color:var(--ink-2);font-size:.88rem}
+ul.daftar li b{color:var(--ink)}
+.kaki{margin-top:2rem;font-size:.74rem;color:var(--muted);max-width:76ch}
+@media (prefers-reduced-motion:no-preference){.batang .rel i,.kolom i{transition:width .3s,height .3s}}
+
+.panel>header h2{font-size:.95rem;font-weight:700;letter-spacing:-.01em}
+h1{font-size:1.4rem;margin-top:0}
+main{padding-top:1rem}
+/* Laci sidebar di layar sempit; sidebar tetap di layar lebar */
+.tirai{display:none;position:fixed;inset:0;z-index:30;border:0;background:rgb(14 34 51 / .4)}
+.tirai.buka{display:block}
+.bar{gap:.5rem}
+.judul-bar{font-size:.95rem;font-weight:800;letter-spacing:-.02em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0}
+.tombol-ikon{margin-left:0}
+.pilih-bulan{margin-left:auto;display:flex;align-items:center;gap:.4rem;font-size:.78rem;color:var(--muted)}
+.pilih-bulan select{font:inherit;font-size:.85rem;font-weight:600;color:var(--ink);background:var(--surface);border:1px solid var(--line);border-radius:.75rem;height:2.5rem;padding:0 .6rem}
+.menu .kd{margin-left:auto;font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:.62rem;letter-spacing:.08em;color:var(--muted)}
+@media (max-width:1023px){
+  .sisi{position:fixed;inset:0 auto 0 0;z-index:40;width:17rem;max-width:85vw;background:var(--sidebar);border-right:1px solid var(--line);padding:.9rem .75rem;display:flex;flex-direction:column;gap:1rem;transform:translateX(-100%);visibility:hidden;box-shadow:var(--bayang-naik)}
+  .sisi.buka{transform:none;visibility:visible}
+  .sisi-merek{display:flex}
+  .menu{position:static;flex-direction:column;border:0;padding:0;background:transparent;overflow:visible}
+  .menu a{white-space:normal;gap:.75rem;padding:.65rem .75rem}
+  .label-grup{display:block;font-size:.6rem;font-weight:700;letter-spacing:.11em;text-transform:uppercase;color:var(--muted);padding:.5rem .75rem .15rem}
+  .bar{position:sticky;top:0;z-index:20}
+}
+@media (prefers-reduced-motion:no-preference){@media (max-width:1023px){.sisi{transition:transform .2s,visibility .2s}}}
+@media (min-width:1024px){.buka-menu,.tutup,.judul-bar{display:none}.bar{padding:1rem 2.5rem 0}}
+/* Ubin cincin */
+.grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+@media (min-width:900px){.grid.g4{grid-template-columns:repeat(4,minmax(0,1fr))}}
+.ubin{display:flex;align-items:center;gap:.7rem;padding:.8rem;min-width:0}
+.ubin>div{min-width:0;display:flex;flex-direction:column}
+.ubin .label{font-size:.74rem;font-weight:600;color:var(--muted)}
+.ubin b{font-size:1rem;font-weight:800;letter-spacing:-.02em;line-height:1.25;overflow-wrap:anywhere}
+.ubin b.besar{font-size:1.6rem;line-height:1.1}
+.ubin .cat{font-size:.72rem;color:var(--muted)}
+.ring{width:3.4rem;height:3.4rem;flex:none}
+.ring circle{fill:none;stroke-width:7}
+.ring .rl{stroke:var(--surface-2)}
+.ring .rf{stroke:var(--accent);stroke-linecap:round}
+.ring .rf.ok{stroke:var(--ok)}.ring .rf.warn{stroke:var(--warn)}.ring .rf.crit{stroke:var(--crit)}
+.ring text{font-size:15px;font-weight:800;fill:var(--ink);font-variant-numeric:tabular-nums}
+@media (max-width:420px){.ubin{flex-direction:column;align-items:flex-start;gap:.45rem}}
+.dep{display:flex;flex-direction:column;gap:.6rem;padding:.8rem;text-decoration:none;color:inherit;min-width:0}
+.dep:hover{border-color:var(--line-strong)}
+.dep .kepala{display:flex;align-items:center;gap:.5rem;min-width:0}
+.dep .kotak-ikon{width:1.9rem;height:1.9rem;font-size:1rem}
+.dep b.nm{display:block;font-size:.85rem;font-weight:800;letter-spacing:-.02em;line-height:1.15}
+.dep .duo{display:flex;gap:.6rem}
+.dep .duo>span{display:flex;flex-direction:column;align-items:center;gap:.15rem}
+.dep .duo .ring{width:3rem;height:3rem}
+.dep small{font-size:.66rem;color:var(--muted);font-weight:600}
+.dep .pg{font-size:.78rem;font-weight:700;color:var(--ink-2)}
+/* Batang satu baris */
+.b1{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:.2rem .75rem;align-items:baseline;padding:.5rem 0}
+.b1+.b1{border-top:1px solid var(--line)}
+.b1 .nm{font-size:.84rem;font-weight:500;color:var(--ink-2)}
+.b1 .nl{font-size:.78rem;color:var(--muted);white-space:nowrap}
+.b1 .nl b{font-size:.9rem;color:var(--ink)}
+.b1 .rel{grid-column:1/-1;position:relative;height:.5rem;border-radius:999px;background:var(--surface-2)}
+.b1 .rel i{position:absolute;inset:0 auto 0 0;border-radius:999px;background:var(--accent)}
+.b1 .rel i.netral{background:var(--line-strong)}.b1 .rel i.ok{background:var(--ok)}
+.b1 .rel em{position:absolute;top:-.25rem;bottom:-.25rem;width:2px;background:var(--ink);border-radius:1px}
+.tag{font-style:normal;font-size:.62rem;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:var(--accent-ink);background:var(--accent-soft);border-radius:999px;padding:.1rem .45rem;margin-right:.4rem;white-space:nowrap}
+/* Kurva */
+.kurva{width:100%;height:auto;display:block}
+.kurva .gl{stroke:var(--line);stroke-width:1}
+.kurva .ax{font-size:10px;fill:var(--muted)}.kurva .ax.on{fill:var(--ink);font-weight:700}
+.kurva .ar{fill:var(--surface-2)}
+.kurva .lr{fill:none;stroke:var(--line-strong);stroke-width:2.5}
+.kurva .la{fill:none;stroke:var(--accent);stroke-width:3;stroke-linejoin:round;stroke-linecap:round}
+.kurva .mk{stroke:var(--ink);stroke-width:1;stroke-dasharray:3 3}
+.kurva .dr{fill:var(--surface);stroke:var(--muted);stroke-width:2}.kurva .da{fill:var(--accent)}
+.kurva .lb{font-size:11px;font-weight:700;fill:var(--ink)}
+@media (max-width:600px){.kurva .ax{font-size:16px}.kurva .lb{font-size:18px}.kurva .lr{stroke-width:4}.kurva .la{stroke-width:5}}
+.thn{margin-left:auto;display:inline-flex;gap:.2rem;border:1px solid var(--line);background:var(--surface-2);border-radius:.75rem;padding:.2rem}
+.thn button{border:0;background:transparent;border-radius:.55rem;padding:.35rem .6rem;font-size:.82rem;font-weight:600;color:var(--ink-2)}
+.thn button[aria-pressed="true"]{background:var(--accent);color:var(--on-accent)}
+.pilih-bulan{margin-left:0}
+.per26{font-size:.74rem;color:var(--muted);white-space:nowrap}
+@media (max-width:480px){.pilih-bulan>span{display:none}.judul-bar{display:none}}
+.b1 .rel i.warn{background:var(--warn)}.b1 .rel i.crit{background:var(--crit)}
+.tumpuk{display:flex;height:1.6rem;border-radius:.5rem;overflow:hidden;gap:2px}
+.tumpuk i{display:grid;place-items:center;font-style:normal;font-size:.74rem;font-weight:700;color:var(--on-accent);background:var(--accent);min-width:1.6rem}
+.tumpuk i.ok{background:var(--ok)}.tumpuk i.warn{background:var(--warn)}.tumpuk i.netral{background:var(--line-strong);color:var(--ink)}
+.legenda i.ok{background:var(--ok)}.legenda i.warn{background:var(--warn)}.legenda i.netral{background:var(--line-strong)}
+.kolom i.nanti{background:var(--line-strong)}
+.kolom{height:10rem}
+.legenda{margin:.5rem 0 0}
+.panel .isi>.legenda:first-child{margin:0 0 .3rem}
+tr.total td{background:var(--accent-soft)}
+td,th{padding:.5rem .8rem}
+.kaki{margin-top:1.25rem}
+</style>
+</head>
+<body>
+<div class="app">
+  <button class="tirai" id="tirai" aria-label="Tutup menu" tabindex="-1"></button>
+  <aside class="sisi" id="sisi">
+    <div class="merek sisi-merek"><span class="marka" id="marka-sisi"></span><span style="flex:1"><b>Pengawasan Dewas</b><span class="eyebrow">Dewan Pengawas · BPJS TK</span></span><button class="tombol-ikon tutup" id="tutup" aria-label="Tutup menu"></button></div>
+    <nav class="menu" id="menu" aria-label="Menu utama"></nav>
+  </aside>
+  <div style="min-width:0">
+    <div class="bar">
+      <button class="tombol-ikon buka-menu" id="buka" aria-label="Buka menu" aria-controls="sisi" aria-expanded="false"></button>
+      <b class="judul-bar" id="judul-bar"></b>
+      <div class="thn" role="group" aria-label="Pilih tahun"><button data-th="2026">2026</button><button data-th="2027">2027</button></div>
+      <span class="per26" id="per26">per 16 Nov</span>
+      <label class="pilih-bulan"><span>s.d.</span><select id="bulan" aria-label="Pilih bulan"></select></label>
+      <button class="tombol-ikon" id="tema" aria-label="Ganti tema terang/gelap"></button>
+    </div>
+    <main id="konten" tabindex="-1"></main>
+  </div>
+</div>
+<script>
+const IKON={
+ layout:'<rect x="3" y="3" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/>',
+ cart:'<circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/>',
+ home:'<path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/>',
+ users:'<path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>',
+ book:'<path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>',
+ list:'<path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><rect x="8" y="2" width="8" height="4" rx="1"/>',
+ sun:'<circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>',
+ moon:'<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>',
+ ok:'<path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/>',
+ warn:'<circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/>',
+ crit:'<path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/>',
+ netral:'<circle cx="12" cy="12" r="10"/><line x1="8" y1="12" x2="16" y2="12"/>',
+ menu:'<line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/>',
+ x:'<line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>',
+ inbox:'<polyline points="22 12 16 12 14 15 10 15 8 12 2 12"/><path d="M5.45 5.11L2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.45-6.89A2 2 0 0 0 16.76 4H7.24a2 2 0 0 0-1.79 1.11z"/>'
+};
+const ik=n=>`<svg class="ikon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">${IKON[n]||IKON.netral}</svg>`;
+const BLN=['Jan','Feb','Mar','Apr','Mei','Jun','Jul','Agu','Sep','Okt','Nov','Des'];
+const BLN_P=['Januari','Februari','Maret','April','Mei','Juni','Juli','Agustus','September','Oktober','November','Desember'];
+const K=()=>Array(12).fill(null); /* realisasi bulanan: null = belum ada data */
+
+/* ===== DATA. Baseline = usulan 2027 per materi rapat 17 Nov 2026. Nilai dalam miliar rupiah.
+   Untuk memperbarui: isi array real/prog per bulan (indeks 0 = Januari) dan DATA_PER. ===== */
+const DATA_PER={pdn:null,asp:null,hcp:null,lnd:null}; /* tanggal data realisasi terakhir */
+const PENGADAAN={pagu:[173.1,80.3,322.2,236.6,21.8,98.0,66.3,10.0,12.5,15.2,9.0,10.1],paket:[42,13,61,34,8,24,32,10,9,5,5,4],realPagu:K(),realPaket:K(),
+ spm:[['Leverage',34,508.09,'Lahan, laptop, jaringan SDWAN'],['Critical',31,351.61,'Database JMO, firewall, lisensi core'],['Routine',132,101.91,'Operasional rutin, e-katalog, pemeliharaan'],['Bottleneck',50,53.62,'Spesifikasi khusus, konsultan, sertifikasi']]};
+const D={
+ pdn:{kode:'PDN',nama:'Pengadaan',judul:'Deputi Bidang Pengadaan',ikon:'cart',pagu:3.242837,labelPagu:'RKA deputi 2027',
+  anggaran:[{j:'RKA deputi per jenis kegiatan',s:'PDN hal. 8',pos:[
+    {n:'Operasional',sub:'13 kegiatan',p:1.921749,r:K()},{n:'Strategis Lanjutan',sub:'5 kegiatan',p:0.992544,r:K()},
+    {n:'Rutin & Langganan',sub:'3 kegiatan',p:0.2208,r:K()},{n:'Strategis Baru',sub:'1 kegiatan',p:0.107744,r:K()}]}],
+  proker:{s:'PDN hal. 5 & 8',item:[
+    {n:'Transformasi Strategic Procurement Berbasis Category Management',jn:'Lanjutan',sub:'Rp449,94 juta',g:K()},
+    {n:'Renewal Lisensi Agentic AI Pengadaan',jn:'Lanjutan',sub:'Rp335,66 juta',g:K()},
+    {n:'Implementasi Multi Winner di E-Procurement',jn:'Baru',sub:'Rp107,74 juta',g:K()},
+    {a:70,n:'Procure To Pay dan Procure To Asset',jn:'Lanjutan',sub:'Rp104,75 juta · SCM & Procure to Pay 70% per Nov 2026',g:K()},
+    {n:'Evaluasi Aplikasi VMS dan SCM',jn:'Lanjutan',sub:'Rp68,54 juta · VMS selesai 2026',g:K()},
+    {n:'Implementasi E-Reverse Auction Procurement',jn:'Lanjutan',sub:'Rp33,65 juta · deployment selesai 2026',g:K()}]}},
+ asp:{kode:'ASP',nama:'Aset & Sarpras',judul:'Deputi Bidang Aset dan Sarana Prasarana',ikon:'home',pagu:213.758452+143.276664,labelPagu:'Usulan BM + tambahan BM SKP',
+  anggaran:[
+   {j:'Belanja Modal per kategori',s:'ASP hal. 4',total:213.758452,pos:[
+    {n:'Pembelian tanah',sub:'6 lokasi',p:144.4132,r:K()},{n:'Penambahan bangunan kantor',sub:'8 pekerjaan, 2 carry over',p:37.646762,r:K()},
+    {n:'Penambahan mobil',sub:'Kendaraan roda 4',p:16.12,r:K()},{n:'Peralatan lain-lain',sub:'PLTS atap, utilitas, multimedia',p:6.436007,r:K()},
+    {n:'Penambahan bangunan lain',sub:'Fasad Gedung Institut, atap Sentul',p:4.613649,r:K()},{n:'Perabot/mebelair',sub:'Rengat, Solok, Kantor Pusat, Selasar',p:3.266154,r:K()},
+    {n:'Interior bangunan',sub:'Selasar, Gedung Institut',p:1.26268,r:K()}]},
+   {j:'Pembelian tanah per lokasi',s:'ASP hal. 4',total:144.4132,pos:[
+    {n:'Lahan Batuceper',p:37.5,r:K()},{n:'Lahan Kanwil Banuspa',p:37.5,r:K()},{n:'Lahan Tanjung Perak',p:30,r:K()},
+    {n:'Lahan Cimone',p:20.25,r:K()},{n:'Tanah KC Bojongsoang',p:12.4132,r:K()},{n:'Lahan Batulicin',p:6.75,r:K()}]},
+   {j:'Usulan tambahan Belanja Modal SKP',s:'ASP hal. 10',total:143.276664,pos:[
+    {n:'Persil Jawa Timur untuk Griya Pekerja',p:50,r:K()},
+    {n:'Kontraktor revitalisasi GP Pasar Minggu',p:47.624771,r:K()},{n:'Kontraktor revitalisasi GP Jababeka Cikarang',sub:'Usulan dari rapat Dewas 10 Nov 2026',p:38.091639,r:K()},
+    {n:'Konsultan MK GP Pasar Minggu',p:2.64172,r:K()},{n:'Konsultan perencana GP Jababeka Cikarang',sub:'Usulan dari rapat Dewas 10 Nov 2026',p:2.038967,r:K()},
+    {n:'Konsultan MK GP Jababeka Cikarang',sub:'Usulan dari rapat Dewas 10 Nov 2026',p:1.887949,r:K()},{n:'Konsultan perencana GP Pasar Minggu',sub:'Usulan dari rapat Dewas 10 Nov 2026',p:0.991619,r:K()}]}],
+  proker:{s:'ASP hal. 3, 4, 9, 10',item:[
+    {n:'Pembangunan Gedung KC Batam Sekupang',jn:'Carry over',sub:'Rp5,58 M · berjalan sejak 2026',g:K()},
+    {n:'Renovasi Selasar BPJamsostek',jn:'Carry over',sub:'Rp3,73 M · berjalan sejak 2026',g:K()},
+    {n:'Pematangan lahan & pembangunan gedung Jakabaring',jn:'Lanjutan',sub:'Rp5,57 M · pengadaan kontraktor per Nov 2026',g:K()},
+    {n:'Pembangunan Gedung KC Rengat',jn:'Lanjutan',sub:'Rp5,18 M · pengadaan konsultan perencana per Nov 2026',g:K()},
+    {n:'Pembangunan Gedung KC Solok',jn:'Lanjutan',sub:'Rp5,14 M · pengadaan konsultan perencana per Nov 2026',g:K()},
+    {n:'Pembelian tanah dan bangunan KC Bojongsoang',jn:'Baru',sub:'Tanah Rp12,41 M, bangunan Rp11,05 M',g:K()},
+    {n:'Pengadaan lahan 5 lokasi',jn:'Baru',sub:'Batuceper, Kanwil Banuspa, Tanjung Perak, Cimone, Batulicin · Rp132,00 M',g:K()},
+    {n:'Revitalisasi Griya Pekerja Jababeka Cikarang',jn:'SKP',sub:'Rp42,02 M · studi kelayakan selesai 2026',g:K()},
+    {n:'Revitalisasi Griya Pekerja Pasar Minggu',jn:'SKP',sub:'Rp51,26 M · masterplan: pembangunan 2027',g:K()},
+    {n:'Pengadaan persil Jawa Timur',jn:'SKP',sub:'Rp50,00 M · masterplan: pengadaan lahan 2027',g:K()}]}},
+ hcp:{kode:'HCP',nama:'Human Capital',judul:'Deputi Bidang Human Capital',ikon:'users',pagu:null,labelPagu:'Anggaran 2027',
+  anggaran:[],catAnggaran:'Materi HCP memuat 102 kegiatan 2027 (2 strategis baru, 6 strategis lanjutan, 38 operasional, 56 rutin dan langganan) tanpa nilai anggaran.',
+  proker:{s:'HCP hal. 3–4, 7–8',item:[
+    {n:'Corporate Employee Wellness Program berbasis profiling kesehatan',jn:'Baru',sub:'Program wellness promotif, preventif, berbasis digital',g:K()},
+    {n:'Kapabilitas pengelolaan data SDM & People Analytics',jn:'Baru',sub:'Pemanfaatan AI untuk data SDM terintegrasi',g:K()},
+    {a:15,n:'Pengembangan profiling kesehatan karyawan',jn:'Lanjutan',sub:'Posisi Nov 2026: 15%',g:K()},
+    {a:23,n:'Penyempurnaan kebijakan pengelolaan talenta',jn:'Lanjutan',sub:'Posisi Nov 2026: 23%',g:K()},
+    {a:22,n:'Evaluasi & penyempurnaan kebijakan pengelolaan karir',jn:'Lanjutan',sub:'Posisi Nov 2026: 22%',g:K()},
+    {a:24,n:'Pengkinian kelengkapan struktur organisasi',jn:'Lanjutan',sub:'Posisi Nov 2026: 24%',g:K()},
+    {a:37,n:'Reviu profil kompetensi',jn:'Lanjutan',sub:'Posisi Nov 2026: 37%',g:K()},
+    {n:'Pengkinian evaluasi bobot jabatan',jn:'Lanjutan',sub:'Pengkinian bobot dan rekomendasi evaluasi jabatan',g:K()}]}},
+ lnd:{kode:'LND',nama:'Learning & Development',judul:'Deputi Bidang Learning & Development',ikon:'book',pagu:null,labelPagu:'Anggaran 2027',
+  anggaran:[],catAnggaran:'Materi LND menyajikan garis besar rencana kerja 2027 tanpa nilai anggaran maupun target terukur.',
+  proker:{s:'LND hal. 7',item:[
+    {n:'Fokus kompetensi: AI, manajemen risiko, komunikasi',jn:'Fokus',g:K()},
+    {n:'Pengembangan kompetensi talenta (leadership & managerial)',jn:'Fokus',g:K()},
+    {n:'Skema bottom up & distance learning',jn:'Fokus',g:K()},
+    {n:'Asesmen SJT J-WAY Behaviour & Uji Kompetensi Teknis',jn:'Fokus',g:K()},
+    {n:'Knowledge Management, Lead Talks, Community of Practice',jn:'Fokus',g:K()},
+    {n:'Penerapan ISO 21001:2025 & surveillance audit',jn:'Fokus',g:K()},
+    {n:'Beasiswa, magang, jurnal, penambahan MoU universitas',jn:'Fokus',g:K()},
+    {n:'Kurikulum Jaminan Sosial di 16 universitas',jn:'Fokus',g:K()}]}}
+};
+const TINDAK=[]; /* {butir, deputi, rapat, tenggat, status:'Terbuka'|'Proses'|'Selesai', catatan} */
+
+
+/* ===== Hitung ===== */
+let m=0;
+const fm=x=>x==null?'—':x<1?'Rp'+(x*1000).toLocaleString('id-ID',{maximumFractionDigits:1})+' jt':'Rp'+x.toLocaleString('id-ID',{minimumFractionDigits:2,maximumFractionDigits:2})+' M';
+const kum=(a,t)=>{let s=0,ada=false;for(let i=0;i<=t;i++)if(a[i]!=null){s+=a[i];ada=true}return ada?s:null};
+const akhir=(a,t)=>{for(let i=t;i>=0;i--)if(a[i]!=null)return a[i];return null};
+const jml=(a,t)=>a.slice(0,t+1).reduce((x,y)=>x+y,0);
+const pct=(r,p)=>r==null||!p?null:r/p*100;
+/* Aturan status PRD: c = realisasi kumulatif / rencana kumulatif */
+const nada=c=>c==null?'':c>=90?'ok':c>=70?'warn':'crit';
+const NADA={'':['Belum ada data','l-netral'],ok:['Sesuai rencana','l-ok'],warn:['Perlu perhatian','l-warn'],crit:['Tertinggal','l-crit']};
+const lencana=n=>`<span class="lencana ${NADA[n][1]}">${NADA[n][0]}</span>`;
+const sumPos=pos=>{let s=0,ada=false;pos.forEach(x=>{const r=kum(x.r,m);if(r!=null){s+=r;ada=true}});return ada?s:null};
+const grupUtama=k=>k==='asp'?[D.asp.anggaran[0],D.asp.anggaran[2]]:D[k].anggaran.slice(0,1);
+const serap=k=>{const g=grupUtama(k);if(!g.length)return{r:null,p:null};let r=null;g.forEach(a=>{const s=sumPos(a.pos);if(s!=null)r=(r||0)+s});return{r,p:D[k].pagu}};
+const prog=k=>{const it=D[k].proker.item,v=it.map(x=>akhir(x.g,m)).filter(x=>x!=null);return{rata:v.length?v.reduce((a,b)=>a+b,0)/it.length:null,lapor:v.length,n:it.length,selesai:v.filter(x=>x>=100).length}};
+const peng=()=>{const P=PENGADAAN;return{rk:jml(P.paket,m),rp:jml(P.pagu,m),ak:kum(P.realPaket,m),ap:kum(P.realPagu,m)}};
+
+/* ===== Bentuk ===== */
+const ring=(p,n)=>`<svg class="ring" viewBox="0 0 64 64" role="img" aria-label="${p==null?'belum ada data':Math.round(p)+' persen'}"><circle cx="32" cy="32" r="26" class="rl"/>${p!=null?`<circle cx="32" cy="32" r="26" class="rf ${n||''}" stroke-dasharray="${Math.min(p,100)/100*163.36} 163.36" transform="rotate(-90 32 32)"/>`:''}<text x="32" y="37" text-anchor="middle">${p==null?'—':Math.round(p)+'%'}</text></svg>`;
+const ubin=(p,label,nilai,target,n)=>`<div class="kartu ubin">${ring(p,n)}<div><span class="label">${label}</span><b class="tnum">${nilai}</b><span class="cat tnum">${target}</span></div></div>`;
+const angka=(v,label,cat)=>`<div class="kartu ubin"><div><span class="label">${label}</span><b class="tnum besar">${v}</b>${cat?`<span class="cat tnum">${cat}</span>`:''}</div></div>`;
+const panel=(j,kanan,isi,pad=true)=>`<section class="kartu panel"><header><h2>${j}</h2>${kanan||''}</header><div class="${pad?'isi':'gulir'}">${isi}</div></section>`;
+/* Batang satu baris: jalur abu = pagu relatif, isi = realisasi, garis = titik awal/target */
+const bar=(n,kanan,trk,fil,o={})=>`<div class="b1"><span class="nm">${o.tag?`<i class="tag">${o.tag}</i>`:''}${n}</span><span class="nl tnum">${kanan}</span><div class="rel"><i class="netral" style="width:${trk}%"></i>${fil?`<i class="${o.nada||''}" style="width:${fil}%"></i>`:''}${o.tanda!=null?`<em style="left:calc(${o.tanda}% - 1px)"></em>`:''}</div></div>`;
+const barPos=(x,mx)=>{const r=kum(x.r,m);return bar(x.n,`<b>${r==null?'—':Math.round(r/x.p*100)+'%'}</b> · ${fm(x.p)}`,x.p/mx*100,r==null?0:Math.min(r,x.p)/mx*100)};
+const barProker=x=>{const g=akhir(x.g,m);return bar(x.n,`<b>${g==null?'—':g+'%'}</b>`,100,g||0,{tag:x.jn,tanda:x.a,nada:g>=100?'ok':''})};
+
+/* Kurva S: paket kumulatif, rencana vs realisasi */
+function kurva(){const P=PENGADAAN,T=247,X=i=>44+i*(540/11),Y=v=>176-v/T*150;let c=0;
+ const rc=P.paket.map(v=>c+=v),pr=rc.map((v,i)=>`${X(i)},${Y(v)}`).join(' ');
+ let a=0,ada=false;const real=[];P.realPaket.forEach((v,i)=>{if(v!=null){a+=v;ada=true}if(ada&&i<=m)real.push(`${X(i)},${Y(a)}`)});
+ const ak=kum(P.realPaket,m);
+ return `<svg class="kurva" viewBox="0 0 600 210" role="img" aria-label="Paket pengadaan kumulatif 2027: rencana dan realisasi">
+ ${[0,.5,1].map(f=>`<line x1="44" x2="584" y1="${Y(T*f)}" y2="${Y(T*f)}" class="gl"/><text x="38" y="${Y(T*f)+3}" text-anchor="end" class="ax">${Math.round(T*f)}</text>`).join('')}
+ <polygon points="${X(0)},${Y(0)} ${pr} ${X(11)},${Y(0)}" class="ar"/><polyline points="${pr}" class="lr"/>
+ ${real.length?`<polyline points="${real.join(' ')}" class="la"/>`:''}
+ <line x1="${X(m)}" x2="${X(m)}" y1="${Y(T)}" y2="${Y(0)}" class="mk"/><circle cx="${X(m)}" cy="${Y(rc[m])}" r="4.5" class="dr"/>
+ ${ak!=null?`<circle cx="${X(m)}" cy="${Y(ak)}" r="4.5" class="da"/>`:''}
+ <text x="${X(m)+(m>8?-8:8)}" y="${Math.max(Y(rc[m])-9,14)}" text-anchor="${m>8?'end':'start'}" class="lb">${rc[m]} pkt</text>
+ ${BLN.map((b,i)=>`<text x="${X(i)}" y="198" text-anchor="middle" class="ax ${i===m?'on':''}">${b}</text>`).join('')}</svg>
+ <div class="legenda"><span><i style="background:var(--line-strong)"></i>Rencana</span><span><i></i>Realisasi</span></div>`}
+function kolom(){const P=PENGADAAN,mx=Math.max(...P.pagu);
+ return `<div class="gulir"><div class="kolom" role="img" aria-label="Rencana pagu pengadaan per bulan, miliar rupiah">${P.pagu.map((v,i)=>`<div><b class="tnum">${v.toLocaleString('id-ID',{minimumFractionDigits:1})}</b><i class="${i===m?'puncak':i<m?'':'nanti'}" style="height:${v/mx*72}%"></i><span>${BLN[i]}</span><small class="tnum">${P.paket[i]}</small></div>`).join('')}</div></div>`}
+
+/* ===== Tampilan ===== */
+function ikhtisar(){const g=peng();let R=null,Pg=0,v=[],N=0;
+ ['pdn','asp'].forEach(k=>{const s=serap(k);Pg+=s.p;if(s.r!=null)R=(R||0)+s.r});
+ Object.keys(D).forEach(k=>{D[k].proker.item.forEach(x=>{N++;const a=akhir(x.g,m);if(a!=null)v.push(a)})});
+ const pr=v.length?v.reduce((a,b)=>a+b,0)/N:null,cp=pct(g.ak,g.rk),ts=TINDAK.filter(t=>t.status==='Selesai').length;
+ return `<h1>Ikhtisar</h1>
+ <div class="grid g4">${ubin(pct(R,Pg),'Serapan anggaran',R==null?'—':fm(R),'dari '+fm(Pg))}${ubin(cp,'Pengadaan',g.ak==null?'—':g.ak+' paket','target '+g.rk+' paket',nada(cp))}${ubin(pr,'Program kerja',v.length+' terlapor','dari '+N+' program')}${ubin(TINDAK.length?ts/TINDAK.length*100:null,'Tindak lanjut',ts+' selesai','dari '+TINDAK.length+' butir')}</div>
+ <div class="grid g4" style="margin-top:.75rem">${Object.entries(D).map(([k,d])=>{const s=serap(k),p=prog(k);
+  return `<a class="kartu dep" href="#${k}"><span class="kepala"><span class="kotak-ikon">${ik(d.ikon)}</span><span><span class="eyebrow">${d.kode}</span><b class="nm">${d.nama}</b></span></span>
+  <span class="duo"><span>${ring(pct(s.r,s.p))}<small>Serapan</small></span><span>${ring(p.rata)}<small>Program</small></span></span>
+  <span class="pg tnum">${d.pagu==null?'Pagu —':fm(d.pagu)}</span></a>`}).join('')}</div>
+ ${panel('Pengadaan: paket kumulatif',lencana(nada(cp)),kurva())}
+ ${panel('Pagu pengadaan per bulan (Rp miliar)','',kolom())}${kaki()}`}
+function vAnggaran(k){const d=D[k],s=serap(k);
+ return `<div class="grid g4">${ubin(pct(s.r,s.p),'Serapan s.d. '+BLN[m],s.r==null?'—':fm(s.r),'dari '+fm(s.p))}${d.anggaran.slice(k==='asp'?0:1).map(a=>{const r=sumPos(a.pos);return ubin(pct(r,a.total),a.pendek,r==null?'—':fm(r),'dari '+fm(a.total))}).join('')}</div>`
+ +d.anggaran.map(a=>{const mx=Math.max(...a.pos.map(x=>x.p));return panel(a.j,`<span class="sumber">${a.s}</span>`,a.pos.map(x=>barPos(x,mx)).join(''))}).join('')}
+function vProker(k){const p=prog(k),it=D[k].proker.item;
+ return `<div class="grid g4">${ubin(p.rata,'Rata-rata progres',p.lapor+' terlapor','dari '+p.n+' program')}${angka(p.selesai,'Selesai 100%','dari '+p.n)}${D[k].pagu==null?angka('—','Anggaran 2027','belum ada data'):''}</div>`
+ +panel('Progres program kerja',`<span class="sumber">${D[k].proker.s}</span>`,(it.some(x=>x.a!=null)?`<div class="legenda"><span><i class="tg"></i>Posisi akhir 2026</span></div>`:'')+it.map(barProker).join(''))}
+function vPengadaan(){const P=PENGADAAN,g=peng(),cp=pct(g.ak,g.rk),cg=pct(g.ap,g.rp),mx=P.spm[0][2];
+ return `<div class="grid g4">${ubin(cp,'Paket s.d. '+BLN[m],g.ak==null?'—':g.ak+' paket','target '+g.rk+' dari 247',nada(cp))}${ubin(cg,'Pagu s.d. '+BLN[m],g.ap==null?'—':fm(g.ap),'target '+fm(g.rp),nada(cg))}${angka(P.paket[m],'Rencana '+BLN[m],fm(P.pagu[m]))}${angka(247-g.rk,'Sisa rencana','paket setelah '+BLN[m])}</div>`
+ +panel('Paket kumulatif',lencana(nada(cp)),kurva())
+ +panel('Pagu per bulan (Rp miliar)','<span class="sumber">PDN hal. 7</span>',kolom())
+ +panel('Per bulan','',`<table><thead><tr><th scope="col">Bulan</th><th scope="col" class="k">Rencana</th><th scope="col" class="k">Realisasi</th><th scope="col" class="k">Capaian kum.</th></tr></thead><tbody>${BLN.map((b,i)=>{const c=pct(kum(P.realPaket,i),jml(P.paket,i));return `<tr ${i===m?'class="total"':''}><td>${b}</td><td class="k tnum">${P.paket[i]} · ${fm(P.pagu[i])}</td><td class="k tnum">${P.realPaket[i]==null?'—':P.realPaket[i]+' · '+fm(P.realPagu[i])}</td><td class="k tnum"><b class="${c==null?'':'n-'+nada(c)}">${c==null?'—':Math.round(c)+'%'}</b></td></tr>`}).join('')}</tbody></table>`,false)
+ +panel('Kategori SPM','<span class="sumber">PDN hal. 6</span>',P.spm.map(s=>bar(s[0],`${s[1]} pkt · ${fm(s[2])}`,s[2]/mx*100,0)).join(''))}
+function vTindak(){const c=s=>TINDAK.filter(t=>t.status===s).length;
+ return `<h1>Tindak lanjut</h1><div class="grid g4">${angka(TINDAK.length,'Total butir')}${angka(c('Terbuka'),'Terbuka')}${angka(c('Proses'),'Proses')}${angka(c('Selesai'),'Selesai')}</div>
+ ${panel('Daftar butir','',`<table><thead><tr><th scope="col">Butir</th><th scope="col">Deputi</th><th scope="col">Rapat</th><th scope="col">Tenggat</th><th scope="col">Status</th></tr></thead><tbody>${TINDAK.length?TINDAK.map(t=>`<tr><td><b>${t.butir}</b></td><td>${t.deputi}</td><td>${t.rapat}</td><td>${t.tenggat||'—'}</td><td><span class="lencana ${t.status==='Selesai'?'l-ok':t.status==='Proses'?'l-aksen':'l-warn'}">${t.status}</span></td></tr>`).join(''):`<tr><td colspan="5" style="text-align:center;color:var(--muted);padding:2rem">Belum ada butir</td></tr>`}</tbody></table>`,false)}`}
+const kaki=()=>`<p class="kaki">Baseline: usulan 2027 per rapat 17 Nov 2026 · M = miliar rupiah · — = belum ada data</p>`;
+
+
+/* ===== 2026: posisi per materi rapat 17 Nov 2026 (cutoff PDN 16 Nov, minggu ke-46) ===== */
+let th='2026';
+const TGT=88.46; /* target linear minggu ke-46 dari 52, sama dengan "rencana" di materi PDN */
+const n26=p=>nada(p/TGT*100);
+const id=(x,d=2)=>x.toLocaleString('id-ID',{minimumFractionDigits:d,maximumFractionDigits:d});
+const pbar=(n,p,ket,o={})=>bar(n,`<b>${id(p,p%1?1:0)}%</b>${ket?' · '+ket:''}`,100,p,{nada:o.nada??n26(p),tanda:o.tanda,tag:o.tag});
+const tumpuk=a=>{const t=a.reduce((x,y)=>x+y[0],0);return `<div class="tumpuk" role="img" aria-label="${a.map(x=>x[1]+' '+x[0]).join(', ')}">${a.map(x=>`<i class="${x[2]}" style="flex:${x[0]}">${x[0]}</i>`).join('')}</div><div class="legenda">${a.map(x=>`<span><i class="${x[2]}"></i>${x[1]} ${Math.round(x[0]/t*100)}%</span>`).join('')}</div>`};
+const sb=t=>`<span class="sumber">${t}</span>`;
+const lgTanda=t=>`<div class="legenda"><span><i class="tg"></i>${t}</span></div>`;
+const HC26=[['Profiling Kesehatan Karyawan',15,'Baru'],['Roadmap HC 2027–2031',100,'Baru'],['Dashboard Analitik SDM',100,'Baru'],['Kebijakan Pengelolaan Talenta',23,'Lanjutan'],['Model, Kamus & Profil Kompetensi',37,'Lanjutan'],['Struktur Organisasi',24,'Lanjutan'],['Kebijakan Pengelolaan Karir',22,'Lanjutan'],['Kajian Real Time Performance Feedback',100,'Lanjutan'],['Kajian Talent Mapping',100,'Lanjutan']];
+const HC_RATA=HC26.reduce((a,b)=>a+b[1],0)/HC26.length;
+const PD26=[['SCM & Procure to Pay',70,'Lanjutan'],['Vendor Management System',100,'Lanjutan'],['Dashboard Monitoring Pengadaan',75,'Lanjutan'],['Otomasi Pengadaan dengan Modul AI',100,'Baru'],['E-Reverse Auction',100,'Baru']];
+const PD_RATA=PD26.reduce((a,b)=>a+b[1],0)/PD26.length;
+const LND_KEG=[['Diklat Teknis Kepala Bidang Pelayanan','Okt','Selesai'],['Pelatihan Inhouse AI (Tier 1 dan 2)','Okt','Selesai'],['Budget Literacy for Future Leaders','Okt','Selesai'],['Pelatihan Risk Management Officer','Okt–Nov','Selesai'],['Diklat Teknis Case Manager','Nov','Selesai'],['ILDP','Nov','Selesai'],['LMDP','Nov','Selesai'],['Assesmen dan Reassesmen Centre','Okt–Nov','Selesai'],['Knowledge Sharing, Lead Talks, CoP','Okt–Nov','Selesai'],
+ ['Program Purna Tugas','Nov','Berlangsung'],['Sertifikasi dan Public Training','Nov–Des','Berlangsung'],['Penyusunan Modul Digital','Nov–Des','Berlangsung'],['Evaluasi perilaku teknis & dampak bisnis','Nov–Des','Berlangsung'],['Perpanjangan MoU 3 perguruan tinggi','Nov–Des','Berlangsung'],['Jurnal Jamsostek Vol. 4 No. 2','Nov–Des','Berlangsung'],
+ ['BLDP','Nov','Persiapan'],['Training Data Security Waka DHCA','Des','Persiapan'],['J-WAY Behavior Potential Measurement','Nov','Persiapan'],['Uji Kompetensi Teknis Calon Karyawan','Nov','Persiapan'],['Launching Modul Kokurikuler SMP & SMA','Des','Persiapan']];
+const prokerBar=a=>[...a].sort((x,y)=>x[1]-y[1]).map(p=>pbar(p[0],p[1],'',{tag:p[2],nada:p[1]>=100?'ok':p[1]<40?'crit':''})).join('');
+const kaki26=()=>`<p class="kaki">Posisi per materi rapat 17 Nov 2026 · Warna: capaian dibanding target linear minggu ke-46 (${id(TGT)}%), hijau ≥ 90% target, kuning 70–90%, merah &lt; 70% · M = miliar rupiah</p>`;
+const RING26={pdn:[[54.25,'Anggaran'],[93.76,'Program']],asp:[[79,'BU'],[36,'BM']],hcp:[[HC_RATA,'Program'],[null,'Anggaran']],lnd:[[45,'Kegiatan'],[null,'Anggaran']]};
+function ikhtisar26(){
+ return `<h1>Ikhtisar 2026</h1>
+ <div class="grid g4">${ubin(74.29,'Pengadaan selesai','130 paket','dari 175 paket',n26(74.29))}${ubin(79,'ASP · Belanja Usaha','Rp100,20 M','dari Rp127,23 M',n26(79))}${ubin(36,'ASP · Belanja Modal','Rp26,22 M','dari Rp73,37 M',n26(36))}${ubin(HC_RATA,'HCP · program strategis','4 selesai','dari 9 program',n26(HC_RATA))}</div>
+ <div class="grid g4" style="margin-top:.75rem">${Object.entries(D).map(([k,d])=>`<a class="kartu dep" href="#${k}"><span class="kepala"><span class="kotak-ikon">${ik(d.ikon)}</span><span><span class="eyebrow">${d.kode}</span><b class="nm">${d.nama}</b></span></span><span class="duo">${RING26[k].map(r=>`<span>${ring(r[0],r[0]==null?'':n26(r[0]))}<small>${r[1]}</small></span>`).join('')}</span></a>`).join('')}</div>
+ ${panel('Realisasi dan prognosa akhir tahun','',lgTanda('Prognosa akhir tahun / target')
+  +pbar('ASP · Belanja Usaha',79,'Rp100,20 M',{tanda:97})+pbar('ASP · Belanja Modal',36,'Rp26,22 M',{tanda:47})
+  +pbar('ASP · BU SKP',16.36,'Rp2,40 M',{tanda:40.59})+pbar('ASP · BM SKP',40.34,'Rp1,82 M',{tanda:50.23})
+  +pbar('PDN · Anggaran deputi',54.25,'Rp1,86 M')+pbar('PDN · Program kerja',93.76,'',{tanda:TGT}))}
+ ${panel('Program strategis per deputi','',pbar('PDN · 5 program',PD_RATA,'3 selesai',{nada:n26(PD_RATA)})+pbar('HCP · 9 program',HC_RATA,'4 selesai')+pbar('LND · 20 kegiatan TW IV',45,'9 selesai'))}
+ ${panel('Status 175 paket pengadaan',sb('PDN hal. 2'),tumpuk([[130,'Selesai','ok'],[32,'Berjalan',''],[13,'Dibatalkan','netral']]))}${kaki26()}`}
+const V26={
+ pdn:{tab:['Anggaran','Program kerja','Pengadaan'],v:[
+  ()=>`<div class="grid g4">${ubin(54.25,'Serapan anggaran','Rp1,86 M','dari Rp3,44 M',n26(54.25))}${ubin(93.76,'Program kerja','93,76%','target '+id(TGT)+'%','ok')}${angka('Rp1,57 M','Sisa saldo','20 kegiatan')}</div>`
+   +panel('Serapan per jenis kegiatan',sb('PDN hal. 4'),pbar('Operasional',86.1,'Rp1,52 M dari Rp1,77 M')+pbar('Rutin dan Langganan',76.9,'Rp88,5 jt dari Rp115,2 jt')+pbar('Strategis Baru',28.8,'Rp113,4 jt dari Rp394,3 jt')+pbar('Strategis Lanjutan',11.9,'Rp137,6 jt dari Rp1,16 M')),
+  ()=>`<div class="grid g4">${ubin(PD_RATA,'Rata-rata progres','3 selesai','dari 5 program',n26(PD_RATA))}${angka(2,'Belum selesai','70% dan 75%')}</div>`+panel('Program kerja strategis',sb('PDN hal. 5'),prokerBar(PD26)),
+  ()=>`<div class="grid g4">${ubin(74.29,'Paket selesai','130 paket','dari 175 paket',n26(74.29))}${ubin(5,'Sesuai kalender','5%','95% tidak sesuai jadwal','crit')}${angka('Rp82,21 M','Cost saving','14,78%')}${angka('Rp347,06 M','Realisasi pengadaan','130 paket · pagu Rp980,10 M')}</div>`
+   +panel('Status paket',sb('PDN hal. 2'),tumpuk([[130,'Selesai','ok'],[32,'Berjalan',''],[13,'Dibatalkan','netral']]))
+   +panel('Tahap 32 paket berjalan',sb('PDN hal. 10–11'),[['Negosiasi',7],['Evaluasi Teknis',5],['Aanwijzing',4],['Buka Teknis',4],['Buka Penawaran',1],['Non-Pelelangan',1],['Pembuatan HPS',5,1],['Buat Jadwal',4,1],['Perencanaan',1,1]].map(t=>bar(t[0],`<b>${t[1]}</b> paket`,100,t[1]/7*100,{nada:t[2]?'warn':''})).join('')+`<div class="legenda"><span><i class="warn"></i>Tahap awal: 10 paket</span></div>`)
+   +panel('Unit kerja pengguna',sb('PDN hal. 3'),[['IPT',55],['ASP',37],['HCP',12],['LND',9],['INL',9],['15 unit lain',51]].map(u=>bar(u[0],`<b>${u[1]}</b> paket`,100,u[1]/55*100,{nada:u[0].includes('lain')?'netral':''})).join(''))
+   +panel('Kategori SPM 2026',sb('PDN hal. 3'),[['Leverage/Umum',79],['Critical',57],['Bottleneck',23],['Lainnya',14]].map(u=>bar(u[0],`<b>${u[1]}</b> paket`,100,u[1]/79*100)).join(''))]},
+ asp:{v:[()=>`<div class="grid g4">${ubin(79,'Belanja Usaha','Rp100,20 M','prognosa 97%',n26(79))}${ubin(36,'Belanja Modal','Rp26,22 M','prognosa 47%',n26(36))}${ubin(16.36,'BU SKP','Rp2,40 M','prognosa 40,59%',n26(16.36))}${ubin(40.34,'BM SKP','Rp1,82 M','prognosa 50,23%',n26(40.34))}</div>`
+   +panel('Realisasi dan prognosa akhir tahun',sb('ASP hal. 2 & 6'),lgTanda('Prognosa akhir tahun')+pbar('Belanja Usaha',79,'dari Rp127,23 M',{tanda:97})+pbar('Belanja Modal',36,'dari Rp73,37 M',{tanda:47})+pbar('BU SKP',16.36,'dari Rp14,68 M',{tanda:40.59})+pbar('BM SKP',40.34,'dari Rp4,51 M',{tanda:50.23}))
+   +panel('Belanja Modal per kategori',sb('ASP hal. 2'),[['Peralatan lain',89,'Rp4,58 M'],['Kendaraan',72,'Rp18,17 M'],['Bangunan',13,'Rp3,46 M'],['Tanah',0,'Rp0'],['Interior',0,'Rp0'],['Perabot/mebelair',0,'Rp0']].map(k=>pbar(k[0],k[1],k[2])).join(''))
+   +panel('Belanja Usaha per aktivitas',sb('ASP hal. 2'),[['Keberlangsungan operasional unit kerja',92],['Inspeksi kendali mutu sarana',76],['Pemeliharaan & pengelolaan aset',69],['Pemenuhan sarana prasarana',63],['Pembangunan & renovasi gedung',61],['Langganan kantor pusat',59],['Administrasi aset tetap',56],['ATK & consumables',31]].map(k=>pbar(k[0],k[1],'')).join(''))
+   +panel('SKP: anggaran dan fisik',sb('ASP hal. 6'),lgTanda('Progres fisik')+pbar('BU · Fasilitas Griya Pekerja',10.39,'fisik 66%',{tanda:66})+pbar('BU · Kepuasan & okupansi',19.6,'fisik 70%',{tanda:70})+pbar('BU · Aset SKP non-Griya Pekerja',75.6,'fisik 63,13%',{tanda:63.13})+pbar('BM · Fasilitas Griya Pekerja',40.34,'fisik 90%',{tanda:90}))]},
+ hcp:{v:[()=>`<div class="grid g4">${ubin(HC_RATA,'Rata-rata progres','4 selesai','dari 9 program',n26(HC_RATA))}${angka(5,'Di bawah 40%','terendah 15%')}${angka('—','Realisasi anggaran','tidak ada di materi')}</div>`
+   +panel('Status 9 program',sb('HCP hal. 3–4'),tumpuk([[4,'Selesai','ok'],[5,'Di bawah 40%','warn']]))
+   +panel('Program kerja strategis',sb('HCP hal. 3–4'),prokerBar(HC26))]},
+ lnd:{v:[()=>`<div class="grid g4">${ubin(45,'Kegiatan TW IV selesai','9 kegiatan','dari 20',n26(45))}${angka(6,'Berlangsung')}${angka(5,'Persiapan')}${angka(112,'Public training','6 akademi')}</div>`
+   +panel('Status 20 kegiatan TW IV',sb('LND hal. 4–6'),tumpuk([[9,'Selesai','ok'],[6,'Berlangsung',''],[5,'Persiapan','warn']]))
+   +panel('Public training per akademi',sb('LND hal. 13'),[['Finance and GRCC',39],['Strategy and Technology',25],['Human Capital and General Affairs',22],['Investment',16],['Membership and Communication',6],['Services',4]].map(a=>bar(a[0],`<b>${a[1]}</b>`,100,a[1]/39*100)).join(''))
+   +panel('Kegiatan TW IV',sb('LND hal. 4–6'),`<table><thead><tr><th scope="col">Kegiatan</th><th scope="col">Bulan</th><th scope="col">Status</th></tr></thead><tbody>${LND_KEG.map(k=>`<tr><td>${k[0]}</td><td>${k[1]}</td><td><span class="lencana ${k[2]==='Selesai'?'l-ok':k[2]==='Berlangsung'?'l-aksen':'l-warn'}">${k[2]}</span></td></tr>`).join('')}</tbody></table>`,false)]}
+};
+function deputi26(r){const d=D[r],v=V26[r],tab=v.tab||[],s=Math.min(seg[r+'26']||0,v.v.length-1);
+ return `<h1>${d.judul}</h1>${tab.length?`<div class="segmen" role="tablist" aria-label="Bagian ${d.kode}">${tab.map((n,i)=>`<button role="tab" aria-selected="${i===s}" data-seg="${i}">${n}</button>`).join('')}</div>`:''}<div role="tabpanel">${v.v[s]()}</div>${kaki26()}`}
+
+/* ===== Navigasi ===== */
+D.asp.anggaran[0].pendek='Belanja Modal';D.asp.anggaran[1].pendek='Tanah';D.asp.anggaran[2].pendek='BM SKP';
+D.pdn.anggaran[0].total=D.pdn.pagu;
+const MENU=[['ikhtisar','Ikhtisar','layout'],...Object.entries(D).map(([k,d])=>[k,d.nama,d.ikon,d.kode]),['tindak-lanjut','Tindak lanjut','list']];
+const seg={};
+const simpan=(k,v)=>{try{localStorage.setItem(k,v)}catch(e){}},baca=k=>{try{return localStorage.getItem(k)}catch(e){return null}};
+const rute=()=>{const h=location.hash.replace('#','');return MENU.some(x=>x[0]===h)?h:'ikhtisar'};
+const sisi=document.getElementById('sisi'),buka=document.getElementById('buka');
+function laci(b){sisi.classList.toggle('buka',b);document.getElementById('tirai').classList.toggle('buka',b);buka.setAttribute('aria-expanded',b);document.body.style.overflow=b?'hidden':'';if(b)document.getElementById('tutup').focus()}
+function gambar(atas){const r=rute(),main=document.getElementById('konten');
+ document.getElementById('menu').innerHTML=MENU.map((x,i)=>`${i===0?'<span class="label-grup">Ringkasan</span>':i===1?'<span class="label-grup">Deputi</span>':i===5?'<span class="label-grup">Rapat</span>':''}<a href="#${x[0]}" ${x[0]===r?'aria-current="page"':''}>${ik(x[2])}<span>${x[1]}</span>${x[3]?`<span class="kd">${x[3]}</span>`:''}</a>`).join('');
+ document.querySelectorAll('[data-th]').forEach(b=>b.setAttribute('aria-pressed',b.dataset.th===th));
+ document.getElementById('per26').style.display=th==='2026'&&r!=='tindak-lanjut'?'':'none';
+ document.getElementById('judul-bar').textContent=r==='ikhtisar'?'Pengawasan '+th:r==='tindak-lanjut'?'Tindak lanjut':D[r].kode;
+ document.querySelector('.pilih-bulan').style.display=th==='2027'&&r!=='tindak-lanjut'?'':'none';
+ if(r==='ikhtisar')main.innerHTML=th==='2026'?ikhtisar26():ikhtisar();
+ else if(r==='tindak-lanjut')main.innerHTML=vTindak();
+ else if(th==='2026')main.innerHTML=deputi26(r);
+ else{const d=D[r],tab=[...(d.anggaran.length?['Anggaran']:[]),'Program kerja',...(r==='pdn'?['Pengadaan']:[])];
+  const s=Math.min(seg[r]||0,tab.length-1),nm=tab[s];
+  main.innerHTML=`<h1>${d.judul}</h1>
+  ${tab.length>1?`<div class="segmen" role="tablist" aria-label="Bagian ${d.kode}">${tab.map((n,i)=>`<button role="tab" aria-selected="${i===s}" data-seg="${i}">${n}</button>`).join('')}</div>`:''}
+  <div role="tabpanel">${nm==='Anggaran'?vAnggaran(r):nm==='Program kerja'?vProker(r):vPengadaan()}</div>${kaki()}`}
+ document.title=(r==='ikhtisar'?'Ikhtisar':r==='tindak-lanjut'?'Tindak lanjut':D[r].kode)+' · Pengawasan Dewas '+th;
+ if(atas)window.scrollTo(0,0)}
+document.addEventListener('click',e=>{
+ const y=e.target.closest('[data-th]');if(y){th=y.dataset.th;simpan('tahun',th);gambar(false);return}
+ const b=e.target.closest('[data-seg]');if(b){seg[rute()+(th==='2026'?'26':'')]=+b.dataset.seg;gambar(false);return}
+ if(e.target.closest('#buka'))laci(true);else if(e.target.closest('#tutup,#tirai,#menu a')){const t=sisi.classList.contains('buka');laci(false);if(t&&!e.target.closest('#menu a'))buka.focus()}});
+document.addEventListener('keydown',e=>{if(e.key==='Escape'&&sisi.classList.contains('buka')){laci(false);buka.focus()}});
+window.addEventListener('hashchange',()=>gambar(true));
+const sel=document.getElementById('bulan');sel.innerHTML=BLN_P.map((b,i)=>`<option value="${i}">${b}</option>`).join('');
+if(baca('tahun')==='2027')th='2027';
+const b0=+baca('bulan');if(b0>=0&&b0<12)m=b0;sel.value=m;
+sel.addEventListener('change',()=>{m=+sel.value;simpan('bulan',m);gambar(false)});
+const akar=document.documentElement,tbl=document.getElementById('tema');
+const gelap=()=>akar.dataset.theme?akar.dataset.theme==='dark':matchMedia('(prefers-color-scheme: dark)').matches;
+const ikonTema=()=>tbl.innerHTML=ik(gelap()?'sun':'moon');
+const t0=baca('tema');if(t0==='dark'||t0==='light')akar.dataset.theme=t0;
+tbl.addEventListener('click',()=>{const n=gelap()?'light':'dark';akar.dataset.theme=n;simpan('tema',n);ikonTema()});
+document.getElementById('marka-sisi').innerHTML=ik('layout');buka.innerHTML=ik('menu');document.getElementById('tutup').innerHTML=ik('x');
+ikonTema();gambar(false);
+</script>
+
+</body>
+</html>
