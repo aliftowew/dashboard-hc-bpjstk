@@ -259,6 +259,7 @@ main{padding-top:1rem}
 .per26{font-size:.74rem;color:var(--muted);white-space:nowrap}
 @media (max-width:480px){.pilih-bulan>span{display:none}.judul-bar{display:none}}
 .b1 .rel i.warn{background:var(--warn)}.b1 .rel i.crit{background:var(--crit)}
+.ket-kecil{font-size:.8rem;color:var(--muted)}
 .tumpuk{display:flex;height:1.6rem;border-radius:.5rem;overflow:hidden;gap:2px}
 .tumpuk i{display:grid;place-items:center;font-style:normal;font-size:.74rem;font-weight:700;color:var(--on-accent);background:var(--accent);min-width:1.6rem}
 .tumpuk i.ok{background:var(--ok)}.tumpuk i.warn{background:var(--warn)}.tumpuk i.netral{background:var(--line-strong);color:var(--ink)}
@@ -474,6 +475,26 @@ const PD_RATA=PD26.reduce((a,b)=>a+b[1],0)/PD26.length;
 const LND_KEG=[['Diklat Teknis Kepala Bidang Pelayanan','Okt','Selesai'],['Pelatihan Inhouse AI (Tier 1 dan 2)','Okt','Selesai'],['Budget Literacy for Future Leaders','Okt','Selesai'],['Pelatihan Risk Management Officer','Okt–Nov','Selesai'],['Diklat Teknis Case Manager','Nov','Selesai'],['ILDP','Nov','Selesai'],['LMDP','Nov','Selesai'],['Assesmen dan Reassesmen Centre','Okt–Nov','Selesai'],['Knowledge Sharing, Lead Talks, CoP','Okt–Nov','Selesai'],
  ['Program Purna Tugas','Nov','Berlangsung'],['Sertifikasi dan Public Training','Nov–Des','Berlangsung'],['Penyusunan Modul Digital','Nov–Des','Berlangsung'],['Evaluasi perilaku teknis & dampak bisnis','Nov–Des','Berlangsung'],['Perpanjangan MoU 3 perguruan tinggi','Nov–Des','Berlangsung'],['Jurnal Jamsostek Vol. 4 No. 2','Nov–Des','Berlangsung'],
  ['BLDP','Nov','Persiapan'],['Training Data Security Waka DHCA','Des','Persiapan'],['J-WAY Behavior Potential Measurement','Nov','Persiapan'],['Uji Kompetensi Teknis Calon Karyawan','Nov','Persiapan'],['Launching Modul Kokurikuler SMP & SMA','Des','Persiapan']];
+const ASP_PK26=[
+ ['Pembangunan Gedung KC Batam Sekupang','BM','Berjalan','Monitoring, evaluasi, dan legal assistance Kejari Batam · carry over 2027 Rp5,58 M'],
+ ['Renovasi Selasar BPJamsostek','BM','Berjalan','Legal assistance Kejari Jakarta Pusat · carry over 2027 Rp3,73 M'],
+ ['Kontraktor pematangan lahan & jembatan Jakabaring Palembang','BM','Pengadaan','Pengadaan kontraktor pelaksana'],
+ ['Konsultan perencana Gedung KC Rengat','BM','Pengadaan',''],
+ ['Konsultan perencana Gedung KC Solok','BM','Pengadaan',''],
+ ['Revisi Perdir standardisasi tanah & konsep bangunan gedung kantor','Kebijakan','Berjalan','Sosialisasi sampai akhir 2026'],
+ ['Lelang dan hapus buku aset tetap','Tindak lanjut','Rencana','Sesuai KEP/97/062026, sampai akhir 2026'],
+ ['Fasilitas 282 kamar GP Bumi Lancang Kuning, Batam','BU SKP','Berjalan','Progres diperkirakan 50% pada Des 2026 · estimasi realisasi Rp2,10 M'],
+ ['Perbaikan hidran GP Kabil, Batam','BU SKP','Tender ulang','Pengadaan memasuki tender kedua'],
+ ['Studi kelayakan revitalisasi GP Jababeka Cikarang','BU SKP','Selesai','Menunggu penagihan'],
+ ['Renovasi interior 282 kamar GP Bumi Lancang Kuning','BM SKP carry over','Selesai','Masa pemeliharaan · retensi Rp445,86 jt dibayar minggu ke-1 Des 2026 · sisa anggaran Rp2,24 M (50,23%)']];
+const LEN_PK={Selesai:'l-ok',Berjalan:'l-aksen',Pengadaan:'l-netral','Tender ulang':'l-warn',Rencana:'l-netral'};
+const GP_MP=[
+ ['2026','Implementasi Pilar 3C','Perencanaan pembangunan GP Pasar Minggu; perencanaan renovasi dan pembangunan GP Jababeka Cikarang; perbaikan dan pemenuhan fasilitas GP'],
+ ['2027','Strengthen the Foundation','Pembangunan GP Pasar Minggu; pembangunan GP Jababeka Cikarang (lanjutan); kajian pengembangan GP Jawa Timur; pengadaan lahan Jawa Timur'],
+ ['2028','Connect Enterprise Ecosystem','Perencanaan pembangunan GP Jawa Timur; kajian pengembangan GP Jawa Tengah; pemeliharaan landscape dan arsitektural; fasilitas GP Kabil Batam'],
+ ['2029','Accelerate Value Creation','Pembangunan GP Jawa Timur; pengadaan lahan Jawa Tengah; pemeliharaan landscape dan arsitektural'],
+ ['2030','Lead Future Protection','Perencanaan pembangunan GP Jawa Tengah; pemeliharaan landscape dan arsitektural; kajian pengembangan GP Banten'],
+ ['2031','Elevate Sustainability','Pembangunan GP Jawa Tengah; penambahan lahan dan perencanaan GP Banten; pemeliharaan landscape dan arsitektural']];
 const prokerBar=a=>[...a].sort((x,y)=>x[1]-y[1]).map(p=>pbar(p[0],p[1],'',{tag:p[2],nada:p[1]>=100?'ok':p[1]<40?'crit':''})).join('');
 const kaki26=()=>`<p class="kaki">Posisi per materi rapat 17 Nov 2026 · Warna: capaian dibanding target linear minggu ke-46 (${id(TGT)}%), hijau ≥ 90% target, kuning 70–90%, merah &lt; 70% · M = miliar rupiah</p>`;
 const RING26={pdn:[[54.25,'Anggaran'],[93.76,'Program']],asp:[[79,'BU'],[36,'BM']],hcp:[[HC_RATA,'Program'],[null,'Anggaran']],lnd:[[45,'Kegiatan'],[null,'Anggaran']]};
@@ -483,7 +504,7 @@ function ikhtisar26(){
  <div class="grid g4" style="margin-top:.75rem">${Object.entries(D).map(([k,d])=>`<a class="kartu dep" href="#${k}"><span class="kepala"><span class="kotak-ikon">${ik(d.ikon)}</span><span><span class="eyebrow">${d.kode}</span><b class="nm">${d.nama}</b></span></span><span class="duo">${RING26[k].map(r=>`<span>${ring(r[0],r[0]==null?'':n26(r[0]))}<small>${r[1]}</small></span>`).join('')}</span></a>`).join('')}</div>
  ${panel('Realisasi dan prognosa akhir tahun','',lgTanda('Prognosa akhir tahun / target')
   +pbar('ASP · Belanja Usaha',79,'Rp100,20 M',{tanda:97})+pbar('ASP · Belanja Modal',36,'Rp26,22 M',{tanda:47})
-  +pbar('ASP · BU SKP',16.36,'Rp2,40 M',{tanda:40.59})+pbar('ASP · BM SKP',40.34,'Rp1,82 M',{tanda:50.23})
+  +pbar('ASP · BU SKP',16.36,'Rp2,40 M · carry over 59,33%',{tanda:40.59})+pbar('ASP · BM SKP',40.34,'Rp1,82 M',{tanda:50.23})
   +pbar('PDN · Anggaran deputi',54.25,'Rp1,86 M')+pbar('PDN · Program kerja',93.76,'',{tanda:TGT}))}
  ${panel('Program strategis per deputi','',pbar('PDN · 5 program',PD_RATA,'3 selesai',{nada:n26(PD_RATA)})+pbar('HCP · 9 program',HC_RATA,'4 selesai')+pbar('LND · 20 kegiatan TW IV',45,'9 selesai'))}
  ${panel('Status 175 paket pengadaan',sb('PDN hal. 2'),tumpuk([[130,'Selesai','ok'],[32,'Berjalan',''],[13,'Dibatalkan','netral']]))}${kaki26()}`}
@@ -497,11 +518,16 @@ const V26={
    +panel('Tahap 32 paket berjalan',sb('PDN hal. 10–11'),[['Negosiasi',7],['Evaluasi Teknis',5],['Aanwijzing',4],['Buka Teknis',4],['Buka Penawaran',1],['Non-Pelelangan',1],['Pembuatan HPS',5,1],['Buat Jadwal',4,1],['Perencanaan',1,1]].map(t=>bar(t[0],`<b>${t[1]}</b> paket`,100,t[1]/7*100,{nada:t[2]?'warn':''})).join('')+`<div class="legenda"><span><i class="warn"></i>Tahap awal: 10 paket</span></div>`)
    +panel('Unit kerja pengguna',sb('PDN hal. 3'),[['IPT',55],['ASP',37],['HCP',12],['LND',9],['INL',9],['15 unit lain',51]].map(u=>bar(u[0],`<b>${u[1]}</b> paket`,100,u[1]/55*100,{nada:u[0].includes('lain')?'netral':''})).join(''))
    +panel('Kategori SPM 2026',sb('PDN hal. 3'),[['Leverage/Umum',79],['Critical',57],['Bottleneck',23],['Lainnya',14]].map(u=>bar(u[0],`<b>${u[1]}</b> paket`,100,u[1]/79*100)).join(''))]},
- asp:{v:[()=>`<div class="grid g4">${ubin(79,'Belanja Usaha','Rp100,20 M','prognosa 97%',n26(79))}${ubin(36,'Belanja Modal','Rp26,22 M','prognosa 47%',n26(36))}${ubin(16.36,'BU SKP','Rp2,40 M','prognosa 40,59%',n26(16.36))}${ubin(40.34,'BM SKP','Rp1,82 M','prognosa 50,23%',n26(40.34))}</div>`
+ asp:{tab:['Anggaran','Program kerja'],v:[()=>`<div class="grid g4">${ubin(79,'Belanja Usaha','Rp100,20 M','prognosa 97%',n26(79))}${ubin(36,'Belanja Modal','Rp26,22 M','prognosa 47%',n26(36))}${ubin(16.36,'BU SKP','Rp2,40 M','prognosa 40,59% · +carry over 59,33%',n26(16.36))}${ubin(40.34,'BM SKP','Rp1,82 M','prognosa 50,23%',n26(40.34))}</div>`
    +panel('Realisasi dan prognosa akhir tahun',sb('ASP hal. 2 & 6'),lgTanda('Prognosa akhir tahun')+pbar('Belanja Usaha',79,'dari Rp127,23 M',{tanda:97})+pbar('Belanja Modal',36,'dari Rp73,37 M',{tanda:47})+pbar('BU SKP',16.36,'dari Rp14,68 M',{tanda:40.59})+pbar('BM SKP',40.34,'dari Rp4,51 M',{tanda:50.23}))
    +panel('Belanja Modal per kategori',sb('ASP hal. 2'),[['Peralatan lain',89,'Rp4,58 M'],['Kendaraan',72,'Rp18,17 M'],['Bangunan',13,'Rp3,46 M'],['Tanah',0,'Rp0'],['Interior',0,'Rp0'],['Perabot/mebelair',0,'Rp0']].map(k=>pbar(k[0],k[1],k[2])).join(''))
    +panel('Belanja Usaha per aktivitas',sb('ASP hal. 2'),[['Keberlangsungan operasional unit kerja',92],['Inspeksi kendali mutu sarana',76],['Pemeliharaan & pengelolaan aset',69],['Pemenuhan sarana prasarana',63],['Pembangunan & renovasi gedung',61],['Langganan kantor pusat',59],['Administrasi aset tetap',56],['ATK & consumables',31]].map(k=>pbar(k[0],k[1],'')).join(''))
-   +panel('SKP: anggaran dan fisik',sb('ASP hal. 6'),lgTanda('Progres fisik')+pbar('BU · Fasilitas Griya Pekerja',10.39,'fisik 66%',{tanda:66})+pbar('BU · Kepuasan & okupansi',19.6,'fisik 70%',{tanda:70})+pbar('BU · Aset SKP non-Griya Pekerja',75.6,'fisik 63,13%',{tanda:63.13})+pbar('BM · Fasilitas Griya Pekerja',40.34,'fisik 90%',{tanda:90}))]},
+   +panel('BU SKP termasuk carry over',sb('ASP hal. 6'),lgTanda('Prognosa + carry over')+pbar('BU SKP + carry over',75.69,'Rp2,40 M + carry over Rp8,71 M dari Rp14,68 M',{tanda:99.91})+`<p class="ket-kecil" style="margin:.5rem 0 0">Realisasi murni 16,36% (prognosa 40,59% atau Rp5,96 M). Ditambah carry over Rp8,71 M (59,33%), prognosa akhir tahun menjadi 99,91%.</p>`)
+   +panel('SKP: anggaran dan fisik',sb('ASP hal. 6'),lgTanda('Progres fisik')+pbar('BU · Fasilitas Griya Pekerja',68.13,'10,39% + carry over 57,74% · fisik 66%',{tanda:66})+pbar('BU · Kepuasan & okupansi',87.37,'19,60% + carry over 67,77% · fisik 70%',{tanda:70})+pbar('BU · Aset SKP non-Griya Pekerja',75.6,'fisik 63,13%',{tanda:63.13})+pbar('BM · Fasilitas Griya Pekerja',40.34,'fisik 90%',{tanda:90})),
+  ()=>`<div class="grid g4">${angka(ASP_PK26.length,'Program kerja TW IV','termasuk 4 kegiatan SKP')}${angka(ASP_PK26.filter(x=>x[2]==='Selesai').length,'Selesai','Studi kelayakan, interior kamar GP')}${angka(ASP_PK26.filter(x=>x[2]==='Berjalan').length,'Berjalan')}${angka(ASP_PK26.filter(x=>x[2]==='Pengadaan'||x[2]==='Tender ulang').length,'Masih pengadaan','1 tender ulang')}</div>`
+   +panel('Status program kerja TW IV',sb('ASP hal. 3, 7, 8'),tumpuk([[ASP_PK26.filter(x=>x[2]==='Selesai').length,'Selesai','ok'],[ASP_PK26.filter(x=>x[2]==='Berjalan').length,'Berjalan',''],[ASP_PK26.filter(x=>x[2]==='Pengadaan'||x[2]==='Rencana').length,'Pengadaan/rencana','netral'],[ASP_PK26.filter(x=>x[2]==='Tender ulang').length,'Tender ulang','warn']]))
+   +panel('Program kerja TW IV dan sampai akhir 2026',sb('ASP hal. 3, 7, 8'),`<table><thead><tr><th scope="col">Kegiatan</th><th scope="col">Pos</th><th scope="col">Status</th></tr></thead><tbody>${ASP_PK26.map(k=>`<tr><td><b>${k[0]}</b>${k[3]?`<br><span class="ket-kecil">${k[3]}</span>`:''}</td><td>${k[1]}</td><td><span class="lencana ${LEN_PK[k[2]]}">${k[2]}</span></td></tr>`).join('')}</tbody></table>`,false)
+   +panel('Masterplan pengembangan Griya Pekerja 2026–2031',sb('ASP hal. 9'),`<table><thead><tr><th scope="col">Tahun</th><th scope="col">Tema</th><th scope="col">Rencana fisik</th></tr></thead><tbody>${GP_MP.map(r=>`<tr><td><b>${r[0]}</b></td><td>${r[1]}</td><td>${r[2]}</td></tr>`).join('')}</tbody></table><p class="ket-kecil" style="padding:.75rem 1rem;margin:0">Dasar: PP 55/2015 dan PP 27/2026.</p>`,false)]},
  hcp:{v:[()=>`<div class="grid g4">${ubin(HC_RATA,'Rata-rata progres','4 selesai','dari 9 program',n26(HC_RATA))}${angka(5,'Di bawah 40%','terendah 15%')}${angka('—','Realisasi anggaran','tidak ada di materi')}</div>`
    +panel('Status 9 program',sb('HCP hal. 3–4'),tumpuk([[4,'Selesai','ok'],[5,'Di bawah 40%','warn']]))
    +panel('Program kerja strategis',sb('HCP hal. 3–4'),prokerBar(HC26))]},
