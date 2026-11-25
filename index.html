@@ -56,6 +56,16 @@ button{font:inherit;color:inherit;cursor:pointer}
 .menu a[aria-current="page"] .ikon{color:var(--accent-ink)}
 .menu .hitung{margin-left:.15rem}
 .label-grup{display:none}
+.menu .rapat-induk .ikon:last-child{margin-left:auto;font-size:.9rem;transition:transform .15s}
+.menu .rapat-induk.terbuka{color:var(--ink);font-weight:600}
+.menu .rapat-induk.terbuka .ikon:last-child{transform:rotate(90deg)}
+.tgl-menu{font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:.72rem;font-weight:600;color:var(--accent-ink);margin-right:.2rem}
+.sub-menu{display:contents}
+.remah{display:flex;flex-wrap:wrap;align-items:center;gap:.3rem;font-size:.78rem;color:var(--muted);margin-bottom:.9rem}
+.remah a{color:var(--accent-ink);text-decoration:none}.remah a:hover{text-decoration:underline}
+.remah .ikon{font-size:.8rem}
+.remah [aria-current]{color:var(--ink-2);font-weight:600}
+@media (max-width:1023px),(min-width:1024px){.sub-menu{display:flex;flex-direction:column;gap:.1rem;margin:.1rem 0 .35rem 1.05rem;padding-left:.55rem;border-left:1px solid var(--line)}}
 main{padding:1.25rem 1rem 3rem;min-width:0;max-width:72rem}
 main:focus{outline:none}
 .sisi-merek{display:none}
@@ -401,7 +411,7 @@ const nadaProgres=p=>p>=100?'ok':p<40?'crit':'';
 const V={};
 
 V.pdn={
- seg:['2026','2027','Titik kritis','Paket'],
+ seg:['2026','2027','Temuan','Paket'],
  0:()=>grid([
    stat('130','Paket selesai','74,29% dari 175 paket','PDN hal. 2','ok'),
    stat('32','Sedang berjalan','18,29%','PDN hal. 2'),
@@ -463,7 +473,7 @@ V.pdn={
 };
 
 V.asp={
- seg:['2026','2027','Titik kritis'],
+ seg:['2026','2027','Temuan'],
  0:()=>grid([
    stat('79%','Realisasi Belanja Usaha','Rp100,20 M dari Rp127,23 M','ASP hal. 2','ok'),
    stat('97%','Prognosa BU akhir tahun','Rp123,71 M','ASP hal. 2'),
@@ -536,7 +546,7 @@ const HC26=[['Profiling Kesehatan Karyawan',15,'Baru · profiling dari hasil MCU
  ['Kajian Real Time Performance Feedback',100,'Lanjutan · kajian'],
  ['Kajian Talent Mapping',100,'Lanjutan · kajian']];
 V.hcp={
- seg:['2026','2027','Titik kritis'],
+ seg:['2026','2027','Temuan'],
  0:()=>grid([
    stat('9','Proker strategis 2026','3 baru, 6 lanjutan','HCP hal. 3–4'),
    stat('4','Selesai 100%','Roadmap, dashboard, 2 kajian','HCP hal. 3–4','ok'),
@@ -576,7 +586,7 @@ const LND_KEG=[
  ['Perpanjangan MoU Polteknaker, UIN Walisongo, Universitas Udayana','Kemitraan','Nov–Des','Berlangsung'],['Penerbitan Jurnal Jamsostek Vol. 4 No. 2','Jurnal','Nov–Des','Berlangsung']];
 const ST={Selesai:['l-ok','cek'],Berlangsung:['l-aksen','jam'],Persiapan:['l-warn','klarifikasi']};
 V.lnd={
- seg:['2026','2027','Titik kritis'],
+ seg:['2026','2027','Temuan'],
  0:()=>grid([
    stat('20','Kegiatan TW IV','Pengembangan, asesmen, supporting, kemitraan','LND hal. 4–6'),
    stat('9','Selesai','45%','LND hal. 4–6','ok'),
@@ -733,27 +743,42 @@ function beranda(){
  const n17=Object.values(ISU).reduce((a,b)=>a+b.length,0);
  return `<p class="kicker">Dewan Pengawas BPJS Ketenagakerjaan</p><h1>Rapat Dewas</h1>
  <div class="dua">
- <a class="kartu rapat" href="#rb"><span class="tgl"><span class="hari tnum">26<small>Nov</small></span><span><span class="eyebrow">Kamis, 26 Nov 2026 · 10.00 WIB</span><h2>Persetujuan Rencana Bisnis 2027</h2></span></span>
+ <a class="kartu rapat" href="#rb-temuan"><span class="tgl"><span class="hari tnum">26<small>Nov</small></span><span><span class="eyebrow">Kamis, 26 Nov 2026 · 10.00 WIB</span><h2>Persetujuan Rencana Bisnis 2027</h2></span></span>
   <span class="tiga"><div><b class="tnum">3,3<small style="font-size:.7rem;font-weight:600"> /5</small></b><span>Skor keselarasan</span></div><div><b class="tnum">10</b><span>Temuan gap</span></div><div><b class="tnum">30/66</b><span>Butir OJK ada</span></div></span>
-  <span class="buka-rapat">Buka rapat ini ${ik('kanan')}</span></a>
- <a class="kartu rapat lalu" href="#ikhtisar"><span class="tgl"><span class="hari tnum">17<small>Nov</small></span><span><span class="eyebrow">Selasa, 17 Nov 2026</span><h2>Program Kerja 2026 dan Rencana 2027</h2></span></span>
-  <span class="tiga"><div><b class="tnum">4</b><span>Deputi</span></div><div><b class="tnum">${n17}</b><span>Titik kritis</span></div><div><b class="tnum">45</b><span>Paket dipantau</span></div></span>
-  <span class="buka-rapat">Buka rapat ini ${ik('kanan')}</span></a>
+  <span class="buka-rapat">Lihat temuan ${ik('kanan')}</span></a>
+ <a class="kartu rapat lalu" href="#t17"><span class="tgl"><span class="hari tnum">17<small>Nov</small></span><span><span class="eyebrow">Selasa, 17 Nov 2026</span><h2>Program Kerja 2026 dan Rencana 2027</h2></span></span>
+  <span class="tiga"><div><b class="tnum">4</b><span>Deputi</span></div><div><b class="tnum">${n17}</b><span>Temuan</span></div><div><b class="tnum">45</b><span>Paket dipantau</span></div></span>
+  <span class="buka-rapat">Lihat temuan ${ik('kanan')}</span></a>
  </div>`}
-const HAL={beranda:['Beranda',beranda],rb:['Rencana Bisnis 2027',vRB],'rb-temuan':['Temuan',vTemuan],'rb-matriks':['Keterlacakan dan OJK',vMatriks],'rb-investasi':['Model investasi',vInvestasi]};
+function vTemuan17(){
+ const urut=['kritis','klarifikasi','pantau'],semua=Object.entries(ISU).flatMap(([k,a])=>a.map(x=>({x,k}))),n=t=>semua.filter(o=>o.x.t===t).length;
+ return `<p class="kicker">Rapat Dewas · Selasa 17 November 2026</p><h1>Temuan dan pertanyaan</h1><p class="ket">Seluruh titik kritis dari empat deputi, dikelompokkan menurut tingkat. Buka halaman deputi untuk data pendukungnya.</p>`
+ +grid([angka(semua.length,'Total butir','dari 4 deputi'),angka(n('kritis'),'Kritis'),angka(n('klarifikasi'),'Perlu klarifikasi'),angka(n('pantau'),'Pantau')])
+ +urut.map(t=>`<h2 class="bagian">${TINGKAT[t][0]} · ${n(t)} butir</h2>`+semua.filter(o=>o.x.t===t).map(o=>isuKartu(o.x,DEPUTI[o.k].kode)).join('')).join('')
+ +`<p class="kaki">Sumber: materi rapat PDN, ASP, HCP, dan LND. Nomor halaman tercantum di setiap kartu.</p>`}
+const HAL={beranda:['Beranda',beranda],'t17':['Temuan',vTemuan17],rb:['Rencana Bisnis 2027',vRB],'rb-temuan':['Temuan',vTemuan],'rb-matriks':['Keterlacakan dan OJK',vMatriks],'rb-investasi':['Model investasi',vInvestasi]};
 
 /* ---------- Navigasi ---------- */
-const MENU=[['beranda','Semua rapat','kalender','Rapat'],['rb','Ringkasan','berkas','26 Nov · Rencana Bisnis 2027'],['rb-temuan','Temuan','kritis'],['rb-matriks','Keterlacakan dan OJK','kisi'],['rb-investasi','Model investasi','tren'],['ikhtisar','Ikhtisar','layout','17 Nov · Empat deputi'],...Object.entries(DEPUTI).map(([k,d])=>[k,d.kode+' · '+d.nama,d.ikon])];
-const HIT=k=>k==='rb-temuan'?RB.temuan.length:ISU[k]?ISU[k].length:0;
+const RAPAT=[
+ {tgl:'26 Nov',nama:'Rencana Bisnis 2027',hal:[['rb-temuan','Temuan','kritis'],['rb','Ringkasan','berkas'],['rb-matriks','Keterlacakan dan OJK','kisi'],['rb-investasi','Model investasi','tren']]},
+ {tgl:'17 Nov',nama:'Empat deputi',hal:[['t17','Temuan','kritis'],['ikhtisar','Ikhtisar','layout'],...Object.entries(DEPUTI).map(([k,d])=>[k,d.kode+' · '+d.nama,d.ikon])]}];
+const MENU=[['beranda','Semua rapat','kalender'],...RAPAT.flatMap(x=>x.hal)];
+const rapatDari=r=>RAPAT.find(x=>x.hal.some(h=>h[0]===r));
+const HIT=k=>k==='rb-temuan'?RB.temuan.length:k==='t17'?Object.values(ISU).reduce((a,b)=>a+b.length,0):ISU[k]?ISU[k].length:0;
+const menuHTML=r=>{const aktif=rapatDari(r),a=(m,kls)=>`<a href="#${m[0]}" class="${kls||''}" ${m[0]===r?'aria-current="page"':''}>${ik(m[2])}<span>${m[1]}</span>${HIT(m[0])?`<span class="hitung tnum">${HIT(m[0])}</span>`:''}</a>`;
+ return a(MENU[0])+`<span class="label-grup">Rapat</span>`+RAPAT.map(x=>{const buka=x===aktif;
+  return `<a href="#${x.hal[0][0]}" class="rapat-induk${buka?' terbuka':''}" ${buka?'aria-expanded="true"':''}>${ik('kalender')}<span><b class="tgl-menu">${x.tgl}</b> ${x.nama}</span>${ik('kanan')}</a>`+(buka?`<div class="sub-menu">${x.hal.map(m=>a(m,'sub')).join('')}</div>`:'')}).join('')};
+const remah=r=>{const x=rapatDari(r);if(!x)return '';const h=x.hal.find(m=>m[0]===r);
+ return `<nav class="remah" aria-label="Lokasi"><a href="#beranda">Semua rapat</a>${ik('kanan')}<a href="#${x.hal[0][0]}">${x.tgl} · ${x.nama}</a>${ik('kanan')}<span aria-current="page">${h[1]}</span></nav>`};
 const seg={};
 const simpan=(k,v)=>{try{localStorage.setItem(k,v)}catch(e){}};
 const baca=k=>{try{return localStorage.getItem(k)}catch(e){return null}};
 function rute(){const h=location.hash.replace('#','');return MENU.some(m=>m[0]===h)?h:'beranda'}
 function gambar(fokus){
   const r=rute(),main=document.getElementById('konten');
-  document.getElementById('menu').innerHTML=MENU.map(m=>`${m[3]?`<span class="label-grup">${m[3]}</span>`:''}<a href="#${m[0]}" ${m[0]===r?'aria-current="page"':''}>${ik(m[2])}<span>${m[1]}</span>${HIT(m[0])?`<span class="hitung tnum">${HIT(m[0])}</span>`:''}</a>`).join('');
-  const jd=HAL[r]?HAL[r][0]:r==='ikhtisar'?'Ikhtisar 17 Nov':DEPUTI[r].kode+' · 17 Nov';
-  document.getElementById('judul-bar').textContent=r==='beranda'?'Rapat Dewas':jd;
+  document.getElementById('menu').innerHTML=menuHTML(r);
+  const jd=r==='beranda'?'Rapat Dewas':rapatDari(r).tgl+' · '+(HAL[r]?HAL[r][0]:r==='ikhtisar'?'Ikhtisar':DEPUTI[r].kode);
+  document.getElementById('judul-bar').textContent=jd;
   if(HAL[r]){main.innerHTML=HAL[r][1]()}
   else if(r==='ikhtisar'){main.innerHTML=ikhtisar()}
   else{
@@ -767,6 +792,7 @@ function gambar(fokus){
     <div role="tabpanel">${isi}</div>`;
     isiPaket();
   }
+  if(r!=='beranda')main.insertAdjacentHTML('afterbegin',remah(r));
   document.title=jd+' · Rapat Dewas';
   if(fokus){window.scrollTo(0,0)}
 }
