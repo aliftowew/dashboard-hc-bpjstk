@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Dashboard Pengawasan Dewas 2026–2027</title>
+<title>Dashboard Rapat Dewas</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
@@ -181,37 +181,29 @@ ul.daftar li b{color:var(--ink)}
 .kaki{margin-top:2rem;font-size:.74rem;color:var(--muted);max-width:76ch}
 @media (prefers-reduced-motion:no-preference){.batang .rel i,.kolom i{transition:width .3s,height .3s}}
 
-.panel>header h2{font-size:.95rem;font-weight:700;letter-spacing:-.01em}
-h1{font-size:1.4rem;margin-top:0}
-main{padding-top:1rem}
-/* Laci sidebar di layar sempit; sidebar tetap di layar lebar */
+/* === Sidebar jadi laci di layar sempit; kartu rapat; cincin; grafik tambahan === */
 .tirai{display:none;position:fixed;inset:0;z-index:30;border:0;background:rgb(14 34 51 / .4)}
 .tirai.buka{display:block}
 .bar{gap:.5rem}
 .judul-bar{font-size:.95rem;font-weight:800;letter-spacing:-.02em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0}
-.tombol-ikon{margin-left:0}
-.pilih-bulan{margin-left:auto;display:flex;align-items:center;gap:.4rem;font-size:.78rem;color:var(--muted)}
-.pilih-bulan select{font:inherit;font-size:.85rem;font-weight:600;color:var(--ink);background:var(--surface);border:1px solid var(--line);border-radius:.75rem;height:2.5rem;padding:0 .6rem}
-.menu .kd{margin-left:auto;font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:.62rem;letter-spacing:.08em;color:var(--muted)}
+.tombol-ikon{margin-left:0}#tema{margin-left:auto}
 @media (max-width:1023px){
-  .sisi{position:fixed;inset:0 auto 0 0;z-index:40;width:17rem;max-width:85vw;background:var(--sidebar);border-right:1px solid var(--line);padding:.9rem .75rem;display:flex;flex-direction:column;gap:1rem;transform:translateX(-100%);visibility:hidden;box-shadow:var(--bayang-naik)}
+  .sisi{position:fixed;inset:0 auto 0 0;z-index:40;width:17.5rem;max-width:86vw;background:var(--sidebar);border-right:1px solid var(--line);padding:.9rem .75rem;display:flex;flex-direction:column;gap:.75rem;transform:translateX(-100%);visibility:hidden;box-shadow:var(--bayang-naik);overflow-y:auto}
   .sisi.buka{transform:none;visibility:visible}
   .sisi-merek{display:flex}
   .menu{position:static;flex-direction:column;border:0;padding:0;background:transparent;overflow:visible}
-  .menu a{white-space:normal;gap:.75rem;padding:.65rem .75rem}
-  .label-grup{display:block;font-size:.6rem;font-weight:700;letter-spacing:.11em;text-transform:uppercase;color:var(--muted);padding:.5rem .75rem .15rem}
+  .menu a{white-space:normal;gap:.75rem;padding:.6rem .75rem;line-height:1.25}
+  .menu .hitung{margin-left:auto}
+  .label-grup{display:block;font-size:.6rem;font-weight:700;letter-spacing:.11em;text-transform:uppercase;color:var(--muted);padding:.6rem .75rem .15rem}
   .bar{position:sticky;top:0;z-index:20}
 }
 @media (prefers-reduced-motion:no-preference){@media (max-width:1023px){.sisi{transition:transform .2s,visibility .2s}}}
-@media (min-width:1024px){.buka-menu,.tutup,.judul-bar{display:none}.bar{padding:1rem 2.5rem 0}}
-/* Ubin cincin */
-.grid{grid-template-columns:repeat(2,minmax(0,1fr))}
-@media (min-width:900px){.grid.g4{grid-template-columns:repeat(4,minmax(0,1fr))}}
+@media (min-width:1024px){.buka-menu,.tutup,.judul-bar{display:none}.sisi{overflow-y:auto;gap:.6rem}.menu a{padding:.42rem .75rem}}
 .ubin{display:flex;align-items:center;gap:.7rem;padding:.8rem;min-width:0}
 .ubin>div{min-width:0;display:flex;flex-direction:column}
 .ubin .label{font-size:.74rem;font-weight:600;color:var(--muted)}
 .ubin b{font-size:1rem;font-weight:800;letter-spacing:-.02em;line-height:1.25;overflow-wrap:anywhere}
-.ubin b.besar{font-size:1.6rem;line-height:1.1}
+.ubin b.besar{font-size:1.5rem;line-height:1.1}
 .ubin .cat{font-size:.72rem;color:var(--muted)}
 .ring{width:3.4rem;height:3.4rem;flex:none}
 .ring circle{fill:none;stroke-width:7}
@@ -220,368 +212,586 @@ main{padding-top:1rem}
 .ring .rf.ok{stroke:var(--ok)}.ring .rf.warn{stroke:var(--warn)}.ring .rf.crit{stroke:var(--crit)}
 .ring text{font-size:15px;font-weight:800;fill:var(--ink);font-variant-numeric:tabular-nums}
 @media (max-width:420px){.ubin{flex-direction:column;align-items:flex-start;gap:.45rem}}
-.dep{display:flex;flex-direction:column;gap:.6rem;padding:.8rem;text-decoration:none;color:inherit;min-width:0}
-.dep:hover{border-color:var(--line-strong)}
-.dep .kepala{display:flex;align-items:center;gap:.5rem;min-width:0}
-.dep .kotak-ikon{width:1.9rem;height:1.9rem;font-size:1rem}
-.dep b.nm{display:block;font-size:.85rem;font-weight:800;letter-spacing:-.02em;line-height:1.15}
-.dep .duo{display:flex;gap:.6rem}
-.dep .duo>span{display:flex;flex-direction:column;align-items:center;gap:.15rem}
-.dep .duo .ring{width:3rem;height:3rem}
-.dep small{font-size:.66rem;color:var(--muted);font-weight:600}
-.dep .pg{font-size:.78rem;font-weight:700;color:var(--ink-2)}
-/* Batang satu baris */
-.b1{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:.2rem .75rem;align-items:baseline;padding:.5rem 0}
-.b1+.b1{border-top:1px solid var(--line)}
-.b1 .nm{font-size:.84rem;font-weight:500;color:var(--ink-2)}
-.b1 .nl{font-size:.78rem;color:var(--muted);white-space:nowrap}
-.b1 .nl b{font-size:.9rem;color:var(--ink)}
-.b1 .rel{grid-column:1/-1;position:relative;height:.5rem;border-radius:999px;background:var(--surface-2)}
-.b1 .rel i{position:absolute;inset:0 auto 0 0;border-radius:999px;background:var(--accent)}
-.b1 .rel i.netral{background:var(--line-strong)}.b1 .rel i.ok{background:var(--ok)}
-.b1 .rel em{position:absolute;top:-.25rem;bottom:-.25rem;width:2px;background:var(--ink);border-radius:1px}
-.tag{font-style:normal;font-size:.62rem;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:var(--accent-ink);background:var(--accent-soft);border-radius:999px;padding:.1rem .45rem;margin-right:.4rem;white-space:nowrap}
-/* Kurva */
-.kurva{width:100%;height:auto;display:block}
-.kurva .gl{stroke:var(--line);stroke-width:1}
-.kurva .ax{font-size:10px;fill:var(--muted)}.kurva .ax.on{fill:var(--ink);font-weight:700}
-.kurva .ar{fill:var(--surface-2)}
-.kurva .lr{fill:none;stroke:var(--line-strong);stroke-width:2.5}
-.kurva .la{fill:none;stroke:var(--accent);stroke-width:3;stroke-linejoin:round;stroke-linecap:round}
-.kurva .mk{stroke:var(--ink);stroke-width:1;stroke-dasharray:3 3}
-.kurva .dr{fill:var(--surface);stroke:var(--muted);stroke-width:2}.kurva .da{fill:var(--accent)}
-.kurva .lb{font-size:11px;font-weight:700;fill:var(--ink)}
-@media (max-width:600px){.kurva .ax{font-size:16px}.kurva .lb{font-size:18px}.kurva .lr{stroke-width:4}.kurva .la{stroke-width:5}}
-.thn{margin-left:auto;display:inline-flex;gap:.2rem;border:1px solid var(--line);background:var(--surface-2);border-radius:.75rem;padding:.2rem}
-.thn button{border:0;background:transparent;border-radius:.55rem;padding:.35rem .6rem;font-size:.82rem;font-weight:600;color:var(--ink-2)}
-.thn button[aria-pressed="true"]{background:var(--accent);color:var(--on-accent)}
-.pilih-bulan{margin-left:0}
-.per26{font-size:.74rem;color:var(--muted);white-space:nowrap}
-@media (max-width:480px){.pilih-bulan>span{display:none}.judul-bar{display:none}}
-.b1 .rel i.warn{background:var(--warn)}.b1 .rel i.crit{background:var(--crit)}
-.ket-kecil{font-size:.8rem;color:var(--muted)}
-.tumpuk{display:flex;height:1.6rem;border-radius:.5rem;overflow:hidden;gap:2px}
-.tumpuk i{display:grid;place-items:center;font-style:normal;font-size:.74rem;font-weight:700;color:var(--on-accent);background:var(--accent);min-width:1.6rem}
-.tumpuk i.ok{background:var(--ok)}.tumpuk i.warn{background:var(--warn)}.tumpuk i.netral{background:var(--line-strong);color:var(--ink)}
-.legenda i.ok{background:var(--ok)}.legenda i.warn{background:var(--warn)}.legenda i.netral{background:var(--line-strong)}
-.kolom i.nanti{background:var(--line-strong)}
-.kolom{height:10rem}
-.legenda{margin:.5rem 0 0}
-.panel .isi>.legenda:first-child{margin:0 0 .3rem}
-tr.total td{background:var(--accent-soft)}
-td,th{padding:.5rem .8rem}
-.kaki{margin-top:1.25rem}
+.rapat{display:flex;flex-direction:column;gap:.75rem;padding:1.1rem;text-decoration:none;color:inherit}
+.rapat:hover{border-color:var(--line-strong)}
+.rapat .tgl{display:flex;align-items:center;gap:.6rem}
+.rapat .hari{display:grid;place-items:center;width:3rem;height:3rem;border-radius:.9rem;background:var(--accent);color:var(--on-accent);font-weight:800;font-size:1.15rem;line-height:1;flex:none}
+.rapat .hari small{display:block;font-size:.58rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;margin-top:.15rem}
+.rapat.lalu .hari{background:var(--surface-2);color:var(--ink-2)}
+.rapat h2{font-size:1.1rem;font-weight:800;letter-spacing:-.02em;line-height:1.2}
+.rapat .tiga{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:.5rem}
+.rapat .tiga div{background:var(--surface-2);border-radius:.75rem;padding:.55rem .6rem;min-width:0}
+.rapat .tiga b{display:block;font-size:1.15rem;font-weight:800;letter-spacing:-.02em;line-height:1.1}
+.rapat .tiga span{font-size:.68rem;color:var(--muted);font-weight:600}
+.rapat .buka-rapat{display:inline-flex;align-items:center;gap:.3rem;font-weight:600;color:var(--accent-ink);font-size:.86rem}
+.tumpuk{display:flex;height:1.7rem;border-radius:.5rem;overflow:hidden;gap:2px}
+.tumpuk i{display:grid;place-items:center;font-style:normal;font-size:.76rem;font-weight:700;color:var(--on-accent);background:var(--accent);min-width:1.7rem}
+.tumpuk i.ok{background:var(--ok)}.tumpuk i.warn{background:var(--warn)}.tumpuk i.crit{background:var(--crit)}
+.legenda i.ok{background:var(--ok)}.legenda i.warn{background:var(--warn)}.legenda i.crit{background:var(--crit)}.legenda i.tinta{background:var(--ink)}.legenda i.netral{background:var(--line-strong)}
+.kolom i.proy{background:var(--accent-soft);outline:1.5px solid var(--accent);outline-offset:-1.5px}
+.gsvg{display:block;width:100%;min-width:34rem;height:auto}
+.gsvg .gl{stroke:var(--line);stroke-width:1}.gsvg .ax{font-size:11px;fill:var(--muted)}.gsvg .vl{font-size:10px;font-weight:700;fill:var(--ink)}
+.gsvg .sa{fill:var(--accent)}.gsvg .sb{fill:var(--ink)}.gsvg .pj{stroke:var(--muted);stroke-dasharray:3 3}
+.sel{display:inline-grid;place-items:center;min-width:1.7rem;height:1.5rem;border-radius:.4rem;font-size:.74rem;font-weight:700}
+.sel.L{background:var(--ok-soft);color:var(--ok)}.sel.S{background:var(--warn-soft);color:var(--warn)}.sel.K{background:var(--crit-soft);color:var(--crit)}
+.opsi{border:1px solid var(--line);border-radius:.9rem;padding:.75rem .9rem}
+.opsi b{display:block;color:var(--ink);font-size:.92rem}.opsi span{font-size:.84rem;color:var(--ink-2)}
+ol.langkah{margin:0;padding-left:1.2rem;display:grid;gap:.45rem;color:var(--ink-2);font-size:.88rem}
 </style>
 </head>
 <body>
 <div class="app">
   <button class="tirai" id="tirai" aria-label="Tutup menu" tabindex="-1"></button>
   <aside class="sisi" id="sisi">
-    <div class="merek sisi-merek"><span class="marka" id="marka-sisi"></span><span style="flex:1"><b>Pengawasan Dewas</b><span class="eyebrow">Dewan Pengawas · BPJS TK</span></span><button class="tombol-ikon tutup" id="tutup" aria-label="Tutup menu"></button></div>
+    <div class="merek sisi-merek"><span class="marka" id="marka-sisi"></span><span style="flex:1"><b>Rapat Dewas</b><span class="eyebrow">Dewan Pengawas · BPJS TK</span></span><button class="tombol-ikon tutup" id="tutup" aria-label="Tutup menu"></button></div>
     <nav class="menu" id="menu" aria-label="Menu utama"></nav>
   </aside>
   <div style="min-width:0">
     <div class="bar">
       <button class="tombol-ikon buka-menu" id="buka" aria-label="Buka menu" aria-controls="sisi" aria-expanded="false"></button>
       <b class="judul-bar" id="judul-bar"></b>
-      <div class="thn" role="group" aria-label="Pilih tahun"><button data-th="2026">2026</button><button data-th="2027">2027</button></div>
-      <span class="per26" id="per26">per 16 Nov</span>
-      <label class="pilih-bulan"><span>s.d.</span><select id="bulan" aria-label="Pilih bulan"></select></label>
       <button class="tombol-ikon" id="tema" aria-label="Ganti tema terang/gelap"></button>
     </div>
     <main id="konten" tabindex="-1"></main>
   </div>
 </div>
 <script>
+/* ---------- Ikon (Feather, inline) ---------- */
 const IKON={
  layout:'<rect x="3" y="3" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/>',
  cart:'<circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/>',
  home:'<path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/>',
  users:'<path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>',
  book:'<path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>',
- list:'<path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><rect x="8" y="2" width="8" height="4" rx="1"/>',
  sun:'<circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>',
  moon:'<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>',
- ok:'<path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/>',
- warn:'<circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/>',
- crit:'<path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/>',
- netral:'<circle cx="12" cy="12" r="10"/><line x1="8" y1="12" x2="16" y2="12"/>',
+ search:'<circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>',
+ kritis:'<path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/>',
+ klarifikasi:'<circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/>',
+ pantau:'<path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/>',
+ cek:'<path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/>',
+ jam:'<circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>',
+ batal:'<circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/>',
+ kanan:'<polyline points="9 18 15 12 9 6"/>',
  menu:'<line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/>',
  x:'<line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>',
- inbox:'<polyline points="22 12 16 12 14 15 10 15 8 12 2 12"/><path d="M5.45 5.11L2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.45-6.89A2 2 0 0 0 16.76 4H7.24a2 2 0 0 0-1.79 1.11z"/>'
+ kalender:'<rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/>',
+ berkas:'<path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/>',
+ kisi:'<rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/>',
+ tren:'<polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/>'
 };
-const ik=n=>`<svg class="ikon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">${IKON[n]||IKON.netral}</svg>`;
-const BLN=['Jan','Feb','Mar','Apr','Mei','Jun','Jul','Agu','Sep','Okt','Nov','Des'];
-const BLN_P=['Januari','Februari','Maret','April','Mei','Juni','Juli','Agustus','September','Oktober','November','Desember'];
-const K=()=>Array(12).fill(null); /* realisasi bulanan: null = belum ada data */
+const ik=n=>`<svg class="ikon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">${IKON[n]||IKON.klarifikasi}</svg>`;
 
-/* ===== DATA. Baseline = usulan 2027 per materi rapat 17 Nov 2026. Nilai dalam miliar rupiah.
-   Untuk memperbarui: isi array real/prog per bulan (indeks 0 = Januari) dan DATA_PER. ===== */
-const DATA_PER={pdn:null,asp:null,hcp:null,lnd:null}; /* tanggal data realisasi terakhir */
-const PENGADAAN={pagu:[173.1,80.3,322.2,236.6,21.8,98.0,66.3,10.0,12.5,15.2,9.0,10.1],paket:[42,13,61,34,8,24,32,10,9,5,5,4],realPagu:K(),realPaket:K(),
- spm:[['Leverage',34,508.09,'Lahan, laptop, jaringan SDWAN'],['Critical',31,351.61,'Database JMO, firewall, lisensi core'],['Routine',132,101.91,'Operasional rutin, e-katalog, pemeliharaan'],['Bottleneck',50,53.62,'Spesifikasi khusus, konsultan, sertifikasi']]};
-const D={
- pdn:{kode:'PDN',nama:'Pengadaan',judul:'Deputi Bidang Pengadaan',ikon:'cart',pagu:3.242837,labelPagu:'RKA deputi 2027',
-  anggaran:[{j:'RKA deputi per jenis kegiatan',s:'PDN hal. 8',pos:[
-    {n:'Operasional',sub:'13 kegiatan',p:1.921749,r:K()},{n:'Strategis Lanjutan',sub:'5 kegiatan',p:0.992544,r:K()},
-    {n:'Rutin & Langganan',sub:'3 kegiatan',p:0.2208,r:K()},{n:'Strategis Baru',sub:'1 kegiatan',p:0.107744,r:K()}]}],
-  proker:{s:'PDN hal. 5 & 8',item:[
-    {n:'Transformasi Strategic Procurement Berbasis Category Management',jn:'Lanjutan',sub:'Rp449,94 juta',g:K()},
-    {n:'Renewal Lisensi Agentic AI Pengadaan',jn:'Lanjutan',sub:'Rp335,66 juta',g:K()},
-    {n:'Implementasi Multi Winner di E-Procurement',jn:'Baru',sub:'Rp107,74 juta',g:K()},
-    {a:70,n:'Procure To Pay dan Procure To Asset',jn:'Lanjutan',sub:'Rp104,75 juta · SCM & Procure to Pay 70% per Nov 2026',g:K()},
-    {n:'Evaluasi Aplikasi VMS dan SCM',jn:'Lanjutan',sub:'Rp68,54 juta · VMS selesai 2026',g:K()},
-    {n:'Implementasi E-Reverse Auction Procurement',jn:'Lanjutan',sub:'Rp33,65 juta · deployment selesai 2026',g:K()}]}},
- asp:{kode:'ASP',nama:'Aset & Sarpras',judul:'Deputi Bidang Aset dan Sarana Prasarana',ikon:'home',pagu:213.758452+143.276664,labelPagu:'Usulan BM + tambahan BM SKP',
-  anggaran:[
-   {j:'Belanja Modal per kategori',s:'ASP hal. 4',total:213.758452,pos:[
-    {n:'Pembelian tanah',sub:'6 lokasi',p:144.4132,r:K()},{n:'Penambahan bangunan kantor',sub:'8 pekerjaan, 2 carry over',p:37.646762,r:K()},
-    {n:'Penambahan mobil',sub:'Kendaraan roda 4',p:16.12,r:K()},{n:'Peralatan lain-lain',sub:'PLTS atap, utilitas, multimedia',p:6.436007,r:K()},
-    {n:'Penambahan bangunan lain',sub:'Fasad Gedung Institut, atap Sentul',p:4.613649,r:K()},{n:'Perabot/mebelair',sub:'Rengat, Solok, Kantor Pusat, Selasar',p:3.266154,r:K()},
-    {n:'Interior bangunan',sub:'Selasar, Gedung Institut',p:1.26268,r:K()}]},
-   {j:'Pembelian tanah per lokasi',s:'ASP hal. 4',total:144.4132,pos:[
-    {n:'Lahan Batuceper',p:37.5,r:K()},{n:'Lahan Kanwil Banuspa',p:37.5,r:K()},{n:'Lahan Tanjung Perak',p:30,r:K()},
-    {n:'Lahan Cimone',p:20.25,r:K()},{n:'Tanah KC Bojongsoang',p:12.4132,r:K()},{n:'Lahan Batulicin',p:6.75,r:K()}]},
-   {j:'Usulan tambahan Belanja Modal SKP',s:'ASP hal. 10',total:143.276664,pos:[
-    {n:'Persil Jawa Timur untuk Griya Pekerja',p:50,r:K()},
-    {n:'Kontraktor revitalisasi GP Pasar Minggu',p:47.624771,r:K()},{n:'Kontraktor revitalisasi GP Jababeka Cikarang',sub:'Usulan dari rapat Dewas 10 Nov 2026',p:38.091639,r:K()},
-    {n:'Konsultan MK GP Pasar Minggu',p:2.64172,r:K()},{n:'Konsultan perencana GP Jababeka Cikarang',sub:'Usulan dari rapat Dewas 10 Nov 2026',p:2.038967,r:K()},
-    {n:'Konsultan MK GP Jababeka Cikarang',sub:'Usulan dari rapat Dewas 10 Nov 2026',p:1.887949,r:K()},{n:'Konsultan perencana GP Pasar Minggu',sub:'Usulan dari rapat Dewas 10 Nov 2026',p:0.991619,r:K()}]}],
-  proker:{s:'ASP hal. 3, 4, 9, 10',item:[
-    {n:'Pembangunan Gedung KC Batam Sekupang',jn:'Carry over',sub:'Rp5,58 M · berjalan sejak 2026',g:K()},
-    {n:'Renovasi Selasar BPJamsostek',jn:'Carry over',sub:'Rp3,73 M · berjalan sejak 2026',g:K()},
-    {n:'Pematangan lahan & pembangunan gedung Jakabaring',jn:'Lanjutan',sub:'Rp5,57 M · pengadaan kontraktor per Nov 2026',g:K()},
-    {n:'Pembangunan Gedung KC Rengat',jn:'Lanjutan',sub:'Rp5,18 M · pengadaan konsultan perencana per Nov 2026',g:K()},
-    {n:'Pembangunan Gedung KC Solok',jn:'Lanjutan',sub:'Rp5,14 M · pengadaan konsultan perencana per Nov 2026',g:K()},
-    {n:'Pembelian tanah dan bangunan KC Bojongsoang',jn:'Baru',sub:'Tanah Rp12,41 M, bangunan Rp11,05 M',g:K()},
-    {n:'Pengadaan lahan 5 lokasi',jn:'Baru',sub:'Batuceper, Kanwil Banuspa, Tanjung Perak, Cimone, Batulicin · Rp132,00 M',g:K()},
-    {n:'Revitalisasi Griya Pekerja Jababeka Cikarang',jn:'SKP',sub:'Rp42,02 M · studi kelayakan selesai 2026',g:K()},
-    {n:'Revitalisasi Griya Pekerja Pasar Minggu',jn:'SKP',sub:'Rp51,26 M · masterplan: pembangunan 2027',g:K()},
-    {n:'Pengadaan persil Jawa Timur',jn:'SKP',sub:'Rp50,00 M · masterplan: pengadaan lahan 2027',g:K()}]}},
- hcp:{kode:'HCP',nama:'Human Capital',judul:'Deputi Bidang Human Capital',ikon:'users',pagu:null,labelPagu:'Anggaran 2027',
-  anggaran:[],catAnggaran:'Materi HCP memuat 102 kegiatan 2027 (2 strategis baru, 6 strategis lanjutan, 38 operasional, 56 rutin dan langganan) tanpa nilai anggaran.',
-  proker:{s:'HCP hal. 3–4, 7–8',item:[
-    {n:'Corporate Employee Wellness Program berbasis profiling kesehatan',jn:'Baru',sub:'Program wellness promotif, preventif, berbasis digital',g:K()},
-    {n:'Kapabilitas pengelolaan data SDM & People Analytics',jn:'Baru',sub:'Pemanfaatan AI untuk data SDM terintegrasi',g:K()},
-    {a:15,n:'Pengembangan profiling kesehatan karyawan',jn:'Lanjutan',sub:'Posisi Nov 2026: 15%',g:K()},
-    {a:23,n:'Penyempurnaan kebijakan pengelolaan talenta',jn:'Lanjutan',sub:'Posisi Nov 2026: 23%',g:K()},
-    {a:22,n:'Evaluasi & penyempurnaan kebijakan pengelolaan karir',jn:'Lanjutan',sub:'Posisi Nov 2026: 22%',g:K()},
-    {a:24,n:'Pengkinian kelengkapan struktur organisasi',jn:'Lanjutan',sub:'Posisi Nov 2026: 24%',g:K()},
-    {a:37,n:'Reviu profil kompetensi',jn:'Lanjutan',sub:'Posisi Nov 2026: 37%',g:K()},
-    {n:'Pengkinian evaluasi bobot jabatan',jn:'Lanjutan',sub:'Pengkinian bobot dan rekomendasi evaluasi jabatan',g:K()}]}},
- lnd:{kode:'LND',nama:'Learning & Development',judul:'Deputi Bidang Learning & Development',ikon:'book',pagu:null,labelPagu:'Anggaran 2027',
-  anggaran:[],catAnggaran:'Materi LND menyajikan garis besar rencana kerja 2027 tanpa nilai anggaran maupun target terukur.',
-  proker:{s:'LND hal. 7',item:[
-    {n:'Fokus kompetensi: AI, manajemen risiko, komunikasi',jn:'Fokus',g:K()},
-    {n:'Pengembangan kompetensi talenta (leadership & managerial)',jn:'Fokus',g:K()},
-    {n:'Skema bottom up & distance learning',jn:'Fokus',g:K()},
-    {n:'Asesmen SJT J-WAY Behaviour & Uji Kompetensi Teknis',jn:'Fokus',g:K()},
-    {n:'Knowledge Management, Lead Talks, Community of Practice',jn:'Fokus',g:K()},
-    {n:'Penerapan ISO 21001:2025 & surveillance audit',jn:'Fokus',g:K()},
-    {n:'Beasiswa, magang, jurnal, penambahan MoU universitas',jn:'Fokus',g:K()},
-    {n:'Kurikulum Jaminan Sosial di 16 universitas',jn:'Fokus',g:K()}]}}
+/* ---------- Data dari 4 deck (angka apa adanya; "M" = miliar rupiah) ---------- */
+const TINGKAT={kritis:['Kritis','l-crit'],klarifikasi:['Perlu klarifikasi','l-warn'],pantau:['Pantau','l-aksen']};
+
+const PAKET_JALAN=[
+['202610.45A.00072','Pemeliharaan Perangkat Jaringan Core Spine and Leaf','Aanwijzing'],
+['202611.42A.00020','Jasa EO Employee Gathering Tahun 2026','Aanwijzing'],
+['202610.43A.00024','Lisensi Aplikasi Security Testing Tahun 2026','Aanwijzing'],
+['202610.53A.00005','Jasa Digital Forensik Keamanan Sistem TI','Aanwijzing'],
+['202609.57A.00012-1','Konsultan Perpanjangan SLF Gedung Menara','Evaluasi Teknis'],
+['202610.56A.00006','Benchmark Investasi per Kelas Aset (PP 27/2026)','Evaluasi Teknis'],
+['202610.57A.00014','Konsultan Appraisal/HBU Investasi JHT','Evaluasi Teknis'],
+['202609.41A.00064-1','Pengurusan SLF Gedung Grha BPJamsostek','Evaluasi Teknis'],
+['202610.52B.00077','Talent Management Assessment Center','Evaluasi Teknis'],
+['202610.45A.00068','Penyediaan Lisensi Cloudera','Negosiasi'],
+['202610.45A.00076','Penyediaan Lisensi KNIME','Negosiasi'],
+['202610.45A.00069','Penyediaan Lisensi Qlik Replicate & Qlik Sense','Negosiasi'],
+['202607.57A.00009-1','Panel Koupler LVSB Tower A Gedung Menara','Negosiasi'],
+['202607.45A.00045-1','Pengadaan Lisensi Remote Access','Negosiasi'],
+['202609.57A.00011-1','Perkuatan Struktur Gedung Parkir Menara','Negosiasi'],
+['202608.45A.00057','Penyediaan Lisensi ATS Database','Negosiasi'],
+['202610.45A.00073','Pemeliharaan Jaringan NAC Clearpass & Aruba','Pembuatan HPS'],
+['202611.57A.00015','Modernisasi Sistem Keamanan Gedung Menara','Pembuatan HPS'],
+['202610.24A.00007','Mitra Pengelola Contact Center 175','Pembuatan HPS'],
+['202611.21A.00008','Operasional Unit Layanan PMI LN dan DN','Pembuatan HPS'],
+['202611.45A.00081','Penyediaan ATS Tools Performance Test','Pembuatan HPS'],
+['202610.53A.00003-1','Assessmen Penerapan Tata Kelola yang Baik','Buat Jadwal'],
+['202609.41A.00065','Konsultan Pengawas Perbaikan Hidran Kabil Batam','Buat Jadwal'],
+['202604.41A.00028-3','Perbaikan Struktur & DPT Gedung Institut','Buat Jadwal'],
+['202606.42A.00011-1','Profiling Kesehatan Karyawan','Buat Jadwal'],
+['202610.53A.00004','Assessmen Maturity Level Manajemen Risiko','Buka Penawaran'],
+['202610.41A.00066','Pematangan Lahan & Jembatan Jakabaring','Buka Teknis'],
+['202608.41A.00063-1','Perbaikan Hidran Griya Pekerja Kabil Batam','Buka Teknis'],
+['202603.41A.00012-2','Konsultan Perencana Gedung KC Solok','Buka Teknis'],
+['202610.43A.00023','Renewal Lisensi Code Analysis Tools 2026','Buka Teknis'],
+['202611.45A.00079','Pemeliharaan Jaringan Proxy DC dan DRC','Perencanaan'],
+['202611.45A.00078','Penyediaan Lisensi Virtualisasi Server VMware','Non-Pelelangan']
+];
+const PAKET_BATAL=[
+['202611.45A.00080','Pemeliharaan Perangkat Jaringan Core Spine & Leaf'],
+['202610.45A.00071','Pemeliharaan Perangkat Jaringan Switch Manageable'],
+['202610.45A.00070','Pengadaan Pemeliharaan Perangkat Jaringan'],
+['202607.45A.00049','Penyediaan Lisensi Pengolahan Data'],
+['202603.41A.00019','Pematangan Lahan dan Jembatan Jakabaring – Palembang'],
+['202608.53A.00002','Assessmen Penerapan Tata Kelola yang Baik BPJS Ketenagakerjaan'],
+['202604.43A.00002','Lisensi Tools AI Pengembangan Perangkat Lunak & Produktivitas Personil'],
+['202607.44A.00006-1','Tenaga Ahli Pembangunan Aplikasi SCMS dan Procure to Pay'],
+['202604.45A.00031','Penyediaan Lisensi Tools Security Assurance'],
+['202606.46A.00005-1','Tenaga Ahli Pendamping Kesiapan Sertifikasi Surveillance ISO 27701:2019'],
+['202607.41A.00047','Pengadaan Peralatan Lain Kantor Cabang Batam Sekupang'],
+['202603.41A.00020','Renovasi Interior Kantor Cabang Bojongsoang'],
+['202609.44A.00008','Renewal Lisensi AI Berbasis LLM untuk Proses Pengadaan Barang dan Jasa']
+];
+/* Urutan tahap mengikuti alur pengadaan, dari paling awal ke paling dekat kontrak. */
+const TAHAP=['Perencanaan','Pembuatan HPS','Buat Jadwal','Aanwijzing','Buka Penawaran','Buka Teknis','Evaluasi Teknis','Negosiasi','Non-Pelelangan'];
+const TAHAP_AWAL=['Perencanaan','Pembuatan HPS','Buat Jadwal'];
+
+const ISU={
+pdn:[
+ {t:'kritis',j:'95% paket tidak sesuai kalender pengadaan',d:'Hanya 5% paket yang berjalan sesuai jadwal. Padahal rencana 2027 menumpuk 57% pagu di Kuartal I.',q:'Akar masalahnya di unit pengguna (permintaan terlambat) atau di proses pengadaan? Apa yang diubah supaya Q1 2027 tidak mengulang pola ini?',s:'PDN hal. 3'},
+ {t:'kritis',j:'10 dari 32 paket berjalan masih di tahap awal',d:'5 paket Pembuatan HPS, 4 Buat Jadwal, 1 Perencanaan, dengan sisa ±6 minggu tahun anggaran.',q:'Paket mana yang realistis berkontrak tahun ini, dan mana yang akan jadi carry over 2027?',s:'PDN hal. 10–11'},
+ {t:'klarifikasi',j:'Jumlah paket tidak konsisten: 173, 175, 178',d:'Pagu dashboard memakai basis 173 paket; status 130 + 32 + 13 = 175 (persentasenya juga berbasis 175); total disebut 178 (165 + 5 + 8).',q:'Basis mana yang resmi, dan 3–5 paket selisihnya berstatus apa?',s:'PDN hal. 2–3'},
+ {t:'klarifikasi',j:'Pagu bulanan 2027 berjumlah Rp1.055 M, bukan Rp1.015,23 M',d:'Jumlah 12 bulan maupun 4 kuartal ≈ Rp1.055,2 M, sedangkan total SPM Rp1.015,23 M. Jumlah paketnya cocok (247). Selisih ±Rp40 M.',q:'Angka mana yang benar, dan di bulan apa selisih Rp40 M itu berada?',s:'PDN hal. 6–7'},
+ {t:'klarifikasi',j:'Renewal Lisensi LLM: batal atau selesai?',d:'Paket "Renewal Lisensi AI Berbasis LLM" ada di daftar batal, tetapi proker Modul AI dilaporkan 100% dengan pemenang sudah ditunjuk dan lisensi aktif per Desember 2026.',q:'Apakah paket yang batal itu ditender ulang? Dengan nilai dan penyedia yang sama?',s:'PDN hal. 5 & 12'},
+ {t:'klarifikasi',j:'Dasar perhitungan cost saving 14,78%',d:'Rp82,21 M pada 14,78% berarti pembaginya sekitar Rp556 M, sementara realisasi pengadaan tercatat Rp347,06 M (130 paket).',q:'Saving dihitung terhadap pagu atau HPS? Paket mana penyumbang terbesar?',s:'PDN hal. 2'},
+ {t:'pantau',j:'Serapan anggaran deputi 54,25% saat proker 93,76%',d:'Strategis Lanjutan baru terserap 11,9% dan Strategis Baru 28,8%. Deck menyebut SCM dan renewal Agentic AI dibayar Desember.',q:'Berapa prognosa serapan akhir tahun setelah pembayaran Desember?',s:'PDN hal. 4'},
+ {t:'pantau',j:'SCM & Procure to Pay baru 70%',d:'Development oleh penyedia 60% dan pengujian berjalan paralel. Paket Tenaga Ahli SCMS & Procure to Pay tercatat batal.',q:'Kapan target go-live, dan apa dampak batalnya tenaga ahli terhadap mutu pengujian?',s:'PDN hal. 5 & 12'},
+ {t:'pantau',j:'Maret 2027: Rp322,18 M dalam 61 paket',d:'Termasuk Rp150,9 M paket Critical (DB JMO) dan Rp92,0 M paket Leverage. Pengadaan dini 2027 baru 8 paket.',q:'Apakah kapasitas tim cukup untuk puncak Maret? Paket Critical mana yang bisa dimajukan lewat pengadaan dini?',s:'PDN hal. 2 & 7'}
+],
+asp:[
+ {t:'kritis',j:'Serapan BM 2026 hanya 47%, usulan 2027 Rp213,76 M',d:'Usulan 2027 setara 2,9× anggaran BM 2026 (Rp73,37 M) dan 6,1× prognosa realisasinya (Rp34,82 M).',q:'Apa yang berubah di 2027 sehingga kapasitas eksekusi naik enam kali lipat?',s:'ASP hal. 2 & 4'},
+ {t:'kritis',j:'Tanah 0% di 2026, minta Rp144,41 M untuk 6 lokasi di 2027',d:'Realisasi tanah, interior, dan perabot 2026 masih Rp0. Tanah mengambil 67,6% usulan 2027: Batuceper dan Kanwil Banuspa masing-masing Rp37,5 M, Tanjung Perak Rp30 M, Cimone Rp20,25 M, Bojongsoang Rp12,41 M, Batulicin Rp6,75 M.',q:'Mengapa pembelian tanah 2026 tidak terealisasi? Sejauh mana kesiapan tiap lokasi 2027 (appraisal, legal, penetapan harga)?',s:'ASP hal. 2 & 4'},
+ {t:'kritis',j:'Tambahan BM SKP 2027 Rp143,28 M, ±32× anggaran BM SKP 2026',d:'Anggaran BM SKP 2026 Rp4,51 M. Empat butir bertanda (*) senilai Rp43,01 M merujuk rapat Dewas 10 November 2026; tiga butir tanpa tanda bernilai Rp100,27 M (MK dan kontraktor Pasar Minggu, persil Jawa Timur Rp50 M).',q:'Apa dasar kajian tiga butir tanpa tanda? Studi kelayakan baru selesai untuk Jababeka — bagaimana dengan Pasar Minggu dan persil Jawa Timur?',s:'ASP hal. 7 & 10'},
+ {t:'klarifikasi',j:'BU SKP baru 16,36%, prognosa 40,59%',d:'Dari Rp14,68 M, prognosa akhir tahun Rp5,96 M. Sekitar Rp8,7 M tidak terserap. Fasilitas kamar GP Batam diperkirakan baru 50% pada Desember; hidran Kabil masuk tender kedua.',q:'Sisa pekerjaan dan anggarannya diluncurkan ke 2027 atau hangus?',s:'ASP hal. 6–7'},
+ {t:'klarifikasi',j:'Angka 50,23% dipakai untuk dua hal',d:'Di satu halaman 50,23% adalah prognosa akhir tahun BM SKP (Rp2,26 M); di halaman lain 50,23% disebut sebagai sisa anggaran (Rp2.243.310.399).',q:'50,23% itu serapan atau sisa?',s:'ASP hal. 6 & 8'},
+ {t:'pantau',j:'Tender ulang: Jakabaring dan hidran Kabil',d:'Pematangan Lahan & Jembatan Jakabaring pernah batal dan kini di tahap Buka Teknis. Hidran Kabil masuk tender kedua. Konsultan perencana KC Solok juga masih Buka Teknis.',q:'Apa penyebab gagal tender pertama, dan apakah spesifikasi/HPS-nya sudah diperbaiki?',s:'ASP hal. 3 & 7 · PDN hal. 10–12'},
+ {t:'pantau',j:'Carry over dan pendampingan hukum',d:'KC Batam Sekupang (Rp5,58 M) dan Renovasi Selasar BPJamsostek (Rp3,73 M) masuk 2027 sebagai carry over. Ada legal assistance dengan Kejari Batam dan Kejari Jakarta Pusat.',q:'Berapa progres fisik keduanya hari ini, dan apa yang melatarbelakangi pendampingan kejaksaan?',s:'ASP hal. 3–4'}
+],
+hcp:[
+ {t:'kritis',j:'5 dari 9 proker strategis masih di bawah 40%',d:'Profiling Kesehatan 15%, Kebijakan Karir 22%, Kebijakan Talenta 23%, Struktur Organisasi 24%, Kompetensi 37% — di pertengahan November.',q:'Mana yang realistis selesai Desember? Yang tidak selesai, apakah memang digeser ke 2027 (keempatnya muncul lagi sebagai Strategis Lanjutan)?',s:'HCP hal. 3–4 & 8'},
+ {t:'klarifikasi',j:'Profiling Kesehatan 15%, pengadaannya masih "Buat Jadwal"',d:'Di daftar pengadaan berjalan, paket Profiling Kesehatan Karyawan belum masuk tahap pemilihan. Program Corporate Wellness 2027 bergantung pada hasil profiling ini.',q:'Kapan hasil profiling tersedia, dan apakah Corporate Wellness 2027 bisa mulai tanpa itu?',s:'HCP hal. 3 & 7 · PDN hal. 11'},
+ {t:'klarifikasi',j:'Tidak ada angka anggaran di deck',d:'Progres 2026 hanya berupa persentase; 102 kegiatan 2027 disajikan tanpa nilai rupiah, padahal 56 di antaranya gaji, tunjangan, dan imbalan pasca kerja.',q:'Berapa realisasi anggaran 2026 dan total usulan 2027 per jenis kegiatan?',s:'HCP hal. 3–6'},
+ {t:'pantau',j:'Struktur organisasi baru 24%',d:'Keluaran berupa draft struktur, tupoksi, uraian dan persyaratan jabatan. Tahun 2027 dilanjutkan dengan validasi RACI dan evaluasi bobot jabatan.',q:'Kapan struktur baru ditargetkan berlaku, dan apa dampaknya ke profil kompetensi serta bobot jabatan?',s:'HCP hal. 4 & 8'},
+ {t:'pantau',j:'Roadmap HC 2027–2031 masih berstatus draft',d:'Dilaporkan 100% dengan keluaran "Draft Road Map Human Capital 2027–2031".',q:'Kapan disahkan, dan apakah proker 2027 sudah diturunkan dari roadmap itu?',s:'HCP hal. 3'}
+],
+lnd:[
+ {t:'klarifikasi',j:'Deck tidak memuat angka sama sekali',d:'Tidak ada realisasi anggaran, jumlah peserta, jam pelatihan, maupun hasil evaluasi. Rencana 2027 berupa garis besar tanpa target.',q:'Berapa serapan anggaran 2026, capaian peserta/jam pelatihan, dan target terukur 2027?',s:'LND hal. 4–7'},
+ {t:'pantau',j:'5 kegiatan TW IV masih tahap persiapan',d:'BLDP, J-WAY Behavior Potential Measurement, dan Uji Kompetensi Teknis dijadwalkan November; Training Data Security dan launching modul kokurikuler di Desember.',q:'Apakah tiga kegiatan November masih terkejar bulan ini?',s:'LND hal. 4–6'},
+ {t:'pantau',j:'Services Academy hanya 4 dari 112 public training',d:'Finance and GRCC 39, Strategy and Technology 25, Human Capital and General Affairs 22, Investment 16, Membership and Communication 6, Services 4.',q:'Apakah sebaran ini sesuai prioritas layanan peserta, atau pelatihan layanan memang lewat in-house?',s:'LND hal. 13'},
+ {t:'pantau',j:'Pengukuran dampak bisnis masih berlangsung',d:'Evaluasi standar perilaku teknis dan dampak bisnis program pengembangan berjalan sampai Desember.',q:'Bisakah hasilnya dilaporkan ke Dewas sebagai dasar prioritas program 2027?',s:'LND hal. 5'}
+]};
+
+const DEPUTI={
+ pdn:{nama:'Pengadaan',kode:'PDN',ikon:'cart',judul:'Deputi Bidang Pengadaan',ket:'Laporan kinerja pengadaan 2026 TW IV (cutoff 16 November 2026, minggu ke-46) dan rencana program kerja 2027.',
+  ring:[['ok','<b>130</b> paket selesai, 32 berjalan, 13 batal'],['warn','Serapan anggaran <b>54,25%</b>, proker 93,76%'],['crit','<b>95%</b> paket tidak sesuai kalender']]},
+ asp:{nama:'Aset & Sarpras',kode:'ASP',ikon:'home',judul:'Deputi Bidang Aset dan Sarana Prasarana',ket:'Evaluasi RKAT 2026, program kerja TW IV, rencana kerja 2027, dan Sarana Kesejahteraan Peserta (SKP).',
+  ring:[['ok','BU <b>79%</b>, prognosa 97%'],['crit','BM <b>36%</b>, prognosa hanya 47%'],['warn','Usulan 2027 <b>Rp213,76 M</b> + SKP Rp143,28 M']]},
+ hcp:{nama:'Human Capital',kode:'HCP',ikon:'users',judul:'Deputi Bidang Human Capital',ket:'Progres program kerja strategis 2026 dan rencana program kerja 2027.',
+  ring:[['ok','<b>4 dari 9</b> proker strategis selesai 100%'],['crit','<b>5</b> proker masih di bawah 40%'],['','2027: <b>102</b> kegiatan']]},
+ lnd:{nama:'Learning & Development',kode:'LND',ikon:'book',judul:'Deputi Bidang Learning & Development',ket:'Tindak lanjut kegiatan Triwulan IV 2026 dan garis besar rencana kerja 2027.',
+  ring:[['ok','<b>9 dari 20</b> kegiatan TW IV selesai'],['warn','<b>5</b> kegiatan masih persiapan'],['','<b>112</b> public training di 6 akademi']]}
 };
-const TINDAK=[]; /* {butir, deputi, rapat, tenggat, status:'Terbuka'|'Proses'|'Selesai', catatan} */
+
+/* ---------- Bentuk dasar ---------- */
+const stat=(v,l,c,s,nada)=>`<div class="kartu stat"><span class="nilai tnum ${nada?'n-'+nada:''}">${v}</span><span class="label">${l}</span>${c?`<span class="cat">${c}</span>`:''}<span class="sumber">${s}</span></div>`;
+const grid=a=>`<div class="grid">${a.join('')}</div>`;
+const panel=(j,kanan,isi,pad=true)=>`<section class="kartu panel"><header><h3>${j}</h3>${kanan?`<span class="sumber">${kanan}</span>`:''}</header><div class="${pad?'isi':'gulir'}">${isi}</div></section>`;
+/* pct = isi batang; tanda = posisi garis prognosa/target (opsional) */
+const batang=(nm,pct,nl,o={})=>`<div class="batang"><span class="nm">${nm}</span><span class="nl tnum">${nl}</span><div class="rel" role="img" aria-label="${nm}: ${String(nl).replace(/<[^>]+>/g,'')}"><i class="${o.nada||''}" style="width:${Math.max(0,Math.min(100,pct))}%"></i>${o.tanda!=null?`<em style="left:calc(${Math.min(100,o.tanda)}% - 1px)"></em>`:''}</div>${o.sub?`<span class="sub">${o.sub}</span>`:''}</div>`;
+const lencana=(teks,kelas,ikon)=>`<span class="lencana ${kelas}">${ikon?ik(ikon):''}${teks}</span>`;
+const isuKartu=(x,dari)=>`<article class="kartu isu ${x.t}"><div class="badan"><div class="atas">${lencana(TINGKAT[x.t][0],TINGKAT[x.t][1],x.t)}${dari?lencana(dari,'l-netral'):''}<span class="sumber">${x.s}</span></div><h3>${x.j}</h3><p>${x.d}</p><div class="tanya"><span class="eyebrow">Pertanyaan</span>${x.q}</div></div></article>`;
+const tabel=(kepala,baris,total)=>`<table><thead><tr>${kepala.map(k=>`<th scope="col" class="${k[1]?'k':''}">${k[0]}</th>`).join('')}</tr></thead><tbody>${baris.map(r=>`<tr>${r.map((c,i)=>`<td class="${kepala[i][1]?'k tnum':''}">${c}</td>`).join('')}</tr>`).join('')}${total?`<tr class="total">${total.map((c,i)=>`<td class="${kepala[i][1]?'k tnum':''}">${c}</td>`).join('')}</tr>`:''}</tbody></table>`;
+const daftar=a=>`<ul class="daftar">${a.map(x=>`<li><span class="titik ${x[0]}"></span><span>${x[1]}</span></li>`).join('')}</ul>`;
+const legenda=(a)=>`<div class="legenda">${a.map(x=>`<span><i class="${x[0]}"></i>${x[1]}</span>`).join('')}</div>`;
+const nadaProgres=p=>p>=100?'ok':p<40?'crit':'';
+
+/* ---------- Tampilan per deputi ---------- */
+const V={};
+
+V.pdn={
+ seg:['2026','2027','Titik kritis','Paket'],
+ 0:()=>grid([
+   stat('130','Paket selesai','74,29% dari 175 paket','PDN hal. 2','ok'),
+   stat('32','Sedang berjalan','18,29%','PDN hal. 2'),
+   stat('13','Dibatalkan','7,43%','PDN hal. 2','warn'),
+   stat('Rp82,21 M','Cost saving','14,78%, pengadaan selesai','PDN hal. 2','ok'),
+   stat('Rp980,10 M','Pagu anggaran dashboard','173 paket','PDN hal. 2'),
+   stat('Rp347,06 M','Realisasi pengadaan tercatat','130 paket','PDN hal. 2'),
+   stat('5%','Sesuai kalender pengadaan','95% tidak sesuai jadwal','PDN hal. 3','crit'),
+   stat('54,25%','Serapan anggaran deputi','dari Rp3,44 M (20 kegiatan)','PDN hal. 4','warn')])
+  +panel('Progres minggu ke-46','PDN hal. 4',
+    batang('Realisasi program kerja',93.76,'93,76%',{nada:'ok',tanda:88.46,sub:'Rencana 88,46% — melampaui target 5,30 poin'})
+   +batang('Realisasi anggaran',54.25,'54,25%',{nada:'warn',sub:'Rp1.863.625.950 dari Rp3.435.456.480'}))
+  +panel('Anggaran & program kerja deputi','PDN hal. 4',tabel([['Jenis kegiatan'],['Jml',1],['Anggaran',1],['Realisasi',1],['%',1],['Sisa',1]],[
+    ['Rutin dan Langganan','2','Rp115.200.000','Rp88.538.849','76,9%','Rp26.661.151'],
+    ['Operasional','13','Rp1.769.244.480','Rp1.524.148.001','86,1%','Rp245.096.479'],
+    ['Strategis Lanjutan','3','Rp1.156.728.500','Rp137.586.404','<b class="n-crit">11,9%</b>','Rp1.019.142.096'],
+    ['Strategis Baru','2','Rp394.283.500','Rp113.352.696','<b class="n-crit">28,8%</b>','Rp280.930.804']],
+    ['Total','20','Rp3.435.456.480','Rp1.863.625.950','54,25%','Rp1.571.830.530']),false)
+  +panel('Program kerja strategis 2026','PDN hal. 5',[
+    ['Smart Contract Management (SCM) & Procure to Pay',70,'Lanjutan · development penyedia 60%, pengujian paralel'],
+    ['Vendor Management System (VMS)',100,'Lanjutan · implementasi dan evaluasi selesai'],
+    ['Dashboard Monitoring Pelaksanaan Pengadaan',75,'Lanjutan · perbaikan fitur bersama Deputi Manajemen Data'],
+    ['Sistemasi & Otomasi Pengadaan dengan Modul AI',100,'Baru · pemenang ditunjuk, lisensi LLM aktif per Desember 2026'],
+    ['Implementasi E-Reverse Auction',100,'Baru · deployment selesai untuk metode harga terendah']
+   ].map(p=>batang(p[0],p[1],p[1]+'%',{nada:nadaProgres(p[1]),sub:p[2]})).join(''))
+  +`<div class="dua">`
+  +panel('Unit kerja pengguna','PDN hal. 3',[['IPT',55,'31,79%'],['ASP',37,'21,39%'],['HCP',12,'6,94%'],['LND',9,'5,20%'],['INL',9,'5,20%'],['15 unit lainnya',51,'29,48%']].map(u=>batang(u[0],u[1]/55*100,`${u[1]} paket`,{sub:u[2],nada:u[0].includes('lainnya')?'netral':''})).join(''))
+  +panel('Jenis kegiatan & SPM 2026','PDN hal. 3',
+    [['Operasional',101,'58,38%'],['Strategis (43 lanjutan, 25 baru)',68,'39,31%'],['Rutin dan Langganan',4,'2,31%']].map(u=>batang(u[0],u[1]/101*100,`${u[1]} paket`,{sub:u[2]})).join('')
+    +`<p class="eyebrow" style="margin:.9rem 0 .2rem">Kategori SPM</p>`
+    +[['Leverage/Umum',79,'45,7%'],['Critical',57,'32,9%'],['Bottleneck',23,'13,3%'],['Lainnya',14,'8,1%']].map(u=>batang(u[0],u[1]/79*100,`${u[1]} paket`,{sub:u[2],nada:'netral'})).join(''))
+  +`</div>`,
+ 1:()=>grid([
+   stat('247','Paket pengadaan 2027','RUP 2027','PDN hal. 6'),
+   stat('1.015,23','Pagu SPM 2027 (Rp miliar)','Critical + Leverage = 84,7%','PDN hal. 6'),
+   stat('Rp575,50 M','Pagu Kuartal I','116 paket, 57% dari total','PDN hal. 7','warn'),
+   stat('Rp3,24 M','RKA deputi 2027','22 kegiatan; 2026: Rp3,44 M','PDN hal. 8')])
+  +panel('Pagu per bulan 2027 (Rp miliar)','PDN hal. 7',`<div class="gulir"><div class="kolom" role="img" aria-label="Pagu pengadaan per bulan 2027, puncak Maret Rp322,2 miliar">${
+    [['Jan',173.1,42],['Feb',80.3,13],['Mar',322.2,61],['Apr',236.6,34],['Mei',21.8,8],['Jun',98.0,24],['Jul',66.3,32],['Agu',10.0,10],['Sep',12.5,9],['Okt',15.2,5],['Nov',9.0,5],['Des',10.1,4]]
+    .map(b=>`<div><b class="tnum">${String(b[1].toFixed(1)).replace('.',',')}</b><i class="${b[0]==='Mar'?'puncak':''}" style="height:${b[1]/322.2*72}%"></i><span>${b[0]}</span><small class="tnum">${b[2]} pkt</small></div>`).join('')}</div></div>
+    <p class="sub" style="margin-top:.75rem;color:var(--muted);font-size:.78rem">Q1 Rp575,50 M (116 paket) · Q2 Rp356,36 M (66) · Q3 Rp88,76 M (51) · Q4 Rp34,61 M (14)</p>`)
+  +panel('Distribusi pagu menurut Supply Positioning Model','PDN hal. 6',[
+    ['Leverage — 34 paket',50.1,'Rp508,09 M','Lahan, laptop, jaringan SDWAN; konsolidasi belanja dan lelang terbuka'],
+    ['Critical — 31 paket',34.6,'Rp351,61 M','Database JMO, firewall, lisensi core; kontrak multi-tahun'],
+    ['Routine — 132 paket',10.0,'Rp101,91 M','Operasional rutin, e-katalog, pemeliharaan standar'],
+    ['Bottleneck — 50 paket',5.3,'Rp53,62 M','Spesifikasi khusus, konsultan niche, sertifikasi']
+   ].map(s=>batang(s[0],s[1]/50.1*100,s[2],{sub:`${String(s[1]).replace('.',',')}% · ${s[3]}`})).join(''))
+  +panel('RKA deputi 2027','PDN hal. 8',tabel([['Jenis kegiatan'],['Jml',1],['Anggaran',1],['Porsi',1]],[
+    ['Operasional','13','Rp1.921.749.000','59,26%'],['Strategis Lanjutan','5','Rp992.544.000','30,61%'],
+    ['Rutin & Langganan','3','Rp220.800.000','6,81%'],['Strategis Baru','1','Rp107.744.000','3,32%']],['Total','22','Rp3.242.837.000','100%']),false)
+  +panel('6 program kerja strategis 2027','PDN hal. 8',tabel([['Kegiatan'],['Jenis'],['Anggaran',1]],[
+    ['Transformasi Strategic Procurement Berbasis Category Management','Lanjutan','Rp449.940.000'],
+    ['Renewal Lisensi Agentic AI Pengadaan','Lanjutan','Rp335.664.000'],
+    ['Implementasi Multi Winner di E-Procurement','Baru','Rp107.744.000'],
+    ['Procure To Pay dan Procure To Asset','Lanjutan','Rp104.750.000'],
+    ['Evaluasi Aplikasi VMS dan SCM','Lanjutan','Rp68.544.000'],
+    ['Implementasi E-Reverse Auction Procurement','Lanjutan','Rp33.646.000']],['Total','','Rp1.100.288.000']),false),
+ 3:()=>paketView()
+};
+
+V.asp={
+ seg:['2026','2027','Titik kritis'],
+ 0:()=>grid([
+   stat('79%','Realisasi Belanja Usaha','Rp100,20 M dari Rp127,23 M','ASP hal. 2','ok'),
+   stat('97%','Prognosa BU akhir tahun','Rp123,71 M','ASP hal. 2'),
+   stat('36%','Realisasi Belanja Modal','Rp26,22 M dari Rp73,37 M','ASP hal. 2','crit'),
+   stat('47%','Prognosa BM akhir tahun','Rp34,82 M','ASP hal. 2','crit')])
+  +`<div class="dua">`
+  +panel('Belanja Modal per kategori','ASP hal. 2',[['Peralatan lain',89,'Rp4,58 M'],['Kendaraan',72,'Rp18,17 M'],['Bangunan',13,'Rp3,46 M'],['Tanah',0,'Rp0'],['Interior',0,'Rp0'],['Perabot/mebelair',0,'Rp0']]
+    .map(k=>batang(k[0],k[1],k[1]+'%',{nada:k[1]<40?'crit':'',sub:'Realisasi '+k[2]})).join(''))
+  +panel('Belanja Usaha per aktivitas','ASP hal. 2',[['Menjaga keberlangsungan operasional unit kerja',92],['Inspeksi kendali mutu sarana',76],['Pemeliharaan, pengamanan & pengelolaan aset',69],['Pemenuhan sarana prasarana',63],['Pembangunan & renovasi gedung',61],['Pembayaran langganan kantor pusat',59],['Administrasi aset tetap',56],['Pemenuhan ATK & consumables',31]]
+    .map(k=>batang(k[0],k[1],k[1]+'%',{nada:k[1]<40?'crit':''})).join(''))
+  +`</div>`
+  +`<div class="dua">`
+  +panel('Sedang berjalan di TW IV','ASP hal. 3',daftar([['','Pembangunan Gedung KC Batam Sekupang'],['','Renovasi Selasar BPJamsostek'],['','Pengadaan kontraktor Pematangan Lahan & Jembatan Jakabaring Palembang'],['','Pengadaan konsultan perencana Gedung KC Rengat'],['','Pengadaan konsultan perencana Gedung KC Solok'],['','Revisi Peraturan Direksi tentang standardisasi tanah & konsep bangunan kantor']]))
+  +panel('Sampai akhir 2026','ASP hal. 3',daftar([['','Monitoring & evaluasi proyek KC Batam Sekupang dan Renovasi Selasar'],['','Legal assistance bersama Kejari Batam dan Kejari Jakarta Pusat'],['','Sosialisasi revisi Perdir standardisasi tanah & konsep bangunan'],['','Proses lelang dan hapus buku aset tetap sesuai KEP/97/062026']]))
+  +`</div>`
+  +`<h2 class="bagian">Sarana Kesejahteraan Peserta (SKP)</h2>`
+  +grid([
+   stat('16,36%','Realisasi BU SKP','Rp2,40 M dari Rp14,68 M','ASP hal. 6','crit'),
+   stat('40,59%','Prognosa BU SKP','Rp5,96 M','ASP hal. 6','warn'),
+   stat('40,34%','Realisasi BM SKP','Rp1,82 M dari Rp4,51 M','ASP hal. 6','warn'),
+   stat('50,23%','Prognosa BM SKP','Rp2,26 M','ASP hal. 6','warn')])
+  +panel('Aktivitas utama SKP: anggaran vs fisik','ASP hal. 6',legenda([['','Realisasi anggaran'],['tg','Progres pelaksanaan']])
+    +batang('BU · Peningkatan & penambahan fasilitas Griya Pekerja',10.39,'10,39%',{tanda:66,nada:'crit',sub:'Progres pelaksanaan 66,00%'})
+    +batang('BU · Kepuasan penghuni & okupansi Griya Pekerja',19.6,'19,60%',{tanda:70,nada:'crit',sub:'Progres pelaksanaan 70,00%'})
+    +batang('BU · Pengelolaan aset SKP non-Griya Pekerja',75.6,'75,60%',{tanda:63.13,sub:'Progres pelaksanaan 63,13%'})
+    +batang('BM · Peningkatan & penambahan fasilitas Griya Pekerja',40.34,'40,34%',{tanda:90,sub:'Progres pelaksanaan 90,00%'}))
+  +panel('Pekerjaan SKP di TW IV','ASP hal. 7–8',daftar([
+    ['warn','<b>Fasilitas kamar GP Bumi Lancang Kuning, Batam</b> (282 kamar) — sedang berlangsung, prognosa 50% pada Desember, estimasi realisasi Rp2.097.063.060'],
+    ['warn','<b>Perbaikan hidran GP Kabil, Batam</b> — pengadaan memasuki tender kedua'],
+    ['ok','<b>Studi kelayakan revitalisasi GP Jababeka Cikarang</b> — selesai, menunggu penagihan'],
+    ['ok','<b>Interior 282 kamar GP Bumi Lancang Kuning</b> — selesai, masa pemeliharaan; retensi Rp445.857.500 dibayar minggu pertama Desember']])),
+ 1:()=>grid([
+   stat('Rp213,76 M','Usulan RKAT BM 2027','2026: Rp73,37 M','ASP hal. 4','warn'),
+   stat('Rp144,41 M','Pembelian tanah','6 lokasi, 67,6% dari usulan','ASP hal. 4','warn'),
+   stat('Rp143,28 M','Tambahan BM SKP 2027','2026: Rp4,51 M','ASP hal. 10','warn'),
+   stat('2026–2031','Masterplan Griya Pekerja','Dasar: PP 55/2015 & PP 27/2026','ASP hal. 9')])
+  +panel('Serapan 2026 dibanding usulan 2027 (Rp miliar)','ASP hal. 2, 4, 6, 10',
+    batang('BM 2026 — anggaran',73.37/213.76*100,'Rp73,37 M',{nada:'netral'})
+   +batang('BM 2026 — prognosa realisasi',34.82/213.76*100,'Rp34,82 M',{nada:'crit',sub:'47% dari anggaran'})
+   +batang('BM 2027 — usulan',100,'Rp213,76 M',{sub:'2,9× anggaran 2026'})
+   +batang('BM SKP 2026 — anggaran',4.51/213.76*100,'Rp4,51 M',{nada:'netral'})
+   +batang('BM SKP 2027 — usulan tambahan',143.28/213.76*100,'Rp143,28 M',{sub:'±32× anggaran 2026'}))
+  +panel('Usulan RKAT 2027 per kategori','ASP hal. 4',tabel([['Kategori'],['Rincian'],['Usulan',1]],[
+    ['Pembelian tanah','Bojongsoang, Batuceper, Batulicin, Cimone, Kanwil Banuspa, Tanjung Perak','Rp144.413.200.000'],
+    ['Penambahan bangunan kantor','Jakabaring, KC Batam Sekupang (carry over), Rengat, Solok, Bojongsoang, Gedung Institut, Selasar (carry over)','Rp37.646.762.129'],
+    ['Penambahan mobil','Kendaraan roda 4','Rp16.120.000.000'],
+    ['Peralatan lain-lain','PLTS atap, utilitas Grha BPJamsostek, multimedia & auditorium Gedung Institut, dll.','Rp6.436.007.273'],
+    ['Penambahan bangunan lain','Fasad Gedung Institut, atap Gedung Aset Sentul','Rp4.613.648.952'],
+    ['Perabot/mebelair','KC Rengat, KC Solok, Kantor Pusat, Selasar','Rp3.266.153.688'],
+    ['Interior bangunan','Selasar BPJamsostek, Gedung Institut','Rp1.262.680.000']],['Total','','Rp213.758.452.022']),false)
+  +panel('Pembelian tanah 2027','ASP hal. 4',[['Pengadaan Lahan Batuceper',37.5,'Rp37,50 M'],['Pengadaan Lahan Kanwil Banuspa',37.5,'Rp37,50 M'],['Pengadaan Lahan Tanjung Perak',30,'Rp30,00 M'],['Pengadaan Lahan Cimone',20.25,'Rp20,25 M'],['Tanah KC Bojongsoang',12.41,'Rp12,41 M'],['Pengadaan Lahan Batulicin',6.75,'Rp6,75 M']].map(k=>batang(k[0],k[1]/37.5*100,k[2])).join(''))
+  +panel('Usulan tambahan RKAT BM SKP 2027','ASP hal. 10',tabel([['Kegiatan'],['Usulan',1]],[
+    ['(*) Kontraktor pelaksana revitalisasi GP Jababeka Cikarang','Rp38.091.639.120'],
+    ['(*) Konsultan perencana revitalisasi GP Jababeka Cikarang','Rp2.038.966.966'],
+    ['(*) Konsultan MK revitalisasi GP Jababeka Cikarang','Rp1.887.949.026'],
+    ['(*) Konsultan perencana revitalisasi GP Pasar Minggu','Rp991.618.500'],
+    ['Kontraktor pelaksana revitalisasi GP Pasar Minggu','Rp47.624.770.531'],
+    ['Konsultan MK revitalisasi GP Pasar Minggu','Rp2.641.720.051'],
+    ['Pengadaan persil di Jawa Timur untuk pengembangan Griya Pekerja','Rp50.000.000.000']],['Total','Rp143.276.664.194']),false)
+  +`<p class="kaki">(*) Berdasarkan hasil rapat Dewan Pengawas 10 November 2026, diusulkan sebagai tambahan RKAT SKP 2027. Seluruh rencana lahan dan gedung kantor disebut mengacu pada Roadmap Deputi Bidang Aset dan Sarana Prasarana 2026–2031.</p>`
+};
+
+const HC26=[['Profiling Kesehatan Karyawan',15,'Baru · profiling dari hasil MCU nasional dan rekomendasi intervensi'],
+ ['Diagnosis & Penyusunan Roadmap HC 2027–2031',100,'Baru · draft roadmap'],
+ ['Dashboard Analitik SDM',100,'Baru · dashboard interaktif pendukung keputusan'],
+ ['Penyempurnaan Kebijakan Pengelolaan Talenta',23,'Lanjutan · Peraturan Direksi'],
+ ['Penyempurnaan Model, Kamus & Profil Kompetensi',37,'Lanjutan · kebijakan kompetensi'],
+ ['Penyempurnaan Struktur Organisasi',24,'Lanjutan · draft struktur, tupoksi, uraian jabatan'],
+ ['Evaluasi & Penyempurnaan Kebijakan Pengelolaan Karir',22,'Lanjutan · Peraturan Direksi'],
+ ['Kajian Real Time Performance Feedback',100,'Lanjutan · kajian'],
+ ['Kajian Talent Mapping',100,'Lanjutan · kajian']];
+V.hcp={
+ seg:['2026','2027','Titik kritis'],
+ 0:()=>grid([
+   stat('9','Proker strategis 2026','3 baru, 6 lanjutan','HCP hal. 3–4'),
+   stat('4','Selesai 100%','Roadmap, dashboard, 2 kajian','HCP hal. 3–4','ok'),
+   stat('5','Di bawah 40%','Terendah 15%','HCP hal. 3–4','crit'),
+   stat('15%','Profiling Kesehatan','Proker dengan progres terendah','HCP hal. 3','crit')])
+  +panel('Progres program kerja strategis','HCP hal. 3–4',[...HC26].sort((a,b)=>a[1]-b[1]).map(p=>batang(p[0],p[1],p[1]+'%',{nada:nadaProgres(p[1]),sub:p[2]})).join('')),
+ 1:()=>grid([
+   stat('102','Kegiatan 2027','Tanpa nilai anggaran di deck','HCP hal. 6'),
+   stat('2','Strategis baru','Corporate Wellness, People Analytics','HCP hal. 6–7'),
+   stat('6','Strategis lanjutan','4 lanjutan dari proker 2026 yang belum selesai','HCP hal. 6 & 8','warn'),
+   stat('94','Operasional & rutin','38 operasional, 56 rutin dan langganan','HCP hal. 6')])
+  +panel('Strategis baru','HCP hal. 7',daftar([
+    ['','<b>Corporate Employee Wellness Program berbasis profiling kesehatan</b> — program wellness komprehensif dengan pendekatan promotif, preventif, dan digital.'],
+    ['','<b>Peningkatan kapabilitas pengelolaan data SDM & People Analytics</b> — memanfaatkan AI untuk data SDM yang akurat dan terintegrasi.']]))
+  +panel('Strategis lanjutan','HCP hal. 8',daftar([
+    ['','<b>Pengembangan profiling kesehatan karyawan</b> — profiling, dashboard monitoring, rekomendasi intervensi.'],
+    ['','<b>Penyempurnaan kebijakan pengelolaan talenta</b> — evaluasi efektivitas dan rekomendasi berbasis asesmen.'],
+    ['','<b>Evaluasi & penyempurnaan kebijakan pengelolaan karir</b> — regulasi karier yang diperbarui dan kerangka pengembangan karier.'],
+    ['','<b>Pengkinian kelengkapan struktur organisasi</b> — draft struktur, uraian jabatan, validasi RACI.'],
+    ['','<b>Reviu profil kompetensi</b> — penyempurnaan profil kompetensi jabatan.'],
+    ['','<b>Pengkinian evaluasi bobot jabatan</b> — pengkinian bobot dan rekomendasi evaluasi jabatan.']]))
+  +panel('Operasional dan rutin','HCP hal. 6',daftar([
+    ['','<b>38 kegiatan operasional</b> — employee wellbeing, pengelolaan kinerja, pengembangan SDM, rekrutmen, budaya organisasi, hubungan industrial, perencanaan SDM, pengelolaan data HC.'],
+    ['','<b>56 kegiatan rutin dan langganan</b> — gaji dan tunjangan manajemen serta karyawan, beban jaminan sosial, imbalan pasca kerja.']]))
+};
+
+const LND_KEG=[
+ ['Diklat Teknis Kepala Bidang Pelayanan 2026','In House','Okt','Selesai'],['Pelatihan Inhouse Artificial Intelligence (Tier 1 dan 2)','In House','Okt','Selesai'],
+ ['Budget Literacy for Future Leaders 2026','In House','Okt','Selesai'],['Pelatihan Risk Management Officer','In House','Okt–Nov','Selesai'],
+ ['Diklat Teknis Case Manager','In House','Nov','Selesai'],['Intermediate Leadership Development Program (ILDP)','In House','Nov','Selesai'],
+ ['Leadership Maturity Development Program (LMDP)','In House','Nov','Selesai'],['Basic Leadership Development Program (BLDP)','In House','Nov','Persiapan'],
+ ['Program Purna Tugas','In House','Nov','Berlangsung'],['Training Data Security untuk Waka DHCA','In House','Des','Persiapan'],
+ ['Sertifikasi dan Public Training (semua akademi)','Public','Nov–Des','Berlangsung'],['Assesmen dan Reassesmen Centre','Assesmen','Okt–Nov','Selesai'],
+ ['J-WAY Behavior Potential Measurement','Assesmen','Nov','Persiapan'],['Uji Kompetensi Teknis Calon Karyawan','Assesmen','Nov','Persiapan'],
+ ['Penyusunan Modul Digital','Supporting','Nov–Des','Berlangsung'],['Evaluasi standar perilaku teknis & dampak bisnis program','Evaluasi','Nov–Des','Berlangsung'],
+ ['Knowledge Sharing, Lead Talks, dan Community of Practice','Knowledge Mgmt','Okt–Nov','Selesai'],['Launching Modul Kokurikuler SMP dan SMA','Kemitraan','Des','Persiapan'],
+ ['Perpanjangan MoU Polteknaker, UIN Walisongo, Universitas Udayana','Kemitraan','Nov–Des','Berlangsung'],['Penerbitan Jurnal Jamsostek Vol. 4 No. 2','Jurnal','Nov–Des','Berlangsung']];
+const ST={Selesai:['l-ok','cek'],Berlangsung:['l-aksen','jam'],Persiapan:['l-warn','klarifikasi']};
+V.lnd={
+ seg:['2026','2027','Titik kritis'],
+ 0:()=>grid([
+   stat('20','Kegiatan TW IV','Pengembangan, asesmen, supporting, kemitraan','LND hal. 4–6'),
+   stat('9','Selesai','45%','LND hal. 4–6','ok'),
+   stat('6','Sedang berlangsung','30%','LND hal. 4–6'),
+   stat('5','Masih persiapan','25%','LND hal. 4–6','warn')])
+  +panel('Kegiatan Triwulan IV','LND hal. 4–6',`<div>${['Persiapan','Berlangsung','Selesai'].flatMap(s=>LND_KEG.filter(k=>k[3]===s)).map(k=>`<div class="paket"><div><div class="jd">${k[0]}</div><div class="kd mono">${k[1]} · ${k[2]} 2026</div></div>${lencana(k[3],ST[k[3]][0],ST[k[3]][1])}</div>`).join('')}</div>`,false)
+  +panel('Public training 2026 per akademi','LND hal. 13',[['Finance and GRCC',39],['Strategy and Technology',25],['Human Capital and General Affairs',22],['Investment',16],['Membership and Communication',6],['Services',4]].map(a=>batang(a[0]+' Academy',a[1]/39*100,a[1]+' kegiatan')).join('')+`<p class="sub" style="margin-top:.6rem;color:var(--muted);font-size:.78rem">Total 112 kegiatan. Lampiran juga memuat 23 program in-house sepanjang 2026.</p>`),
+ 1:()=>panel('Garis besar rencana kerja 2027','LND hal. 7',daftar([
+    ['','<b>Fokus kompetensi</b> — Artificial Intelligence, manajemen risiko, dan komunikasi.'],
+    ['','<b>Kompetensi talenta</b> — kapabilitas leadership dan managerial secara terstruktur dan berkelanjutan.'],
+    ['','<b>Skema bottom up</b> — menjawab kebutuhan individu karyawan; materi berbasis distance learning.'],
+    ['','<b>Asesmen dan LSP</b> — asesmen SJT untuk J-WAY Behaviour dan Uji Kompetensi Teknis karyawan.'],
+    ['','<b>Knowledge management</b> — Knowledge Management, Lead Talks, Community of Practice.'],
+    ['','<b>Pengelolaan mutu</b> — penerapan ISO 21001:2025 dan surveillance audit.'],
+    ['','<b>Beasiswa, kemitraan, magang</b> — beasiswa, magang, jurnal, dan penambahan MoU universitas.'],
+    ['','<b>Kurikulum jaminan sosial</b> — implementasi di 16 universitas kerja sama.']]))
+  +`<p class="kaki">Deck LND tidak mencantumkan anggaran, target peserta, maupun indikator untuk rencana 2027.</p>`
+};
+
+/* ---------- Daftar paket (PDN) ---------- */
+let saring='semua',kata='';
+function paketView(){
+  const hit=t=>PAKET_JALAN.filter(p=>p[2]===t).length;
+  const chips=[['semua','Semua',45],['berjalan','Berjalan',32],['awal','Tahap awal',PAKET_JALAN.filter(p=>TAHAP_AWAL.includes(p[2])).length],['batal','Dibatalkan',13],...TAHAP.filter(hit).map(t=>[t,t,hit(t)])];
+  return `<label class="cari">${ik('search')}<span style="position:absolute;left:-9999px">Cari paket</span><input id="cari" type="search" placeholder="Cari judul atau kode tender…" value="${kata.replace(/"/g,'&quot;')}" autocomplete="off"></label>
+  <div class="chips" role="group" aria-label="Saring paket">${chips.map(c=>`<button class="chip" data-saring="${c[0]}" aria-pressed="${saring===c[0]}">${c[1]} <span class="tnum">${c[2]}</span></button>`).join('')}</div>
+  <div id="hasil-paket"></div>
+  <p class="kaki">Sumber: PDN hal. 10–12. "Tahap awal" = Perencanaan, Pembuatan HPS, dan Buat Jadwal.</p>`;
+}
+function isiPaket(){
+  const el=document.getElementById('hasil-paket');if(!el)return;
+  const semua=[...PAKET_JALAN.map(p=>({k:p[0],j:p[1],t:p[2],b:false})),...PAKET_BATAL.map(p=>({k:p[0],j:p[1],t:'Dibatalkan',b:true}))];
+  const q=kata.trim().toLowerCase();
+  const cocok=semua.filter(p=>{
+    if(q&&!(p.j+' '+p.k).toLowerCase().includes(q))return false;
+    if(saring==='semua')return true; if(saring==='berjalan')return !p.b; if(saring==='batal')return p.b;
+    if(saring==='awal')return TAHAP_AWAL.includes(p.t); return p.t===saring;
+  }).sort((a,b)=>(a.b-b.b)||(TAHAP.indexOf(a.t)-TAHAP.indexOf(b.t)));
+  el.innerHTML=`<section class="kartu panel"><header><h3>Paket pengadaan</h3><span class="sumber tnum">${cocok.length} paket</span></header><div>${cocok.length?cocok.map(p=>`<div class="paket"><div><div class="jd">${p.j}</div><div class="kd mono">${p.k}</div></div>${p.b?lencana('Dibatalkan','l-netral','batal'):lencana(p.t,TAHAP_AWAL.includes(p.t)?'l-warn':'l-aksen',TAHAP_AWAL.includes(p.t)?'klarifikasi':'jam')}</div>`).join(''):`<div class="kosong">Tidak ada paket yang cocok. Hapus kata pencarian atau pilih "Semua".</div>`}</div></section>`;
+}
+
+/* ---------- Ikhtisar ---------- */
+function ikhtisar(){
+  const top=[['pdn',0],['asp',0],['asp',2],['hcp',0],['pdn',3],['pdn',4]];
+  return `<p class="kicker">Rapat Dewan Pengawas · 17 November 2026</p><h1>Ikhtisar empat deputi</h1>
+  <p class="ket">Kinerja 2026, usulan 2027, dan hal yang perlu ditanyakan. Setiap angka menyebut halaman deck asalnya.</p>
+  <div class="dua">${Object.entries(DEPUTI).map(([k,d])=>`<a class="kartu kartu-deputi" href="#${k}"><span class="kepala"><span class="kotak-ikon">${ik(d.ikon)}</span><span style="min-width:0;flex:1"><span class="eyebrow">${d.kode}</span><b class="nm">${d.nama}</b></span><span class="hitung tnum" title="Jumlah titik kritis & pertanyaan">${ISU[k].length}</span></span><ul>${d.ring.map(r=>`<li><span class="titik ${r[0]}"></span><span>${r[1]}</span></li>`).join('')}</ul></a>`).join('')}</div>
+  <h2 class="bagian">Serapan 2026 dibanding usulan 2027</h2>
+  ${panel('Belanja Modal ASP dan SKP (Rp miliar)','ASP hal. 2, 4, 6, 10',
+    batang('BM 2026 — prognosa realisasi',34.82/213.76*100,'Rp34,82 M',{nada:'crit',tanda:73.37/213.76*100,sub:'Garis tegak: anggaran 2026 Rp73,37 M (serapan 47%)'})
+   +batang('BM 2027 — usulan',100,'Rp213,76 M',{sub:'Tanah Rp144,41 M (2026: realisasi tanah Rp0)'})
+   +batang('BM SKP 2026 — anggaran',4.51/213.76*100,'Rp4,51 M',{nada:'netral',sub:'Prognosa serapan 50,23%'})
+   +batang('BM SKP 2027 — usulan tambahan',143.28/213.76*100,'Rp143,28 M',{sub:'Revitalisasi GP Jababeka & Pasar Minggu, persil Jawa Timur'})).replace('class="kartu panel"','class="kartu panel" style="margin-top:0"')}
+  <h2 class="bagian">Enam hal terpenting untuk ditanyakan</h2>
+  ${top.map(([k,i])=>isuKartu(ISU[k][i],DEPUTI[k].kode)).join('')}
+  <p class="kaki">Sumber: materi rapat PDN (13 halaman), ASP (11), HCP (8), dan LND (13). "M" berarti miliar rupiah. Nomor halaman PDN mengikuti label "Halaman x / 12" di slide. Angka ditampilkan apa adanya; ketidakcocokan antarhalaman ditandai sebagai titik kritis, tidak dikoreksi.</p>`;
+}
 
 
-/* ===== Hitung ===== */
-let m=0;
-const fm=x=>x==null?'—':x<1?'Rp'+(x*1000).toLocaleString('id-ID',{maximumFractionDigits:1})+' jt':'Rp'+x.toLocaleString('id-ID',{minimumFractionDigits:2,maximumFractionDigits:2})+' M';
-const kum=(a,t)=>{let s=0,ada=false;for(let i=0;i<=t;i++)if(a[i]!=null){s+=a[i];ada=true}return ada?s:null};
-const akhir=(a,t)=>{for(let i=t;i>=0;i--)if(a[i]!=null)return a[i];return null};
-const jml=(a,t)=>a.slice(0,t+1).reduce((x,y)=>x+y,0);
-const pct=(r,p)=>r==null||!p?null:r/p*100;
-/* Aturan status PRD: c = realisasi kumulatif / rencana kumulatif */
-const nada=c=>c==null?'':c>=90?'ok':c>=70?'warn':'crit';
-const NADA={'':['Belum ada data','l-netral'],ok:['Sesuai rencana','l-ok'],warn:['Perlu perhatian','l-warn'],crit:['Tertinggal','l-crit']};
-const lencana=n=>`<span class="lencana ${NADA[n][1]}">${NADA[n][0]}</span>`;
-const sumPos=pos=>{let s=0,ada=false;pos.forEach(x=>{const r=kum(x.r,m);if(r!=null){s+=r;ada=true}});return ada?s:null};
-const grupUtama=k=>k==='asp'?[D.asp.anggaran[0],D.asp.anggaran[2]]:D[k].anggaran.slice(0,1);
-const serap=k=>{const g=grupUtama(k);if(!g.length)return{r:null,p:null};let r=null;g.forEach(a=>{const s=sumPos(a.pos);if(s!=null)r=(r||0)+s});return{r,p:D[k].pagu}};
-const prog=k=>{const it=D[k].proker.item,v=it.map(x=>akhir(x.g,m)).filter(x=>x!=null);return{rata:v.length?v.reduce((a,b)=>a+b,0)/it.length:null,lapor:v.length,n:it.length,selesai:v.filter(x=>x>=100).length}};
-const peng=()=>{const P=PENGADAAN;return{rk:jml(P.paket,m),rp:jml(P.pagu,m),ak:kum(P.realPaket,m),ap:kum(P.realPagu,m)}};
-
-/* ===== Bentuk ===== */
-const ring=(p,n)=>`<svg class="ring" viewBox="0 0 64 64" role="img" aria-label="${p==null?'belum ada data':Math.round(p)+' persen'}"><circle cx="32" cy="32" r="26" class="rl"/>${p!=null?`<circle cx="32" cy="32" r="26" class="rf ${n||''}" stroke-dasharray="${Math.min(p,100)/100*163.36} 163.36" transform="rotate(-90 32 32)"/>`:''}<text x="32" y="37" text-anchor="middle">${p==null?'—':Math.round(p)+'%'}</text></svg>`;
-const ubin=(p,label,nilai,target,n)=>`<div class="kartu ubin">${ring(p,n)}<div><span class="label">${label}</span><b class="tnum">${nilai}</b><span class="cat tnum">${target}</span></div></div>`;
+/* ================= Rapat 26 Nov 2026: Persetujuan Rencana Bisnis 2027 =================
+   Sumber: undangan MI/66/112026, reviu KPKB MI/115/112026, dan model investasi (KK_FINMOD, Base Case). */
+const idn=(x,d=2)=>x.toLocaleString('id-ID',{minimumFractionDigits:d,maximumFractionDigits:d});
+const ring=(p,n,teks)=>`<svg class="ring" viewBox="0 0 64 64" role="img" aria-label="${teks||Math.round(p)+' persen'}"><circle cx="32" cy="32" r="26" class="rl"/><circle cx="32" cy="32" r="26" class="rf ${n||''}" stroke-dasharray="${Math.max(0,Math.min(p,100))/100*163.36} 163.36" transform="rotate(-90 32 32)"/><text x="32" y="37" text-anchor="middle">${teks||Math.round(p)+'%'}</text></svg>`;
+const ubin=(p,label,nilai,cat,n,teks)=>`<div class="kartu ubin">${ring(p,n,teks)}<div><span class="label">${label}</span><b class="tnum">${nilai}</b><span class="cat tnum">${cat}</span></div></div>`;
 const angka=(v,label,cat)=>`<div class="kartu ubin"><div><span class="label">${label}</span><b class="tnum besar">${v}</b>${cat?`<span class="cat tnum">${cat}</span>`:''}</div></div>`;
-const panel=(j,kanan,isi,pad=true)=>`<section class="kartu panel"><header><h2>${j}</h2>${kanan||''}</header><div class="${pad?'isi':'gulir'}">${isi}</div></section>`;
-/* Batang satu baris: jalur abu = pagu relatif, isi = realisasi, garis = titik awal/target */
-const bar=(n,kanan,trk,fil,o={})=>`<div class="b1"><span class="nm">${o.tag?`<i class="tag">${o.tag}</i>`:''}${n}</span><span class="nl tnum">${kanan}</span><div class="rel"><i class="netral" style="width:${trk}%"></i>${fil?`<i class="${o.nada||''}" style="width:${fil}%"></i>`:''}${o.tanda!=null?`<em style="left:calc(${o.tanda}% - 1px)"></em>`:''}</div></div>`;
-const barPos=(x,mx)=>{const r=kum(x.r,m);return bar(x.n,`<b>${r==null?'—':Math.round(r/x.p*100)+'%'}</b> · ${fm(x.p)}`,x.p/mx*100,r==null?0:Math.min(r,x.p)/mx*100)};
-const barProker=x=>{const g=akhir(x.g,m);return bar(x.n,`<b>${g==null?'—':g+'%'}</b>`,100,g||0,{tag:x.jn,tanda:x.a,nada:g>=100?'ok':''})};
+const tumpuk=a=>{const t=a.reduce((x,y)=>x+y[0],0);return `<div class="tumpuk" role="img" aria-label="${a.map(x=>x[1]+' '+x[0]).join(', ')}">${a.map(x=>`<i class="${x[2]}" style="flex:${x[0]}">${x[0]}</i>`).join('')}</div><div class="legenda" style="margin:.5rem 0 0">${a.map(x=>`<span><i class="${x[2]}"></i>${x[1]} ${Math.round(x[0]/t*100)}%</span>`).join('')}</div>`};
+const kol=(d,rem=3)=>{const mx=Math.max(...d.map(x=>x[1]));return `<div class="gulir"><div class="kolom" style="grid-template-columns:repeat(${d.length},minmax(2.6rem,1fr));min-width:${d.length*rem}rem;height:11rem" role="img" aria-label="${d.map(x=>x[0]+' '+x[2]).join(', ')}">${d.map(x=>`<div><b class="tnum">${x[2]}</b><i class="${x[3]||''}" style="height:${x[1]/mx*72}%"></i><span>${x[0]}</span></div>`).join('')}</div></div>`};
+/* Batang berpasangan: dua seri per tahun; garis putus menandai awal proyeksi */
+function grup(lbl,a,b,awalProy){const n=lbl.length,W=600,H=220,x0=36,sl=(W-x0-8)/n,mx=Math.max(...a,...b)*1.08,Y=v=>190-v/mx*165;
+ return `<div class="gulir"><svg class="gsvg" viewBox="0 0 ${W} ${H}" role="img" aria-label="Hasil investasi per tahun, dua dasar pengukuran">
+ ${[0,.5,1].map(f=>`<line class="gl" x1="${x0}" x2="${W-8}" y1="${Y(mx*f)}" y2="${Y(mx*f)}"/><text class="ax" x="${x0-5}" y="${Y(mx*f)+4}" text-anchor="end">${Math.round(mx*f)}</text>`).join('')}
+ <line class="pj" x1="${x0+awalProy*sl}" x2="${x0+awalProy*sl}" y1="14" y2="190"/><text class="ax" x="${x0+awalProy*sl+5}" y="22">Proyeksi</text>
+ ${lbl.map((t,i)=>{const cx=x0+i*sl+sl/2;return `<rect class="sa" x="${cx-19}" y="${Y(a[i])}" width="18" height="${190-Y(a[i])}" rx="2"/><rect class="sb" x="${cx+1}" y="${Y(b[i])}" width="18" height="${190-Y(b[i])}" rx="2"/><text class="vl" x="${cx-10}" y="${Y(a[i])-4}" text-anchor="middle">${Math.round(a[i])}</text><text class="vl" x="${cx+10}" y="${Y(b[i])-4}" text-anchor="middle">${Math.round(b[i])}</text><text class="ax" x="${cx}" y="208" text-anchor="middle">${t}</text>`}).join('')}</svg></div>`}
+const sbr=t=>`<span class="sumber">${t}</span>`;
+const nSkor=v=>v>=4?'ok':v>=3?'warn':'crit';
 
-/* Kurva S: paket kumulatif, rencana vs realisasi */
-function kurva(){const P=PENGADAAN,T=247,X=i=>44+i*(540/11),Y=v=>176-v/T*150;let c=0;
- const rc=P.paket.map(v=>c+=v),pr=rc.map((v,i)=>`${X(i)},${Y(v)}`).join(' ');
- let a=0,ada=false;const real=[];P.realPaket.forEach((v,i)=>{if(v!=null){a+=v;ada=true}if(ada&&i<=m)real.push(`${X(i)},${Y(a)}`)});
- const ak=kum(P.realPaket,m);
- return `<svg class="kurva" viewBox="0 0 600 210" role="img" aria-label="Paket pengadaan kumulatif 2027: rencana dan realisasi">
- ${[0,.5,1].map(f=>`<line x1="44" x2="584" y1="${Y(T*f)}" y2="${Y(T*f)}" class="gl"/><text x="38" y="${Y(T*f)+3}" text-anchor="end" class="ax">${Math.round(T*f)}</text>`).join('')}
- <polygon points="${X(0)},${Y(0)} ${pr} ${X(11)},${Y(0)}" class="ar"/><polyline points="${pr}" class="lr"/>
- ${real.length?`<polyline points="${real.join(' ')}" class="la"/>`:''}
- <line x1="${X(m)}" x2="${X(m)}" y1="${Y(T)}" y2="${Y(0)}" class="mk"/><circle cx="${X(m)}" cy="${Y(rc[m])}" r="4.5" class="dr"/>
- ${ak!=null?`<circle cx="${X(m)}" cy="${Y(ak)}" r="4.5" class="da"/>`:''}
- <text x="${X(m)+(m>8?-8:8)}" y="${Math.max(Y(rc[m])-9,14)}" text-anchor="${m>8?'end':'start'}" class="lb">${rc[m]} pkt</text>
- ${BLN.map((b,i)=>`<text x="${X(i)}" y="198" text-anchor="middle" class="ax ${i===m?'on':''}">${b}</text>`).join('')}</svg>
- <div class="legenda"><span><i style="background:var(--line-strong)"></i>Rencana</span><span><i></i>Realisasi</span></div>`}
-function kolom(){const P=PENGADAAN,mx=Math.max(...P.pagu);
- return `<div class="gulir"><div class="kolom" role="img" aria-label="Rencana pagu pengadaan per bulan, miliar rupiah">${P.pagu.map((v,i)=>`<div><b class="tnum">${v.toLocaleString('id-ID',{minimumFractionDigits:1})}</b><i class="${i===m?'puncak':i<m?'':'nanti'}" style="height:${v/mx*72}%"></i><span>${BLN[i]}</span><small class="tnum">${P.paket[i]}</small></div>`).join('')}</div></div>`}
-
-/* ===== Tampilan ===== */
-function ikhtisar(){const g=peng();let R=null,Pg=0,v=[],N=0;
- ['pdn','asp'].forEach(k=>{const s=serap(k);Pg+=s.p;if(s.r!=null)R=(R||0)+s.r});
- Object.keys(D).forEach(k=>{D[k].proker.item.forEach(x=>{N++;const a=akhir(x.g,m);if(a!=null)v.push(a)})});
- const pr=v.length?v.reduce((a,b)=>a+b,0)/N:null,cp=pct(g.ak,g.rk),ts=TINDAK.filter(t=>t.status==='Selesai').length;
- return `<h1>Ikhtisar</h1>
- <div class="grid g4">${ubin(pct(R,Pg),'Serapan anggaran',R==null?'—':fm(R),'dari '+fm(Pg))}${ubin(cp,'Pengadaan',g.ak==null?'—':g.ak+' paket','target '+g.rk+' paket',nada(cp))}${ubin(pr,'Program kerja',v.length+' terlapor','dari '+N+' program')}${ubin(TINDAK.length?ts/TINDAK.length*100:null,'Tindak lanjut',ts+' selesai','dari '+TINDAK.length+' butir')}</div>
- <div class="grid g4" style="margin-top:.75rem">${Object.entries(D).map(([k,d])=>{const s=serap(k),p=prog(k);
-  return `<a class="kartu dep" href="#${k}"><span class="kepala"><span class="kotak-ikon">${ik(d.ikon)}</span><span><span class="eyebrow">${d.kode}</span><b class="nm">${d.nama}</b></span></span>
-  <span class="duo"><span>${ring(pct(s.r,s.p))}<small>Serapan</small></span><span>${ring(p.rata)}<small>Program</small></span></span>
-  <span class="pg tnum">${d.pagu==null?'Pagu —':fm(d.pagu)}</span></a>`}).join('')}</div>
- ${panel('Pengadaan: paket kumulatif',lencana(nada(cp)),kurva())}
- ${panel('Pagu pengadaan per bulan (Rp miliar)','',kolom())}${kaki()}`}
-function vAnggaran(k){const d=D[k],s=serap(k);
- return `<div class="grid g4">${ubin(pct(s.r,s.p),'Serapan s.d. '+BLN[m],s.r==null?'—':fm(s.r),'dari '+fm(s.p))}${d.anggaran.slice(k==='asp'?0:1).map(a=>{const r=sumPos(a.pos);return ubin(pct(r,a.total),a.pendek,r==null?'—':fm(r),'dari '+fm(a.total))}).join('')}</div>`
- +d.anggaran.map(a=>{const mx=Math.max(...a.pos.map(x=>x.p));return panel(a.j,`<span class="sumber">${a.s}</span>`,a.pos.map(x=>barPos(x,mx)).join(''))}).join('')}
-function vProker(k){const p=prog(k),it=D[k].proker.item;
- return `<div class="grid g4">${ubin(p.rata,'Rata-rata progres',p.lapor+' terlapor','dari '+p.n+' program')}${angka(p.selesai,'Selesai 100%','dari '+p.n)}${D[k].pagu==null?angka('—','Anggaran 2027','belum ada data'):''}</div>`
- +panel('Progres program kerja',`<span class="sumber">${D[k].proker.s}</span>`,(it.some(x=>x.a!=null)?`<div class="legenda"><span><i class="tg"></i>Posisi akhir 2026</span></div>`:'')+it.map(barProker).join(''))}
-function vPengadaan(){const P=PENGADAAN,g=peng(),cp=pct(g.ak,g.rk),cg=pct(g.ap,g.rp),mx=P.spm[0][2];
- return `<div class="grid g4">${ubin(cp,'Paket s.d. '+BLN[m],g.ak==null?'—':g.ak+' paket','target '+g.rk+' dari 247',nada(cp))}${ubin(cg,'Pagu s.d. '+BLN[m],g.ap==null?'—':fm(g.ap),'target '+fm(g.rp),nada(cg))}${angka(P.paket[m],'Rencana '+BLN[m],fm(P.pagu[m]))}${angka(247-g.rk,'Sisa rencana','paket setelah '+BLN[m])}</div>`
- +panel('Paket kumulatif',lencana(nada(cp)),kurva())
- +panel('Pagu per bulan (Rp miliar)','<span class="sumber">PDN hal. 7</span>',kolom())
- +panel('Per bulan','',`<table><thead><tr><th scope="col">Bulan</th><th scope="col" class="k">Rencana</th><th scope="col" class="k">Realisasi</th><th scope="col" class="k">Capaian kum.</th></tr></thead><tbody>${BLN.map((b,i)=>{const c=pct(kum(P.realPaket,i),jml(P.paket,i));return `<tr ${i===m?'class="total"':''}><td>${b}</td><td class="k tnum">${P.paket[i]} · ${fm(P.pagu[i])}</td><td class="k tnum">${P.realPaket[i]==null?'—':P.realPaket[i]+' · '+fm(P.realPagu[i])}</td><td class="k tnum"><b class="${c==null?'':'n-'+nada(c)}">${c==null?'—':Math.round(c)+'%'}</b></td></tr>`}).join('')}</tbody></table>`,false)
- +panel('Kategori SPM','<span class="sumber">PDN hal. 6</span>',P.spm.map(s=>bar(s[0],`${s[1]} pkt · ${fm(s[2])}`,s[2]/mx*100,0)).join(''))}
-function vTindak(){const c=s=>TINDAK.filter(t=>t.status===s).length;
- return `<h1>Tindak lanjut</h1><div class="grid g4">${angka(TINDAK.length,'Total butir')}${angka(c('Terbuka'),'Terbuka')}${angka(c('Proses'),'Proses')}${angka(c('Selesai'),'Selesai')}</div>
- ${panel('Daftar butir','',`<table><thead><tr><th scope="col">Butir</th><th scope="col">Deputi</th><th scope="col">Rapat</th><th scope="col">Tenggat</th><th scope="col">Status</th></tr></thead><tbody>${TINDAK.length?TINDAK.map(t=>`<tr><td><b>${t.butir}</b></td><td>${t.deputi}</td><td>${t.rapat}</td><td>${t.tenggat||'—'}</td><td><span class="lencana ${t.status==='Selesai'?'l-ok':t.status==='Proses'?'l-aksen':'l-warn'}">${t.status}</span></td></tr>`).join(''):`<tr><td colspan="5" style="text-align:center;color:var(--muted);padding:2rem">Belum ada butir</td></tr>`}</tbody></table>`,false)}`}
-const kaki=()=>`<p class="kaki">Baseline: usulan 2027 per rapat 17 Nov 2026 · M = miliar rupiah · — = belum ada data</p>`;
-
-
-/* ===== 2026: posisi per materi rapat 17 Nov 2026 (cutoff PDN 16 Nov, minggu ke-46) ===== */
-let th='2026';
-const TGT=88.46; /* target linear minggu ke-46 dari 52, sama dengan "rencana" di materi PDN */
-const n26=p=>nada(p/TGT*100);
-const id=(x,d=2)=>x.toLocaleString('id-ID',{minimumFractionDigits:d,maximumFractionDigits:d});
-const pbar=(n,p,ket,o={})=>bar(n,`<b>${id(p,p%1?1:0)}%</b>${ket?' · '+ket:''}`,100,p,{nada:o.nada??n26(p),tanda:o.tanda,tag:o.tag});
-const tumpuk=a=>{const t=a.reduce((x,y)=>x+y[0],0);return `<div class="tumpuk" role="img" aria-label="${a.map(x=>x[1]+' '+x[0]).join(', ')}">${a.map(x=>`<i class="${x[2]}" style="flex:${x[0]}">${x[0]}</i>`).join('')}</div><div class="legenda">${a.map(x=>`<span><i class="${x[2]}"></i>${x[1]} ${Math.round(x[0]/t*100)}%</span>`).join('')}</div>`};
-const sb=t=>`<span class="sumber">${t}</span>`;
-const lgTanda=t=>`<div class="legenda"><span><i class="tg"></i>${t}</span></div>`;
-const HC26=[['Profiling Kesehatan Karyawan',15,'Baru'],['Roadmap HC 2027–2031',100,'Baru'],['Dashboard Analitik SDM',100,'Baru'],['Kebijakan Pengelolaan Talenta',23,'Lanjutan'],['Model, Kamus & Profil Kompetensi',37,'Lanjutan'],['Struktur Organisasi',24,'Lanjutan'],['Kebijakan Pengelolaan Karir',22,'Lanjutan'],['Kajian Real Time Performance Feedback',100,'Lanjutan'],['Kajian Talent Mapping',100,'Lanjutan']];
-const HC_RATA=HC26.reduce((a,b)=>a+b[1],0)/HC26.length;
-const PD26=[['SCM & Procure to Pay',70,'Lanjutan'],['Vendor Management System',100,'Lanjutan'],['Dashboard Monitoring Pengadaan',75,'Lanjutan'],['Otomasi Pengadaan dengan Modul AI',100,'Baru'],['E-Reverse Auction',100,'Baru']];
-const PD_RATA=PD26.reduce((a,b)=>a+b[1],0)/PD26.length;
-const LND_KEG=[['Diklat Teknis Kepala Bidang Pelayanan','Okt','Selesai'],['Pelatihan Inhouse AI (Tier 1 dan 2)','Okt','Selesai'],['Budget Literacy for Future Leaders','Okt','Selesai'],['Pelatihan Risk Management Officer','Okt–Nov','Selesai'],['Diklat Teknis Case Manager','Nov','Selesai'],['ILDP','Nov','Selesai'],['LMDP','Nov','Selesai'],['Assesmen dan Reassesmen Centre','Okt–Nov','Selesai'],['Knowledge Sharing, Lead Talks, CoP','Okt–Nov','Selesai'],
- ['Program Purna Tugas','Nov','Berlangsung'],['Sertifikasi dan Public Training','Nov–Des','Berlangsung'],['Penyusunan Modul Digital','Nov–Des','Berlangsung'],['Evaluasi perilaku teknis & dampak bisnis','Nov–Des','Berlangsung'],['Perpanjangan MoU 3 perguruan tinggi','Nov–Des','Berlangsung'],['Jurnal Jamsostek Vol. 4 No. 2','Nov–Des','Berlangsung'],
- ['BLDP','Nov','Persiapan'],['Training Data Security Waka DHCA','Des','Persiapan'],['J-WAY Behavior Potential Measurement','Nov','Persiapan'],['Uji Kompetensi Teknis Calon Karyawan','Nov','Persiapan'],['Launching Modul Kokurikuler SMP & SMA','Des','Persiapan']];
-const ASP_PK26=[
- ['Pembangunan Gedung KC Batam Sekupang','BM','Berjalan','Monitoring, evaluasi, dan legal assistance Kejari Batam · carry over 2027 Rp5,58 M'],
- ['Renovasi Selasar BPJamsostek','BM','Berjalan','Legal assistance Kejari Jakarta Pusat · carry over 2027 Rp3,73 M'],
- ['Kontraktor pematangan lahan & jembatan Jakabaring Palembang','BM','Pengadaan','Pengadaan kontraktor pelaksana'],
- ['Konsultan perencana Gedung KC Rengat','BM','Pengadaan',''],
- ['Konsultan perencana Gedung KC Solok','BM','Pengadaan',''],
- ['Revisi Perdir standardisasi tanah & konsep bangunan gedung kantor','Kebijakan','Berjalan','Sosialisasi sampai akhir 2026'],
- ['Lelang dan hapus buku aset tetap','Tindak lanjut','Rencana','Sesuai KEP/97/062026, sampai akhir 2026'],
- ['Fasilitas 282 kamar GP Bumi Lancang Kuning, Batam','BU SKP','Berjalan','Progres diperkirakan 50% pada Des 2026 · estimasi realisasi Rp2,10 M'],
- ['Perbaikan hidran GP Kabil, Batam','BU SKP','Tender ulang','Pengadaan memasuki tender kedua'],
- ['Studi kelayakan revitalisasi GP Jababeka Cikarang','BU SKP','Selesai','Menunggu penagihan'],
- ['Renovasi interior 282 kamar GP Bumi Lancang Kuning','BM SKP carry over','Selesai','Masa pemeliharaan · retensi Rp445,86 jt dibayar minggu ke-1 Des 2026 · sisa anggaran Rp2,24 M (50,23%)']];
-const LEN_PK={Selesai:'l-ok',Berjalan:'l-aksen',Pengadaan:'l-netral','Tender ulang':'l-warn',Rencana:'l-netral'};
-const GP_MP=[
- ['2026','Implementasi Pilar 3C','Perencanaan pembangunan GP Pasar Minggu; perencanaan renovasi dan pembangunan GP Jababeka Cikarang; perbaikan dan pemenuhan fasilitas GP'],
- ['2027','Strengthen the Foundation','Pembangunan GP Pasar Minggu; pembangunan GP Jababeka Cikarang (lanjutan); kajian pengembangan GP Jawa Timur; pengadaan lahan Jawa Timur'],
- ['2028','Connect Enterprise Ecosystem','Perencanaan pembangunan GP Jawa Timur; kajian pengembangan GP Jawa Tengah; pemeliharaan landscape dan arsitektural; fasilitas GP Kabil Batam'],
- ['2029','Accelerate Value Creation','Pembangunan GP Jawa Timur; pengadaan lahan Jawa Tengah; pemeliharaan landscape dan arsitektural'],
- ['2030','Lead Future Protection','Perencanaan pembangunan GP Jawa Tengah; pemeliharaan landscape dan arsitektural; kajian pengembangan GP Banten'],
- ['2031','Elevate Sustainability','Pembangunan GP Jawa Tengah; penambahan lahan dan perencanaan GP Banten; pemeliharaan landscape dan arsitektural']];
-const prokerBar=a=>[...a].sort((x,y)=>x[1]-y[1]).map(p=>pbar(p[0],p[1],'',{tag:p[2],nada:p[1]>=100?'ok':p[1]<40?'crit':''})).join('');
-const kaki26=()=>`<p class="kaki">Posisi per materi rapat 17 Nov 2026 · Warna: capaian dibanding target linear minggu ke-46 (${id(TGT)}%), hijau ≥ 90% target, kuning 70–90%, merah &lt; 70% · M = miliar rupiah</p>`;
-const RING26={pdn:[[54.25,'Anggaran'],[93.76,'Program']],asp:[[79,'BU'],[36,'BM']],hcp:[[HC_RATA,'Program'],[null,'Anggaran']],lnd:[[45,'Kegiatan'],[null,'Anggaran']]};
-function ikhtisar26(){
- return `<h1>Ikhtisar 2026</h1>
- <div class="grid g4">${ubin(74.29,'Pengadaan selesai','130 paket','dari 175 paket',n26(74.29))}${ubin(79,'ASP · Belanja Usaha','Rp100,20 M','dari Rp127,23 M',n26(79))}${ubin(36,'ASP · Belanja Modal','Rp26,22 M','dari Rp73,37 M',n26(36))}${ubin(HC_RATA,'HCP · program strategis','4 selesai','dari 9 program',n26(HC_RATA))}</div>
- <div class="grid g4" style="margin-top:.75rem">${Object.entries(D).map(([k,d])=>`<a class="kartu dep" href="#${k}"><span class="kepala"><span class="kotak-ikon">${ik(d.ikon)}</span><span><span class="eyebrow">${d.kode}</span><b class="nm">${d.nama}</b></span></span><span class="duo">${RING26[k].map(r=>`<span>${ring(r[0],r[0]==null?'':n26(r[0]))}<small>${r[1]}</small></span>`).join('')}</span></a>`).join('')}</div>
- ${panel('Realisasi dan prognosa akhir tahun','',lgTanda('Prognosa akhir tahun / target')
-  +pbar('ASP · Belanja Usaha',79,'Rp100,20 M',{tanda:97})+pbar('ASP · Belanja Modal',36,'Rp26,22 M',{tanda:47})
-  +pbar('ASP · BU SKP',16.36,'Rp2,40 M · carry over 59,33%',{tanda:40.59})+pbar('ASP · BM SKP',40.34,'Rp1,82 M',{tanda:50.23})
-  +pbar('PDN · Anggaran deputi',54.25,'Rp1,86 M')+pbar('PDN · Program kerja',93.76,'',{tanda:TGT}))}
- ${panel('Program strategis per deputi','',pbar('PDN · 5 program',PD_RATA,'3 selesai',{nada:n26(PD_RATA)})+pbar('HCP · 9 program',HC_RATA,'4 selesai')+pbar('LND · 20 kegiatan TW IV',45,'9 selesai'))}
- ${panel('Status 175 paket pengadaan',sb('PDN hal. 2'),tumpuk([[130,'Selesai','ok'],[32,'Berjalan',''],[13,'Dibatalkan','netral']]))}${kaki26()}`}
-const V26={
- pdn:{tab:['Anggaran','Program kerja','Pengadaan'],v:[
-  ()=>`<div class="grid g4">${ubin(54.25,'Serapan anggaran','Rp1,86 M','dari Rp3,44 M',n26(54.25))}${ubin(93.76,'Program kerja','93,76%','target '+id(TGT)+'%','ok')}${angka('Rp1,57 M','Sisa saldo','20 kegiatan')}</div>`
-   +panel('Serapan per jenis kegiatan',sb('PDN hal. 4'),pbar('Operasional',86.1,'Rp1,52 M dari Rp1,77 M')+pbar('Rutin dan Langganan',76.9,'Rp88,5 jt dari Rp115,2 jt')+pbar('Strategis Baru',28.8,'Rp113,4 jt dari Rp394,3 jt')+pbar('Strategis Lanjutan',11.9,'Rp137,6 jt dari Rp1,16 M')),
-  ()=>`<div class="grid g4">${ubin(PD_RATA,'Rata-rata progres','3 selesai','dari 5 program',n26(PD_RATA))}${angka(2,'Belum selesai','70% dan 75%')}</div>`+panel('Program kerja strategis',sb('PDN hal. 5'),prokerBar(PD26)),
-  ()=>`<div class="grid g4">${ubin(74.29,'Paket selesai','130 paket','dari 175 paket',n26(74.29))}${ubin(5,'Sesuai kalender','5%','95% tidak sesuai jadwal','crit')}${angka('Rp82,21 M','Cost saving','14,78%')}${angka('Rp347,06 M','Realisasi pengadaan','130 paket · pagu Rp980,10 M')}</div>`
-   +panel('Status paket',sb('PDN hal. 2'),tumpuk([[130,'Selesai','ok'],[32,'Berjalan',''],[13,'Dibatalkan','netral']]))
-   +panel('Tahap 32 paket berjalan',sb('PDN hal. 10–11'),[['Negosiasi',7],['Evaluasi Teknis',5],['Aanwijzing',4],['Buka Teknis',4],['Buka Penawaran',1],['Non-Pelelangan',1],['Pembuatan HPS',5,1],['Buat Jadwal',4,1],['Perencanaan',1,1]].map(t=>bar(t[0],`<b>${t[1]}</b> paket`,100,t[1]/7*100,{nada:t[2]?'warn':''})).join('')+`<div class="legenda"><span><i class="warn"></i>Tahap awal: 10 paket</span></div>`)
-   +panel('Unit kerja pengguna',sb('PDN hal. 3'),[['IPT',55],['ASP',37],['HCP',12],['LND',9],['INL',9],['15 unit lain',51]].map(u=>bar(u[0],`<b>${u[1]}</b> paket`,100,u[1]/55*100,{nada:u[0].includes('lain')?'netral':''})).join(''))
-   +panel('Kategori SPM 2026',sb('PDN hal. 3'),[['Leverage/Umum',79],['Critical',57],['Bottleneck',23],['Lainnya',14]].map(u=>bar(u[0],`<b>${u[1]}</b> paket`,100,u[1]/79*100)).join(''))]},
- asp:{tab:['Anggaran','Program kerja'],v:[()=>`<div class="grid g4">${ubin(79,'Belanja Usaha','Rp100,20 M','prognosa 97%',n26(79))}${ubin(36,'Belanja Modal','Rp26,22 M','prognosa 47%',n26(36))}${ubin(16.36,'BU SKP','Rp2,40 M','prognosa 40,59% · +carry over 59,33%',n26(16.36))}${ubin(40.34,'BM SKP','Rp1,82 M','prognosa 50,23%',n26(40.34))}</div>`
-   +panel('Realisasi dan prognosa akhir tahun',sb('ASP hal. 2 & 6'),lgTanda('Prognosa akhir tahun')+pbar('Belanja Usaha',79,'dari Rp127,23 M',{tanda:97})+pbar('Belanja Modal',36,'dari Rp73,37 M',{tanda:47})+pbar('BU SKP',16.36,'dari Rp14,68 M',{tanda:40.59})+pbar('BM SKP',40.34,'dari Rp4,51 M',{tanda:50.23}))
-   +panel('Belanja Modal per kategori',sb('ASP hal. 2'),[['Peralatan lain',89,'Rp4,58 M'],['Kendaraan',72,'Rp18,17 M'],['Bangunan',13,'Rp3,46 M'],['Tanah',0,'Rp0'],['Interior',0,'Rp0'],['Perabot/mebelair',0,'Rp0']].map(k=>pbar(k[0],k[1],k[2])).join(''))
-   +panel('Belanja Usaha per aktivitas',sb('ASP hal. 2'),[['Keberlangsungan operasional unit kerja',92],['Inspeksi kendali mutu sarana',76],['Pemeliharaan & pengelolaan aset',69],['Pemenuhan sarana prasarana',63],['Pembangunan & renovasi gedung',61],['Langganan kantor pusat',59],['Administrasi aset tetap',56],['ATK & consumables',31]].map(k=>pbar(k[0],k[1],'')).join(''))
-   +panel('BU SKP termasuk carry over',sb('ASP hal. 6'),lgTanda('Prognosa + carry over')+pbar('BU SKP + carry over',75.69,'Rp2,40 M + carry over Rp8,71 M dari Rp14,68 M',{tanda:99.91})+`<p class="ket-kecil" style="margin:.5rem 0 0">Realisasi murni 16,36% (prognosa 40,59% atau Rp5,96 M). Ditambah carry over Rp8,71 M (59,33%), prognosa akhir tahun menjadi 99,91%.</p>`)
-   +panel('SKP: anggaran dan fisik',sb('ASP hal. 6'),lgTanda('Progres fisik')+pbar('BU · Fasilitas Griya Pekerja',68.13,'10,39% + carry over 57,74% · fisik 66%',{tanda:66})+pbar('BU · Kepuasan & okupansi',87.37,'19,60% + carry over 67,77% · fisik 70%',{tanda:70})+pbar('BU · Aset SKP non-Griya Pekerja',75.6,'fisik 63,13%',{tanda:63.13})+pbar('BM · Fasilitas Griya Pekerja',40.34,'fisik 90%',{tanda:90})),
-  ()=>`<div class="grid g4">${angka(ASP_PK26.length,'Program kerja TW IV','termasuk 4 kegiatan SKP')}${angka(ASP_PK26.filter(x=>x[2]==='Selesai').length,'Selesai','Studi kelayakan, interior kamar GP')}${angka(ASP_PK26.filter(x=>x[2]==='Berjalan').length,'Berjalan')}${angka(ASP_PK26.filter(x=>x[2]==='Pengadaan'||x[2]==='Tender ulang').length,'Masih pengadaan','1 tender ulang')}</div>`
-   +panel('Status program kerja TW IV',sb('ASP hal. 3, 7, 8'),tumpuk([[ASP_PK26.filter(x=>x[2]==='Selesai').length,'Selesai','ok'],[ASP_PK26.filter(x=>x[2]==='Berjalan').length,'Berjalan',''],[ASP_PK26.filter(x=>x[2]==='Pengadaan'||x[2]==='Rencana').length,'Pengadaan/rencana','netral'],[ASP_PK26.filter(x=>x[2]==='Tender ulang').length,'Tender ulang','warn']]))
-   +panel('Program kerja TW IV dan sampai akhir 2026',sb('ASP hal. 3, 7, 8'),`<table><thead><tr><th scope="col">Kegiatan</th><th scope="col">Pos</th><th scope="col">Status</th></tr></thead><tbody>${ASP_PK26.map(k=>`<tr><td><b>${k[0]}</b>${k[3]?`<br><span class="ket-kecil">${k[3]}</span>`:''}</td><td>${k[1]}</td><td><span class="lencana ${LEN_PK[k[2]]}">${k[2]}</span></td></tr>`).join('')}</tbody></table>`,false)
-   +panel('Masterplan pengembangan Griya Pekerja 2026–2031',sb('ASP hal. 9'),`<table><thead><tr><th scope="col">Tahun</th><th scope="col">Tema</th><th scope="col">Rencana fisik</th></tr></thead><tbody>${GP_MP.map(r=>`<tr><td><b>${r[0]}</b></td><td>${r[1]}</td><td>${r[2]}</td></tr>`).join('')}</tbody></table><p class="ket-kecil" style="padding:.75rem 1rem;margin:0">Dasar: PP 55/2015 dan PP 27/2026.</p>`,false)]},
- hcp:{v:[()=>`<div class="grid g4">${ubin(HC_RATA,'Rata-rata progres','4 selesai','dari 9 program',n26(HC_RATA))}${angka(5,'Di bawah 40%','terendah 15%')}${angka('—','Realisasi anggaran','tidak ada di materi')}</div>`
-   +panel('Status 9 program',sb('HCP hal. 3–4'),tumpuk([[4,'Selesai','ok'],[5,'Di bawah 40%','warn']]))
-   +panel('Program kerja strategis',sb('HCP hal. 3–4'),prokerBar(HC26))]},
- lnd:{v:[()=>`<div class="grid g4">${ubin(45,'Kegiatan TW IV selesai','9 kegiatan','dari 20',n26(45))}${angka(6,'Berlangsung')}${angka(5,'Persiapan')}${angka(112,'Public training','6 akademi')}</div>`
-   +panel('Status 20 kegiatan TW IV',sb('LND hal. 4–6'),tumpuk([[9,'Selesai','ok'],[6,'Berlangsung',''],[5,'Persiapan','warn']]))
-   +panel('Public training per akademi',sb('LND hal. 13'),[['Finance and GRCC',39],['Strategy and Technology',25],['Human Capital and General Affairs',22],['Investment',16],['Membership and Communication',6],['Services',4]].map(a=>bar(a[0],`<b>${a[1]}</b>`,100,a[1]/39*100)).join(''))
-   +panel('Kegiatan TW IV',sb('LND hal. 4–6'),`<table><thead><tr><th scope="col">Kegiatan</th><th scope="col">Bulan</th><th scope="col">Status</th></tr></thead><tbody>${LND_KEG.map(k=>`<tr><td>${k[0]}</td><td>${k[1]}</td><td><span class="lencana ${k[2]==='Selesai'?'l-ok':k[2]==='Berlangsung'?'l-aksen':'l-warn'}">${k[2]}</span></td></tr>`).join('')}</tbody></table>`,false)]}
+const RB={
+ skor:[['A. Kerangka strategis',4.5,'Visi, misi, 3C, dan 8 Sasaran Badan sama'],['B. Ketertelusuran',4.0,'Tiap inisiatif punya program kerja di RB'],['E. Risiko',3.5,'Risiko RB mencerminkan risiko Renstra'],['C. Konsistensi target',3.0,'Angka RB, Renstra, ICK, dan laporan keuangan'],['G. Tata kelola',3.0,'RASCI dan pemilik inisiatif'],['D. Sumber daya',2.5,'Beban dan capex mengikuti prioritas strategis'],['F. Horizon dan kelayakan',2.5,'Laju 2027 realistis dari baseline 2026']],
+ dana:[['JKK',200,167],['JKM',30,18],['JKP',204,134]],
+ temuan:[
+  {t:'kritis',j:'Ketahanan dana JKK, JKM, JKP di bawah target Renstra',d:'JKK 167 bulan (target 200), JKM 18 (target 30), JKP 134 (target 204). Arahnya menurun. JKM diproyeksikan defisit Rp1,30 T dan RB belum memuat mitigasinya.',q:'Apa jalur pemulihan menuju target Renstra, dan bagaimana pendanaan JKM bila defisit?',s:'MI/115 · temuan 1'},
+  {t:'kritis',j:'Target hasil investasi tidak cocok dengan laporan keuangan',d:'Pendapatan investasi lima DJS di laporan 2027 sekitar Rp55,8 T, target hasil Rp70,9 T (selisih ≈Rp15 T). JKM tercatat −Rp377 miliar padahal targetnya Rp1,36 T. RB tidak memuat rekonsiliasinya.',q:'Berapa bagian selisih yang berasal dari realized vs unrealized, dan mana yang dipakai sebagai target kinerja?',s:'MI/115 · temuan 3'},
+  {t:'kritis',j:'Baseline kepesertaan tidak konsisten; BPU harus naik 58%',d:'Target 2026 tertulis 59,59 juta di satu halaman dan 63,31 juta di halaman lain. Dari realisasi September, BPU harus naik dari 14,69 juta ke 23,27 juta, sedangkan PU hanya +4%. Butuh 2,89 juta peserta per bulan di Q4 2026, sekitar 1,7 kali laju September.',q:'Baseline mana yang resmi, dan apa dasar keyakinan atas lonjakan BPU?',s:'MI/115 · temuan 4'},
+  {t:'kritis',j:'Anggaran tidak bisa ditelusuri ke inisiatif',d:'Beban purnajasa naik 74,7%, capex SKP naik 24 kali, pembelian tanah Rp132 miliar (26% capex) padahal RB menyatakan tidak ada pengembangan jaringan kantor. Angka Rp132 miliar sama dengan lima pengadaan lahan di usulan ASP pada rapat 17 November.',q:'Bisakah Direksi melampirkan anggaran per inisiatif, setidaknya untuk capex, purnajasa, tanah, dan SKP?',s:'MI/115 · temuan 8 · ASP hal. 4'},
+  {t:'klarifikasi',j:'Rasio JHT 100% bersifat mekanis',d:'Pembilang dan penyebut sama-sama Rp635,13 T, sehingga hasilnya pasti 100%. Posisi September 2026 adalah 98,34%, rasio klaim terhadap iuran 95,03%, dan surplus iuran tinggal Rp3,76 T.',q:'Berapa rasio JHT bila dihitung dengan basis aktuaria?',s:'MI/115 · temuan 2'},
+  {t:'klarifikasi',j:'Target retensi dan lama kepesertaan BPU berbeda',d:'RB menyebut Length of Stay BPU naik dari 5 ke 18 bulan dengan churn 20%. Renstra menargetkan 7 bulan (2027) hingga 12 bulan (2031) dan retensi 40%.',q:'Angka mana yang menjadi target 2027?',s:'MI/115 · temuan 5'},
+  {t:'klarifikasi',j:'Target Sasaran Badan dan KPI inisiatif tidak terbawa ke RB',d:'CSI, Maturity Index Data/IT, GRCC, retensi 40%, dan High-Risk Company Treated 10% tidak muncul. Keselarasan baru bersifat struktural, belum terukur.',q:'Kapan target 2027 untuk delapan Sasaran Badan dimuat di RB?',s:'MI/115 · temuan 6'},
+  {t:'pantau',j:'Sebaran program tidak mengikuti bobot ICK',d:'Dari sekitar 338 program, SB1–SB3 yang berbobot ICK 67% hanya mendapat sekitar 25%. SB7 (tata kelola) sekitar 27% dan SB4 sekitar 24%. Hitungan jumlah program, bukan bobot anggaran.',q:'Berapa porsi anggaran per Sasaran Badan?',s:'MI/115 · temuan 7'},
+  {t:'pantau',j:'Horizon TI dan urutan fase',d:'IT Master Plan 2025–2027 berakhir tahun depan. Konsolidasi 89 ke 5 aplikasi (target 50% di 2027) tidak disebut. Optimalisasi JMO ditaruh di depan, padahal risiko kerentanan JMO/Lapak Asik berstatus sangat tinggi.',q:'Apa rencana TI setelah 2027, dan bagaimana urutan fondasi sebelum engagement?',s:'MI/115 · temuan 9'},
+  {t:'pantau',j:'Kepemilikan inisiatif dan hal minor',d:'Penempatan G.4, G.5, dan B.5 berbeda antara Renstra dan RB. Masih ada "Integrated Report Tahun 2024". RB merujuk PP 55/2015, Renstra memakai PP 27/2026.',q:'Siapa accountable owner tiap inisiatif, dan apa konsekuensi perbedaan rujukan PP?',s:'MI/115 · temuan 10'}],
+ matriks:[['SB1','Layanan seamless dan bernilai tambah','SLLKS'],['SB2','Keberlanjutan dana, manfaat, kepercayaan','SLLKS'],['SB3','Perluasan kepesertaan inklusif','LLLKS'],['SB4','Operasional dan keuangan scalable','SLLKS'],['SB5','Organisasi adaptif berorientasi dampak','SLLKS'],['SB6','Data dan teknologi sebagai fondasi','SLLKS'],['SB7','Tata kelola, risiko, kepatuhan proaktif','SLLKS'],['SB8','Workforce intelligence, early warning','KSSKS']],
+ tiada:[['crit','<b>Rencana pemenuhan pendanaan DJS bila defisit</b> — prioritas tertinggi'],['crit','<b>Proyeksi 2027 per triwulan</b> — prioritas tertinggi'],['','Laporan arus kas BPJS'],['','Laporan arus kas DJS (JKK, JKM, JKP)'],['','Laporan perubahan ekuitas BPJS'],['','Alih daya pengelolaan investasi ke manajer investasi'],['','Pembentukan komite'],['','Pemenuhan SDM untuk verifikasi dan audit klaim'],['','Rencana penggunaan tenaga kerja asing'],['','Kerja sama dengan penyedia jasa TI'],['','Informasi lainnya (kejadian luar biasa)']],
+ langkah:['Rekonsiliasi baseline kepesertaan 2026 per segmen, lalu hitung ulang beban pertumbuhan BPU.','Sandingkan target hasil investasi dengan pendapatan investasi di laporan keuangan, khususnya JKM.','Muat target 2027 untuk 8 Sasaran Badan serta KPI B.5, dan selaraskan angka Length of Stay.','Jelaskan jalur pemulihan ketahanan dana JKK/JKM/JKP dan hitung ulang rasio JHT dengan basis aktuaria.','Petakan anggaran ke inisiatif (capex, purnajasa, tanah, SKP).','Rapikan kepemilikan G.4, G.5, B.5 dan hapus program bertahun lama.','Lengkapi butir SEOJK 2/2021 yang berstatus "tidak ada" dan "sebagian".']
 };
-function deputi26(r){const d=D[r],v=V26[r],tab=v.tab||[],s=Math.min(seg[r+'26']||0,v.v.length-1);
- return `<h1>${d.judul}</h1>${tab.length?`<div class="segmen" role="tablist" aria-label="Bagian ${d.kode}">${tab.map((n,i)=>`<button role="tab" aria-selected="${i===s}" data-seg="${i}">${n}</button>`).join('')}</div>`:''}<div role="tabpanel">${v.v[s]()}</div>${kaki26()}`}
+/* Model investasi (Rp triliun). Tahun 2021–2025 aktual, 2026–2030 proyeksi. A = tanpa selisih penilaian (bruto), C = dengan selisih penilaian (bruto) */
+const FM={th:['2021','2022','2023','2024','2025','2026','2027','2028','2029','2030'],
+ dana:[494.45,560.17,633.43,707.72,897.89,994.14,1133.83,1249.74,1372.06,1500.51],
+ hA:[32.95,35.79,41.63,46.00,59.70,64.21,78.56,58.13,64.01,70.15],
+ hC:[27.83,38.40,41.23,32.52,71.35,57.55,106.16,61.80,68.07,74.61],
+ yoi:[['2022',6.79],['2023',6.98],['2024',6.86],['2025',7.44],['2026',6.87],['2027',7.39],['2028',4.88],['2029',4.89],['2030',4.89]],
+ prog:[['JHT',38.34,42.59,90.0,68.4],['JP',16.93,18.34,92.3,89.3],['JKK',5.40,5.86,92.1,99.8],['JKM',1.32,1.33,99.9,105.3],['JKP',1.24,1.69,73.6,69.1],['Badan (BPJS)',0.97,1.11,87.6,94.8]],
+ inst:[['Obligasi','757,72','104,4%','51,77','61,24'],['Deposito','125,88','100,8%','7,06','7,06'],['Saham','70,32','<b class="n-crit">67,2%</b>','4,92','<b class="n-crit">−7,42</b>'],['Reksadana','35,90','86,4%','0,38','<b class="n-crit">−3,42</b>'],['Penyertaan','2,24','99,4%','0,01','0,01'],['Properti','2,09','99,0%','0,08','0,09']],
+ isu:[
+  {t:'kritis',j:'Proyeksi model 2027 di atas target RB, padahal 2026 di bawah RKAT',d:'Model memproyeksikan hasil investasi 2027 Rp78,56 T (YOI 7,39%), sedangkan target RB Rp71,90 T. Prognosa 2026 sendiri hanya Rp64,21 T atau 90,5% dari RKAT Rp70,92 T (YOI 6,87% dari target 7,49%).',q:'Angka mana yang menjadi komitmen 2027, dan apa yang membuat imbal hasil naik setelah target 2026 tidak tercapai?',s:'FINMOD · Prognosa 2026, P_TOTAL'},
+  {t:'kritis',j:'Dana investasi 2027: model Rp1.133,83 T, RB Rp1.074,00 T',d:'Selisih Rp59,83 T. Model menaikkan dana 14,1% dari prognosa akhir 2026 (Rp994,14 T).',q:'Asumsi iuran dan klaim mana yang berbeda antara model dan RB?',s:'FINMOD · P_TOTAL · MI/115'},
+  {t:'klarifikasi',j:'Porsi saham naik 64% di 2027 setelah rugi penilaian 2026',d:'Akhir 2026 saham diproyeksikan Rp70,32 T, hanya 67,2% dari RKAT, dengan hasil −Rp7,42 T bila selisih penilaian dihitung. Tahun 2027 model menaikkannya ke Rp115,36 T.',q:'Apa dasar penambahan saham sekitar Rp45 T, dan bagaimana batas risikonya?',s:'FINMOD · Prognosa 2026, P_TOTAL'},
+  {t:'klarifikasi',j:'YOI turun ke 4,88% mulai 2028',d:'Hasil investasi turun dari Rp78,56 T (2027) ke Rp58,13 T (2028) saat dana naik ke Rp1.249,74 T. YOI bertahan di 4,88–4,89% sampai 2030.',q:'Ini asumsi model, atau proyeksi setelah 2027 belum dimutakhirkan? Renstra menargetkan YOI sekitar 7%.',s:'FINMOD · CHART_P_YOI'},
+  {t:'pantau',j:'Hasil 2027 sangat bergantung pada selisih penilaian',d:'Dengan selisih penilaian, hasil 2027 menjadi Rp106,16 T, dan Rp84,56 T di antaranya dari SBN. Tahun 2026 arahnya sebaliknya: Rp57,55 T, lebih rendah dari Rp64,21 T tanpa selisih penilaian.',q:'Berapa sensitivitas hasil 2027 terhadap perubahan imbal hasil SBN?',s:'FINMOD · P_TOTAL'}]
+};
+const MATI={L:1,S:.5,K:0};
+const kakiRB=()=>`<p class="kaki">Sumber: undangan MI/66/112026 (25 Nov 2026), reviu KPKB MI/115/112026 (24 Nov 2026), dan model investasi KK_FINMOD (Base Case). RB = Rencana Bisnis. T = triliun rupiah. Skor reviu bersifat indikatif menurut KPKB.</p>`;
+const kepalaRB=j=>`<p class="kicker">Rapat Dewas · Kamis 26 November 2026 · 10.00 WIB</p><h1>${j}</h1>`;
 
-/* ===== Navigasi ===== */
-D.asp.anggaran[0].pendek='Belanja Modal';D.asp.anggaran[1].pendek='Tanah';D.asp.anggaran[2].pendek='BM SKP';
-D.pdn.anggaran[0].total=D.pdn.pagu;
-const MENU=[['ikhtisar','Ikhtisar','layout'],...Object.entries(D).map(([k,d])=>[k,d.nama,d.ikon,d.kode]),['tindak-lanjut','Tindak lanjut','list']];
+function vRB(){
+ return kepalaRB('Persetujuan Rencana Bisnis 2027')
+ +grid([ubin(66,'Skor keselarasan RB dan Renstra','3,3 dari 5','selaras sebagian','warn','3,3'),ubin(30/66*100,'Cakupan SEOJK 2/2021','30 dari 66 butir','25 sebagian, 11 tidak ada','warn'),angka('10','Temuan gap','4 kritis'),angka('30 Nov','Batas penyampaian ke OJK','Senin, 30 November 2026')])
+ +panel('Skor per lapisan (skala 1–5)',sbr('MI/115'),RB.skor.map(x=>batang(x[0],x[1]/5*100,idn(x[1],1),{nada:nSkor(x[1]),sub:x[2]})).join(''))
+ +panel('Ketahanan dana 2027 (bulan)',sbr('MI/115 · temuan 1'),legenda([['','Prognosa RB 2027'],['tg','Target Renstra 2027']])+RB.dana.map(x=>batang(x[0],x[2]/204*100,`${x[2]} dari ${x[1]}`,{nada:'crit',tanda:x[1]/204*100,sub:Math.round(x[2]/x[1]*100)+'% dari target'})).join(''))
+ +panel('Pilihan keputusan Dewas',sbr('MI/115 · lampiran'),`<div style="display:grid;gap:.6rem"><div class="opsi"><b>Persetujuan bersyarat</b><span>Direksi wajib melengkapi butir yang kurang sebelum RB disampaikan ke OJK.</span></div><div class="opsi"><b>Menyetujui setelah revisi diterima</b><span>Persetujuan diberikan sesudah Direksi menyerahkan RB yang sudah dilengkapi.</span></div></div><p class="sub" style="margin-top:.75rem;color:var(--muted);font-size:.8rem">Prioritas tertinggi sebelum persetujuan: rencana pendanaan DJS bila defisit dan proyeksi 2027 per triwulan.</p>`)
+ +panel('Tujuh langkah sebelum persetujuan',sbr('MI/115'),`<ol class="langkah">${RB.langkah.map(x=>`<li>${x}</li>`).join('')}</ol>`)
+ +panel('Yang sudah selaras',sbr('MI/115'),daftar([['ok','<b>ICK 2027</b> cocok dengan KEP DJSN 06/2026: KPJ 62,68 juta, NIK 51,25 juta, YOI 7%/6,75%, BOPO 95%'],['ok','<b>Dana dan hasil investasi</b> Rp1.074,00 T dan Rp71,90 T sama dengan Renstra'],['ok','<b>27 inisiatif</b> seluruhnya punya padanan program kerja'],['ok','<b>Beban SDM</b> 59,80% dari total beban, sejalan dengan target 60%']]))
+ +kakiRB()}
+function vTemuan(){
+ return kepalaRB('Temuan dan pertanyaan')
+ +grid([angka('+14,88%','Pertumbuhan klaim','iuran hanya +6,77%'),angka('+58%','Kenaikan BPU yang dibutuhkan','14,69 juta ke 23,27 juta'),angka('≈Rp15 T','Selisih hasil investasi','laporan Rp55,8 T, target Rp70,9 T'),angka('Rp132 M','Pembelian tanah','26% capex')])
+ +panel('Angka kunci temuan',sbr('MI/115'),batang('Klaim tumbuh',100,'+14,88%',{nada:'crit'})+batang('Iuran tumbuh',6.77/14.88*100,'+6,77%')+batang('Iuran per peserta',7.54/14.88*100,'−7,54%',{nada:'crit'})
+  +batang('Program untuk SB1–SB3',25,'≈25% program',{tanda:67,sub:'Garis tegak: bobot ICK 67%'})+batang('Pendapatan investasi di laporan',55.8/70.9*100,'Rp55,8 T',{nada:'warn',tanda:100,sub:'Garis tegak: target hasil DJS Rp70,9 T'}))
+ +`<p class="ket" style="margin-top:1.25rem">${RB.temuan.length} temuan dari reviu KPKB, diurutkan dari yang paling mendesak.</p>`+RB.temuan.map(x=>isuKartu(x)).join('')+kakiRB()}
+function vMatriks(){
+ return kepalaRB('Keterlacakan dan kepatuhan OJK')
+ +grid([ubin(57.5,'Indeks keterlacakan rata-rata','57,5%','8 Sasaran Badan, 5 simpul'),angka('0 dari 8','Anggaran tertaut ke inisiatif','semua berstatus kosong'),ubin(30/66*100,'Butir SEOJK ada','30 butir','dari 66','warn'),angka('11','Butir tidak ada','25 lainnya sebagian')])
+ +panel('Matriks strategi ke eksekusi',sbr('MI/115'),`<table><thead><tr><th scope="col">Sasaran Badan</th><th scope="col">KPI</th><th scope="col">Inisiatif</th><th scope="col">Program</th><th scope="col">Anggaran</th><th scope="col">Pemilik</th><th scope="col" class="k">Indeks</th></tr></thead><tbody>${RB.matriks.map(r=>{const ix=[...r[2]].reduce((a,c)=>a+MATI[c],0)/5*100;return `<tr><td><b>${r[0]}</b> ${r[1]}</td>${[...r[2]].map(c=>`<td><span class="sel ${c}">${c}</span></td>`).join('')}<td class="k tnum"><b class="${ix<50?'n-crit':''}">${Math.round(ix)}%</b></td></tr>`}).join('')}</tbody></table>`,false)
+ +`<p class="kaki" style="margin-top:.6rem">L = lengkap, S = sebagian, K = kosong. Indeks dihitung dengan cara yang disarankan memo: L bernilai 1, S 0,5, K 0, dirata-rata pada lima simpul.</p>`
+ +panel('Cakupan SEOJK 2/2021: 66 butir',sbr('MI/115 · lampiran'),tumpuk([[30,'Ada','ok'],[25,'Sebagian','warn'],[11,'Tidak ada','crit']]))
+ +panel('11 butir yang tidak ada',sbr('MI/115 · lampiran'),daftar(RB.tiada))
+ +panel('Ketentuan POJK 24/2019 yang relevan',sbr('MI/115 · lampiran'),daftar([['','<b>Pasal 4 dan 8:</b> RB disusun Direksi, disetujui Dewas, disampaikan ke OJK paling lambat 30 November 2026'],['','<b>Pasal 10:</b> OJK dapat meminta penyesuaian; wajib disampaikan dalam 15 hari kerja'],['','<b>Pasal 3:</b> RB wajib realistis; contoh tidak realistis antara lain pembelian tanah dan bangunan besar tanpa memperhatikan likuiditas']]))
+ +kakiRB()}
+function vInvestasi(){
+ const d=FM.dana.map((v,i)=>[FM.th[i],v,Math.round(v).toLocaleString('id-ID'),i>4?'proy':'']);
+ return kepalaRB('Model investasi')
+ +grid([ubin(99.3,'Dana investasi akhir 2026','Rp994,14 T','RKAT Rp1.001,18 T','ok'),ubin(90.5,'Hasil investasi 2026','Rp64,21 T','RKAT Rp70,92 T','warn'),ubin(77.2,'Hasil dengan selisih penilaian','Rp57,55 T','dari Rp74,58 T','crit'),angka('6,87%','YOI 2026','target RKAT 7,49%')])
+ +panel('Proyeksi model 2027 dibanding target RB',sbr('FINMOD · MI/115'),legenda([['','Proyeksi model'],['tg','Target RB 2027']])
+   +batang('Dana investasi',100,'Rp1.133,83 T',{tanda:1074/1133.83*100,sub:'Target RB Rp1.074,00 T · selisih Rp59,83 T'})
+   +batang('Hasil investasi',100,'Rp78,56 T',{tanda:71.9/78.56*100,sub:'Target RB Rp71,90 T · selisih Rp6,66 T'})
+   +batang('YOI',100,'7,39%',{tanda:7/7.39*100,sub:'Target RB 7,0% (JHT, JP) dan 6,75% (JKK, JKM, JKP)'}))
+ +panel('Dana investasi (Rp triliun)',sbr('FINMOD · P_TOTAL'),kol(d)+`<div class="legenda" style="margin:.5rem 0 0"><span><i></i>Aktual</span><span><i style="background:var(--accent-soft);outline:1.5px solid var(--accent);outline-offset:-1.5px"></i>Proyeksi</span></div>`)
+ +panel('Hasil investasi (Rp triliun)',sbr('FINMOD · P_TOTAL'),grup(FM.th,FM.hA,FM.hC,5)+legenda([['','Tanpa selisih penilaian'],['tinta','Dengan selisih penilaian']]))
+ +panel('YOI bruto per tahun (%)',sbr('FINMOD · CHART_P_YOI'),kol(FM.yoi.map((x,i)=>[x[0],x[1],idn(x[1]),i>3?'proy':''])))
+ +panel('Hasil 2026 terhadap RKAT, per program',sbr('FINMOD · Prognosa 2026'),legenda([['','Tanpa selisih penilaian'],['tg','Dengan selisih penilaian']])+FM.prog.map(p=>batang(p[0],p[3],idn(p[3],1)+'%',{nada:p[3]>=95?'ok':p[3]>=85?'warn':'crit',tanda:Math.min(p[4],100),sub:`Rp${idn(p[1])} T dari RKAT Rp${idn(p[2])} T · dengan selisih penilaian ${idn(p[4],1)}%`})).join(''))
+ +panel('Per instrumen, akhir 2026 (Rp triliun)',sbr('FINMOD · Prognosa 2026'),tabel([['Instrumen'],['Dana',1],['Thd RKAT',1],['Hasil',1],['Hasil + SP',1]],FM.inst,['Total','994,14','99,3%','64,21','57,55']),false)
+ +`<p class="kaki" style="margin-top:.6rem">SP = selisih penilaian investasi. Warna capaian per program: hijau ≥ 95% RKAT, kuning 85–95%, merah di bawah 85%.</p>`
+ +`<h2 class="bagian">Pertanyaan dari model</h2>`+FM.isu.map(x=>isuKartu(x)).join('')+kakiRB()}
+function beranda(){
+ const n17=Object.values(ISU).reduce((a,b)=>a+b.length,0);
+ return `<p class="kicker">Dewan Pengawas BPJS Ketenagakerjaan</p><h1>Rapat Dewas</h1>
+ <div class="dua">
+ <a class="kartu rapat" href="#rb"><span class="tgl"><span class="hari tnum">26<small>Nov</small></span><span><span class="eyebrow">Kamis, 26 Nov 2026 · 10.00 WIB</span><h2>Persetujuan Rencana Bisnis 2027</h2></span></span>
+  <span class="tiga"><div><b class="tnum">3,3<small style="font-size:.7rem;font-weight:600"> /5</small></b><span>Skor keselarasan</span></div><div><b class="tnum">10</b><span>Temuan gap</span></div><div><b class="tnum">30/66</b><span>Butir OJK ada</span></div></span>
+  <span class="buka-rapat">Buka rapat ini ${ik('kanan')}</span></a>
+ <a class="kartu rapat lalu" href="#ikhtisar"><span class="tgl"><span class="hari tnum">17<small>Nov</small></span><span><span class="eyebrow">Selasa, 17 Nov 2026</span><h2>Program Kerja 2026 dan Rencana 2027</h2></span></span>
+  <span class="tiga"><div><b class="tnum">4</b><span>Deputi</span></div><div><b class="tnum">${n17}</b><span>Titik kritis</span></div><div><b class="tnum">45</b><span>Paket dipantau</span></div></span>
+  <span class="buka-rapat">Buka rapat ini ${ik('kanan')}</span></a>
+ </div>`}
+const HAL={beranda:['Beranda',beranda],rb:['Rencana Bisnis 2027',vRB],'rb-temuan':['Temuan',vTemuan],'rb-matriks':['Keterlacakan dan OJK',vMatriks],'rb-investasi':['Model investasi',vInvestasi]};
+
+/* ---------- Navigasi ---------- */
+const MENU=[['beranda','Semua rapat','kalender','Rapat'],['rb','Ringkasan','berkas','26 Nov · Rencana Bisnis 2027'],['rb-temuan','Temuan','kritis'],['rb-matriks','Keterlacakan dan OJK','kisi'],['rb-investasi','Model investasi','tren'],['ikhtisar','Ikhtisar','layout','17 Nov · Empat deputi'],...Object.entries(DEPUTI).map(([k,d])=>[k,d.kode+' · '+d.nama,d.ikon])];
+const HIT=k=>k==='rb-temuan'?RB.temuan.length:ISU[k]?ISU[k].length:0;
 const seg={};
-const simpan=(k,v)=>{try{localStorage.setItem(k,v)}catch(e){}},baca=k=>{try{return localStorage.getItem(k)}catch(e){return null}};
-const rute=()=>{const h=location.hash.replace('#','');return MENU.some(x=>x[0]===h)?h:'ikhtisar'};
+const simpan=(k,v)=>{try{localStorage.setItem(k,v)}catch(e){}};
+const baca=k=>{try{return localStorage.getItem(k)}catch(e){return null}};
+function rute(){const h=location.hash.replace('#','');return MENU.some(m=>m[0]===h)?h:'beranda'}
+function gambar(fokus){
+  const r=rute(),main=document.getElementById('konten');
+  document.getElementById('menu').innerHTML=MENU.map(m=>`${m[3]?`<span class="label-grup">${m[3]}</span>`:''}<a href="#${m[0]}" ${m[0]===r?'aria-current="page"':''}>${ik(m[2])}<span>${m[1]}</span>${HIT(m[0])?`<span class="hitung tnum">${HIT(m[0])}</span>`:''}</a>`).join('');
+  const jd=HAL[r]?HAL[r][0]:r==='ikhtisar'?'Ikhtisar 17 Nov':DEPUTI[r].kode+' · 17 Nov';
+  document.getElementById('judul-bar').textContent=r==='beranda'?'Rapat Dewas':jd;
+  if(HAL[r]){main.innerHTML=HAL[r][1]()}
+  else if(r==='ikhtisar'){main.innerHTML=ikhtisar()}
+  else{
+    const d=DEPUTI[r],v=V[r];
+    /* Titik kritis tampil pertama dan jadi bawaan; kunci simpanan baru supaya pilihan lama tidak menimpanya */
+    if(seg[r]==null){const t=baca('seg2-'+r);seg[r]=t==null?2:Math.min(+t,v.seg.length-1)}
+    const s=seg[r];
+    const isi=s===2?`<p class="ket" style="margin-top:1rem">${ISU[r].length} butir, diurutkan dari yang paling mendesak.</p>`+ISU[r].map(x=>isuKartu(x)).join(''):v[s]();
+    main.innerHTML=`<p class="kicker">${d.kode} · Rapat Dewas 17 November 2026</p><h1>${d.judul}</h1><p class="ket">${d.ket}</p>
+    <div class="segmen" role="tablist" aria-label="Bagian ${d.kode}">${[2,0,1,3].filter(i=>i<v.seg.length).map(i=>`<button role="tab" aria-selected="${i===s}" data-seg="${i}">${v.seg[i]}${i===2?` <span class="hitung tnum">${ISU[r].length}</span>`:''}</button>`).join('')}</div>
+    <div role="tabpanel">${isi}</div>`;
+    isiPaket();
+  }
+  document.title=jd+' · Rapat Dewas';
+  if(fokus){window.scrollTo(0,0)}
+}
 const sisi=document.getElementById('sisi'),buka=document.getElementById('buka');
 function laci(b){sisi.classList.toggle('buka',b);document.getElementById('tirai').classList.toggle('buka',b);buka.setAttribute('aria-expanded',b);document.body.style.overflow=b?'hidden':'';if(b)document.getElementById('tutup').focus()}
-function gambar(atas){const r=rute(),main=document.getElementById('konten');
- document.getElementById('menu').innerHTML=MENU.map((x,i)=>`${i===0?'<span class="label-grup">Ringkasan</span>':i===1?'<span class="label-grup">Deputi</span>':i===5?'<span class="label-grup">Rapat</span>':''}<a href="#${x[0]}" ${x[0]===r?'aria-current="page"':''}>${ik(x[2])}<span>${x[1]}</span>${x[3]?`<span class="kd">${x[3]}</span>`:''}</a>`).join('');
- document.querySelectorAll('[data-th]').forEach(b=>b.setAttribute('aria-pressed',b.dataset.th===th));
- document.getElementById('per26').style.display=th==='2026'&&r!=='tindak-lanjut'?'':'none';
- document.getElementById('judul-bar').textContent=r==='ikhtisar'?'Pengawasan '+th:r==='tindak-lanjut'?'Tindak lanjut':D[r].kode;
- document.querySelector('.pilih-bulan').style.display=th==='2027'&&r!=='tindak-lanjut'?'':'none';
- if(r==='ikhtisar')main.innerHTML=th==='2026'?ikhtisar26():ikhtisar();
- else if(r==='tindak-lanjut')main.innerHTML=vTindak();
- else if(th==='2026')main.innerHTML=deputi26(r);
- else{const d=D[r],tab=[...(d.anggaran.length?['Anggaran']:[]),'Program kerja',...(r==='pdn'?['Pengadaan']:[])];
-  const s=Math.min(seg[r]||0,tab.length-1),nm=tab[s];
-  main.innerHTML=`<h1>${d.judul}</h1>
-  ${tab.length>1?`<div class="segmen" role="tablist" aria-label="Bagian ${d.kode}">${tab.map((n,i)=>`<button role="tab" aria-selected="${i===s}" data-seg="${i}">${n}</button>`).join('')}</div>`:''}
-  <div role="tabpanel">${nm==='Anggaran'?vAnggaran(r):nm==='Program kerja'?vProker(r):vPengadaan()}</div>${kaki()}`}
- document.title=(r==='ikhtisar'?'Ikhtisar':r==='tindak-lanjut'?'Tindak lanjut':D[r].kode)+' · Pengawasan Dewas '+th;
- if(atas)window.scrollTo(0,0)}
-document.addEventListener('click',e=>{
- const y=e.target.closest('[data-th]');if(y){th=y.dataset.th;simpan('tahun',th);gambar(false);return}
- const b=e.target.closest('[data-seg]');if(b){seg[rute()+(th==='2026'?'26':'')]=+b.dataset.seg;gambar(false);return}
- if(e.target.closest('#buka'))laci(true);else if(e.target.closest('#tutup,#tirai,#menu a')){const t=sisi.classList.contains('buka');laci(false);if(t&&!e.target.closest('#menu a'))buka.focus()}});
 document.addEventListener('keydown',e=>{if(e.key==='Escape'&&sisi.classList.contains('buka')){laci(false);buka.focus()}});
+document.addEventListener('click',e=>{
+  if(e.target.closest('#buka')){laci(true);return}
+  if(e.target.closest('#tutup,#tirai,#menu a')){const t=sisi.classList.contains('buka');laci(false);if(t&&!e.target.closest('#menu a'))buka.focus()}
+  const b=e.target.closest('[data-seg]');
+  if(b){const r=rute();seg[r]=+b.dataset.seg;simpan('seg2-'+r,seg[r]);gambar(false);return}
+  const c=e.target.closest('[data-saring]');
+  if(c){saring=c.dataset.saring;document.querySelectorAll('[data-saring]').forEach(x=>x.setAttribute('aria-pressed',x.dataset.saring===saring));isiPaket()}
+});
+document.addEventListener('input',e=>{if(e.target.id==='cari'){kata=e.target.value;isiPaket()}});
 window.addEventListener('hashchange',()=>gambar(true));
-const sel=document.getElementById('bulan');sel.innerHTML=BLN_P.map((b,i)=>`<option value="${i}">${b}</option>`).join('');
-if(baca('tahun')==='2027')th='2027';
-const b0=+baca('bulan');if(b0>=0&&b0<12)m=b0;sel.value=m;
-sel.addEventListener('change',()=>{m=+sel.value;simpan('bulan',m);gambar(false)});
+
+/* ---------- Tema ---------- */
 const akar=document.documentElement,tbl=document.getElementById('tema');
-const gelap=()=>akar.dataset.theme?akar.dataset.theme==='dark':matchMedia('(prefers-color-scheme: dark)').matches;
-const ikonTema=()=>tbl.innerHTML=ik(gelap()?'sun':'moon');
+function gelapKah(){const t=akar.dataset.theme;return t?t==='dark':matchMedia('(prefers-color-scheme: dark)').matches}
+function ikonTema(){tbl.innerHTML=ik(gelapKah()?'sun':'moon')}
 const t0=baca('tema');if(t0==='dark'||t0==='light')akar.dataset.theme=t0;
-tbl.addEventListener('click',()=>{const n=gelap()?'light':'dark';akar.dataset.theme=n;simpan('tema',n);ikonTema()});
-document.getElementById('marka-sisi').innerHTML=ik('layout');buka.innerHTML=ik('menu');document.getElementById('tutup').innerHTML=ik('x');
+tbl.addEventListener('click',()=>{const n=gelapKah()?'light':'dark';akar.dataset.theme=n;simpan('tema',n);ikonTema()});
+document.getElementById('marka-sisi').innerHTML=ik('kalender');buka.innerHTML=ik('menu');document.getElementById('tutup').innerHTML=ik('x');
 ikonTema();gambar(false);
 </script>
-
 </body>
 </html>
